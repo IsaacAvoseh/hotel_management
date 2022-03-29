@@ -17,4 +17,6 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::match(['get', 'post'], '/', [DashBoardController::class, 'index']);
+Route::match(['get', 'post'], '/admin', [DashBoardController::class, 'index']);
+Route::match(['get', 'post'], '/admin/login', [DashBoardController::class, 'login']);
+Route::match(['get', 'post'], 'admin/register', [DashBoardController::class, 'register']);
