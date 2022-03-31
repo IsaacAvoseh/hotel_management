@@ -45,7 +45,7 @@
 
 								<h6>Services: <span>Wifi, television ...</span></h6>
 							</div>
-							<a class="btn view-detail-btn" href="orange.html">View Details </a>
+							<a class="btn view-detail-btn" href="/orange">View Details </a>
 						</div>
 					</div>
 					<!-- Single Room Area -->
@@ -215,7 +215,7 @@
 				<div class="col-12 col-lg-4">
 					<!-- Hotel Reservation Area -->
 					<div class="hotel-reservation--area mb-100">
-						<form action="http://www.horizonsuites.com.ng/reservation.php" method="post">
+						<form action="" method="post">
 							<div class="form-group mb-30"><label for="checkInDate">Date</label>
 
 								<div class="input-daterange" id="datepicker">

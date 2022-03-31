@@ -35,7 +35,7 @@
         <!-- Search Form -->
         <div class="search-form d-flex align-items-center">
             <div class="container">
-                <form action="http://www.horizonsuites.com.ng/index.html" method="get">
+                <form action="" method="get">
                     <input type="search" name="search-form-input" id="searchFormInput"
                         placeholder="Type your keyword ...">
                     <button type="submit"><i class="icon_search"></i></button>
@@ -59,12 +59,12 @@
                         <div class="top-header-content">
                             <!-- Top Social Area -->
                             <div class="top-social-area ml-auto">
-                                <a href="https://www.facebook.com/HorizonSuitesIb"><i class="fa fa-facebook"
+                                <a href=""><i class="fa fa-facebook"
                                         aria-hidden="true"></i></a>
-                                <a href="https://www.twitter.com/horizonsuites"><i class="fa fa-twitter"
+                                <a href=""><i class="fa fa-twitter"
                                         aria-hidden="true"></i></a>
                                 <a href="#"><i class="fa fa-tripadvisor" aria-hidden="true"></i></a>
-                                <a href="https://www.instagram.com/horizonsuitesib"><i class="fa fa-instagram"
+                                <a href=""><i class="fa fa-instagram"
                                         aria-hidden="true"></i></a>
                             </div>
                         </div>
@@ -158,16 +158,16 @@
 
                             <!-- Single Blog Area -->
                             <div class="latest-blog-area">
-                                <a href="https://www.facebook.com/HorizonSuitesIb" class="post-title">Facebook</a>
+                                <a href="" class="post-title">Facebook</a>
                             </div>
 
                             <!-- Single Blog Area -->
                             <div class="latest-blog-area">
-                                <a href="https://twitter.com/horizonsuites" class="post-title">Twitter</a>
+                                <a href="" class="post-title">Twitter</a>
                             </div>
                             <!-- Single Blog Area -->
                             <div class="latest-blog-area">
-                                <a href="https://www.instagram.com/horizonsuitesib" class="post-title">Instagram</a>
+                                <a href="" class="post-title">Instagram</a>
                             </div>
 
                         </div>
@@ -231,11 +231,11 @@
                     <div class="col-12 col-md-4">
                         <!-- Social Info -->
                         <div class="social-info">
-                            <a href="https://www.facebook.com/HorizonSuitesIb"><i class="fa fa-facebook"
+                            <a href=""><i class="fa fa-facebook"
                                     aria-hidden="true"></i></a>
-                            <a href="https://twitter.com/horizonsuites"><i class="fa fa-twitter"
+                            <a href=""><i class="fa fa-twitter"
                                     aria-hidden="true"></i></a>
-                            <a href="https://www.instagram.com/horizonsuitesib"><i class="fa fa-instagram"
+                            <a href=""><i class="fa fa-instagram"
                                     aria-hidden="true"></i></a>
                             <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
                         </div>
@@ -262,17 +262,17 @@
 
     <!--Start of Tawk.to Script-->
     <script type="text/javascript">
-        var Tawk_API = Tawk_API || {},
-            Tawk_LoadStart = new Date();
-        (function() {
-            var s1 = document.createElement("script"),
-                s0 = document.getElementsByTagName("script")[0];
-            s1.async = true;
-            s1.src = 'https://embed.tawk.to/5ecacbcf8ee2956d73a4206b/default';
-            s1.charset = 'UTF-8';
-            s1.setAttribute('crossorigin', '*');
-            s0.parentNode.insertBefore(s1, s0);
-        })();
+        // var Tawk_API = Tawk_API || {},
+        //     Tawk_LoadStart = new Date();
+        // (function() {
+        //     var s1 = document.createElement("script"),
+        //         s0 = document.getElementsByTagName("script")[0];
+        //     s1.async = true;
+        //     s1.src = 'https://embed';
+        //     s1.charset = 'UTF-8';
+        //     s1.setAttribute('crossorigin', '*');
+        //     s0.parentNode.insertBefore(s1, s0);
+        // })();
     </script>
     <!--End of Tawk.to Script-->
 
