@@ -34,7 +34,7 @@
                                 <div class="welcome-text text-center">
                                     <h2 data-animation="fadeInUp" data-delay="500ms">Discover Beauty</h2>
                                     <a class="btn roberto-btn btn-2" data-animation="fadeInUp" data-delay="800ms"
-                                        href="booking.html">Book Online</a>
+                                        href="/booking">Book Online</a>
                                 </div>
                             </div>
                         </div>
@@ -54,7 +54,7 @@
                                 <div class="welcome-text text-center">
                                     <h2 data-animation="fadeInUp" data-delay="500ms">A Luxury Stay</h2>
                                     <a class="btn roberto-btn btn-2" data-animation="fadeInUp" data-delay="800ms"
-                                        href="booking.html">Book Online</a>
+                                        href="/booking">Book Online</a>
                                 </div>
                             </div>
                         </div>
@@ -74,7 +74,7 @@
                                 <div class="welcome-text text-center">
                                     <h2 data-animation="fadeInUp" data-delay="500ms">Delicious Meal</h2>
                                     <a class="btn roberto-btn btn-2" data-animation="fadeInUp" data-delay="800ms"
-                                        href="booking.html">Book Online</a>
+                                        href="/booking">Book Online</a>
                                 </div>
                             </div>
                         </div>
@@ -94,7 +94,7 @@
                                 <div class="welcome-text text-center">
                                     <h2 data-animation="fadeInDown" data-delay="500ms">Modern Hall Facilities</h2>
                                     <a class="btn roberto-btn btn-2" data-animation="fadeInDown" data-delay="800ms"
-                                        href="booking.html">Book Online</a>
+                                        href="/booking">Book Online</a>
                                 </div>
                             </div>
                         </div>
@@ -111,7 +111,7 @@
         <div class="hotel-search-form-area">
             <div class="container-fluid">
                 <div class="hotel-search-form">
-                    <form action="http://www.horizonsuites.com.ng/reservation.php" method="post">
+                    <form action="" method="post">
                         <div class="row justify-content-between align-items-end">
                             <div class="col-6 col-md-2 col-lg-3"><label for="name">Name</label> <input
                                     class="form-control" id="name" name="name" type="text" /></div>

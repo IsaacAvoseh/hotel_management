@@ -72,7 +72,7 @@
                     <div class="icon_menu">
                         <img src="/img/menu-icon/2.svg" alt="">
                     </div>
-                    <span>Menu</span>
+                    <span>Rooms</span>
                 </a>
 
             </li>
@@ -81,7 +81,7 @@
                     <div class="icon_menu">
                         <img src="/img/menu-icon/3.svg" alt="">
                     </div>
-                    <span>Menu</span>
+                    <span>Bookings</span>
                 </a>
 
             </li>
@@ -90,7 +90,7 @@
                     <div class="icon_menu">
                         <img src="/img/menu-icon/4.svg" alt="">
                     </div>
-                    <span>Menu</span>
+                    <span>Messages</span>
                 </a>
 
             </li>
@@ -99,7 +99,7 @@
                     <div class="icon_menu">
                         <img src="/img/menu-icon/5.svg" alt="">
                     </div>
-                    <span>Menu</span>
+                    <span>Staff</span>
                 </a>
             </li>
             <li class="">

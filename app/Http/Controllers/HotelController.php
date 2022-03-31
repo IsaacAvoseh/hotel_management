@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
 use Illuminate\Http\Request;
 
 class HotelController extends Controller
@@ -16,8 +17,31 @@ class HotelController extends Controller
         return view('user.rooms');
     }
 
-    public function Contact()
+    public function Contact(Request $request)
     {
+        if($request->isMethod('post'))
+        {
+            // dd($request->all());
+           $request->validate([
+                'name' => 'required',
+                'email' => 'required',
+                'message' => 'required',
+            ]);
+            $data = $request->all();
+            $contact = new Contact;
+            $contact->name = $data['name'];
+            $contact->email = $data['email'];
+            $contact->message = $data['message'];
+            $saved = $contact->save();
+            if($saved)
+            {
+                return redirect()->back()->with('success', 'Message sent successfully');
+            }
+            else
+            {
+                return redirect()->back()->with('error', 'Message not sent');
+            }
+        }
         return view('user.contact');
     }
 

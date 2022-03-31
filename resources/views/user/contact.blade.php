@@ -90,16 +90,31 @@
                 <div class="col-12">
                     <!-- Form -->
                     <div class="roberto-contact-form">
-                        <form action="http://www.horizonsuites.com.ng/includes/mail.php" method="post">
+                        <form action="" method="post">
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+                            @if (session('error'))
+                                <div class="alert alert-danger">
+                                    {{ session('error') }}
+                                </div>
+                            @endif
+                            @csrf
                             <div class="row">
-                                <div class="col-12 col-lg-6 wow fadeInUp" data-wow-delay="100ms">
-                                    <input type="text" name="name" class="form-control mb-30" placeholder="Your Name">
+                                <div class="col-12 col-lg-6 wow fadeInUp mb-30" data-wow-delay="100ms">
+                                    <input type="text" name="name" value="{{ old('name') }}" class="form-control "
+                                        placeholder="Your Name">
+                                 <span class="text-danger">@error ('name') {{$message}} @enderror</span>
                                 </div>
-                                <div class="col-12 col-lg-6 wow fadeInUp" data-wow-delay="100ms">
-                                    <input type="email" name="email" class="form-control mb-30" placeholder="Your Email">
+                                <div class="col-12 col-lg-6 wow fadeInUp mb-30" data-wow-delay="100ms">
+                                    <input type="email" name="email" value="{{ old('email') }}" class="form-control" placeholder="Your Email">
+                                     <span class="text-danger">@error ('email') {{$message}} @enderror</span>
                                 </div>
-                                <div class="col-12 wow fadeInUp" data-wow-delay="100ms">
-                                    <textarea name="message" class="form-control mb-30" placeholder="Your Message"></textarea>
+                                <div class="col-12 wow fadeInUp mb-30" data-wow-delay="100ms">
+                                    <textarea name="message" value="{{ old('message') }}" class="form-control" placeholder="Your Message"></textarea>
+                                     <span class="text-danger">@error ('message') {{$message}} @enderror</span>
                                 </div>
                                 <div class="col-12 text-center wow fadeInUp" data-wow-delay="100ms">
                                     <button type="submit" class="btn roberto-btn mt-15">Send Message</button>
@@ -125,7 +140,7 @@
                         </div>
                     </div>
                     <div class="col-12 col-md-5 text-right">
-                        <a href="contact.html" class="btn roberto-btn mb-50">Contact Now</a>
+                        <a href="/contact" class="btn roberto-btn mb-50">Contact Now</a>
                     </div>
                 </div>
             </div>
