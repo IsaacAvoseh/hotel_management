@@ -306,7 +306,7 @@
 
                                             <div class="single_notify d-flex align-items-center">
                                                 <div class="notify_thumb">
-                                                    <a href="#"><img src="/img/staf/3.png" alt=""></a>
+                                                    <a href="#"><img src="{{ Auth::user()->image }}" alt=""></a>
                                                 </div>
                                                 <div class="notify_content">
                                                     <a href="#">
@@ -329,16 +329,16 @@
                                 </li>
                             </div>
                             <div class="profile_info">
-                                <img src="/img/client_img.png" alt="#">
+                                <img src="{{ Auth::user()->image }}" alt="#">
                                 <div class="profile_info_iner">
                                     <div class="profile_author_name">
-                                        <p>Neurologist </p>
-                                        <h5>Dr. Robar Smith</h5>
+                                        <p>Admin </p>
+                                        <h5>{{ Auth::user()->name }}</h5>
                                     </div>
                                     <div class="profile_info_details">
                                         <a href="#">My Profile </a>
                                         <a href="#">Settings</a>
-                                        <a href="#">Log Out </a>
+                                        <a href="/admin/logout">Log Out </a>
                                     </div>
                                 </div>
                             </div>

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
+use App\Models\Staff;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -104,4 +106,73 @@ class DashBoardController extends Controller
         }
         return view('admin.register');
     }
+
+    //add new role 
+    public function addRole(Request $request)
+    {
+     
+            $request->validate([
+                'name' => 'required',
+                'description' => 'required',
+            ]);
+            
+
+            $role = new Role();
+            $role->name = $request->name;
+            $role->description = $request->description;
+            $saved = $role->save();
+            if ($saved) {
+                return redirect()->back()->with('success', 'Role added successfully');
+            } else {
+                return redirect()->back()->with('error', 'Role not added');
+            }       
+   
+    }
+
+
+    public function staff(Request $request)
+    {
+
+        $roles = Role::all();
+
+       if($request->isMethod('post')){
+           //add new staff and use phone number as password
+              $request->validate([
+                'first_name' => 'required',
+                'first_name' => 'required',
+                'last_name' => 'required',
+                'email' => 'required|email',
+                'phone' => 'required|unique:staff',
+                'role' => 'required',
+            ]);
+            // dd($request->all());
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $image_name = $image->getClientOriginalName();
+                $image->move(public_path('/admin/images'), $image_name);
+                $image_path = 'admin/images' . $image_name;
+            } else {
+                $image_path = '/admin/images/default.jpg';
+             }
+
+             $staff =  new Staff();
+                $staff->first_name = $request->first_name;
+                $staff->last_name = $request->last_name;
+                $staff->email = $request->email;
+                $staff->address = $request->address;
+                $staff->phone = $request->phone;
+                $staff->image = $image_path;
+                $staff->role = $request->role;
+                $staff->password = Hash::make($request->phone);
+                $saved = $staff->save();
+                if ($saved) {
+                    return redirect()->back()->with('success', 'Staff added successfully');
+                } else {
+                    return redirect()->back()->with('error', 'Staff not added');
+                }
+        
+    }
+    return view('admin.staff', compact('roles'));
+}
+
 }

@@ -22,8 +22,9 @@ Route::match(['get', 'post'], '/admin/dashboard', [DashBoardController::class, '
 Route::match(['get', 'post'], '/admin/login', [DashBoardController::class, 'login'])->name('login');
 Route::match(['get', 'post'], '/admin/register', [DashBoardController::class, 'register'])->name('register');
 Route::match(['get', 'post'], '/admin/logout', [DashBoardController::class, 'logout'])->name('logout');
-
-
+Route::match(['get', 'post'], '/admin/change-password', [DashBoardController::class, 'changePassword'])->name('changePassword');
+Route::match(['get', 'post'], '/admin/staff', [DashBoardController::class, 'staff'])->name('staff');
+Route::post('/admin/staff/role', [DashBoardController::class, 'addRole'])->name('role');
 
 Route::match(['get', 'post'], '/', [HotelController::class, 'Home']);
 Route::match(['get', 'post'], '/room', [HotelController::class, 'Room']);
