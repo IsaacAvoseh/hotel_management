@@ -48,7 +48,6 @@
 
 <body class="crm_body_bg">
 
-
     <nav class="sidebar vertical-scroll dark_sidebar  ps-container ps-theme-default ps-active-y">
         <div class="logo d-flex justify-content-between">
             <a href="index.html"><img src="/img/logo_white.png" alt=""></a>
@@ -56,7 +55,7 @@
                 <i class="ti-close"></i>
             </div>
         </div>
-
+        @if(Auth::check())
         <ul id="sidebar_menu">
             <li class="mm-active">
                 <a href="/admin" class="has-arrow/" href="#" aria-expanded="false">
@@ -200,7 +199,7 @@
 
             </li>
             <li class="">
-                <a class="has-arrow/" href="#" aria-expanded="false">
+                <a href="/admin/logout" class="has-arrow/" href="#" aria-expanded="false">
                     <div class="icon_menu">
                         <img src="/img/menu-icon/16.svg" alt="">
                     </div>
@@ -209,6 +208,7 @@
 
             </li>
         </ul>
+        @endif
     </nav>
 
 
@@ -217,12 +217,13 @@
             <div class="row">
                 <div class="col-lg-12 p-0 ">
                     <div class="header_iner d-flex justify-content-between align-items-center">
+                        @if(Auth::check())
                         <div class="sidebar_icon d-lg-none">
                             <i class="ti-menu"></i>
                         </div>
                         <div class="serach_field-area d-flex align-items-center">
                             <div class="search_inner">
-                                <form action="#">
+                                <form action="">
                                     <div class="search_field">
                                         <input type="text" placeholder="Search here...">
                                     </div>
@@ -343,6 +344,7 @@
                             </div>
                         </div>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>

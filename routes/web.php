@@ -18,13 +18,14 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::match(['get', 'post'], '/admin', [DashBoardController::class, 'index']);
-Route::match(['get', 'post'], '/admin/login', [DashBoardController::class, 'login']);
-Route::match(['get', 'post'], 'admin/register', [DashBoardController::class, 'register']);
+Route::match(['get', 'post'], '/admin/dashboard', [DashBoardController::class, 'Admin'])->name('dashboard');
+Route::match(['get', 'post'], '/admin/login', [DashBoardController::class, 'login'])->name('login');
+Route::match(['get', 'post'], '/admin/register', [DashBoardController::class, 'register'])->name('register');
+Route::match(['get', 'post'], '/admin/logout', [DashBoardController::class, 'logout'])->name('logout');
 
 
 
-Route::match(['get', 'post'], '/home', [HotelController::class, 'Home']);
+Route::match(['get', 'post'], '/', [HotelController::class, 'Home']);
 Route::match(['get', 'post'], '/room', [HotelController::class, 'Room']);
 Route::match(['get', 'post'], '/contact', [HotelController::class, 'Contact']);
 Route::match(['get', 'post'], '/booking', [HotelController::class, 'Booking']);
