@@ -100,7 +100,7 @@
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <ul id="nav">
-                                    <li class="active"><a href="home">Home</a></li>
+                                    <li class="active"><a href="/">Home</a></li>
                                     <li><a href="room">Rooms</a></li>
                                     <li><a href="contact">Contact</a></li>
                                 </ul>
@@ -181,7 +181,7 @@
 
                             <!-- Footer Nav -->
                             <ul class="footer-nav">
-                                <li><a href="home"><i class="fa fa-caret-right" aria-hidden="true"></i> Home </a>
+                                <li><a href="/"><i class="fa fa-caret-right" aria-hidden="true"></i> Home </a>
                                 </li>
                                 <li><a href="room"><i class="fa fa-caret-right" aria-hidden="true"></i> Our
                                         Room</a></li>
@@ -199,7 +199,7 @@
                             <span>Subscribe our newsletter gor get notification about new updates.</span>
 
                             <!-- Newsletter Form -->
-                            <form action="http://www.horizonsuites.com.ng/index.html" class="nl-form">
+                            <form action="" class="nl-form">
                                 <input type="email" class="form-control" placeholder="Enter your email...">
                                 <button type="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
                             </form>

@@ -28,18 +28,31 @@
 
                             <div class="modal-content cs_modal">
                                 <div style="background-color: #323246;" class="modal-header justify-content-center">
+                                @include('flash.flash')
                                     <h5 class="modal-title text_white">Resister</h5>
                                 </div>
                                 <div class="modal-body">
-                                    <form>
+                                    <form action="{{ route('register') }}" method="POST" enctype="multipart/form-data" >
+                                        @csrf
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Full Name">
+                                            <input type="text" name="name" class="form-control" placeholder="Full Name">
+                                            <span class="text-danger">@error ('name') {{$message}} @enderror</span>
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Enter your email">
+                                            <input type="text" name="email" class="form-control" placeholder="Enter your email">
+                                            <span class="text-danger">@error ('email') {{$message}} @enderror</span>
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control" placeholder="Password">
+                                            <input type="file" name="image" class="form-control">
+                                           
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" name="password" placeholder="Enter your password">
+                                            <span class="text-danger">@error ('password') {{$message}} @enderror</span>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password">
+                                            <span class="text-danger">@error ('password_confirmation') {{$message}} @enderror</span>
                                         </div>
                                         <div class="form-group cs_check_box">
                                             <input type="checkbox" id="check_box" class="common_checkbox">
@@ -47,7 +60,7 @@
                                                 Keep me up to date
                                             </label>
                                         </div>
-                                        <a style="background-color: #323246;" href="#" class="btn_1 full_width text-center"> Sign Up</a>
+                                        <button type="submit" style="background-color: #323246;" class="btn_1 full_width text-center"> Sign Up</button>
                                         <p>Need an account? <a data-toggle="modal" data-target="#sing_up" data-dismiss="modal" href="#">Log in</a></p>
                                         <div class="text-center">
                                             <a href="#" data-toggle="modal" data-target="#forgot_password" data-dismiss="modal" class="pass_forget_btn">Forget Password?</a>

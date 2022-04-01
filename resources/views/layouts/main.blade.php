@@ -48,7 +48,6 @@
 
 <body class="crm_body_bg">
 
-
     <nav class="sidebar vertical-scroll dark_sidebar  ps-container ps-theme-default ps-active-y">
         <div class="logo d-flex justify-content-between">
             <a href="index.html"><img src="/img/logo_white.png" alt=""></a>
@@ -56,7 +55,7 @@
                 <i class="ti-close"></i>
             </div>
         </div>
-
+        @if(Auth::check())
         <ul id="sidebar_menu">
             <li class="mm-active">
                 <a href="/admin" class="has-arrow/" href="#" aria-expanded="false">
@@ -200,7 +199,7 @@
 
             </li>
             <li class="">
-                <a class="has-arrow/" href="#" aria-expanded="false">
+                <a href="/admin/logout" class="has-arrow/" href="#" aria-expanded="false">
                     <div class="icon_menu">
                         <img src="/img/menu-icon/16.svg" alt="">
                     </div>
@@ -209,6 +208,7 @@
 
             </li>
         </ul>
+        @endif
     </nav>
 
 
@@ -217,12 +217,13 @@
             <div class="row">
                 <div class="col-lg-12 p-0 ">
                     <div class="header_iner d-flex justify-content-between align-items-center">
+                        @if(Auth::check())
                         <div class="sidebar_icon d-lg-none">
                             <i class="ti-menu"></i>
                         </div>
                         <div class="serach_field-area d-flex align-items-center">
                             <div class="search_inner">
-                                <form action="#">
+                                <form action="">
                                     <div class="search_field">
                                         <input type="text" placeholder="Search here...">
                                     </div>
@@ -305,7 +306,7 @@
 
                                             <div class="single_notify d-flex align-items-center">
                                                 <div class="notify_thumb">
-                                                    <a href="#"><img src="/img/staf/3.png" alt=""></a>
+                                                    <a href="#"><img src="{{ Auth::user()->image }}" alt=""></a>
                                                 </div>
                                                 <div class="notify_content">
                                                     <a href="#">
@@ -328,21 +329,22 @@
                                 </li>
                             </div>
                             <div class="profile_info">
-                                <img src="/img/client_img.png" alt="#">
+                                <img src="{{ Auth::user()->image }}" alt="#">
                                 <div class="profile_info_iner">
                                     <div class="profile_author_name">
-                                        <p>Neurologist </p>
-                                        <h5>Dr. Robar Smith</h5>
+                                        <p>Admin </p>
+                                        <h5>{{ Auth::user()->name }}</h5>
                                     </div>
                                     <div class="profile_info_details">
                                         <a href="#">My Profile </a>
                                         <a href="#">Settings</a>
-                                        <a href="#">Log Out </a>
+                                        <a href="/admin/logout">Log Out </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>
