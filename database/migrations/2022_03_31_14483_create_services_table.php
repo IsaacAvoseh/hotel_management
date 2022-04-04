@@ -15,12 +15,12 @@ class CreateServicesTable extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->id();
-            $table->string('air_conditioner');
-            $table->string('drinks');
-            $table->string('restaurant');
-            $table->string('cable_tv');
-            $table->string('unlimited_wifi');
-            $table->string('24_hour_front_desk');
+            $table->boolean('air_conditioner')->nullable()->default(false);
+            $table->boolean('drinks')->nullable()->default(false);
+            $table->boolean('restaurant')->nullable()->default(false);
+            $table->boolean('cable_tv')->nullable()->default(false);
+            $table->boolean('unlimited_wifi')->nullable()->default(false);
+            $table->boolean('hour_front_desk')->nullable()->default(true);
             $table->timestamps();
         });
     }
