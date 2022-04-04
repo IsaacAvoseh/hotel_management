@@ -67,7 +67,7 @@
 
             </li>
             <li class="">
-                <a class="has-arrow/" href="#" aria-expanded="false">
+                <a href="/admin/room" class="has-arrow/" href="#" aria-expanded="false">
                     <div class="icon_menu">
                         <img src="/img/menu-icon/2.svg" alt="">
                     </div>
@@ -85,7 +85,7 @@
 
             </li>
             <li class="">
-                <a class="has-arrow/" href="#" aria-expanded="false">
+                <a href="/admin/messages" class="has-arrow/" href="#" aria-expanded="false">
                     <div class="icon_menu">
                         <img src="/img/menu-icon/4.svg" alt="">
                     </div>
@@ -102,11 +102,11 @@
                 </a>
             </li>
             <li class="">
-                <a href="#" aria-expanded="false">
+                <a href="/admin/services" aria-expanded="false">
                     <div class="icon_menu">
                         <img src="/img/menu-icon/6.svg" alt="">
                     </div>
-                    <span>Menu</span>
+                    <span>Services</span>
                 </a>
             </li>
             <li class="">

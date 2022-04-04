@@ -111,7 +111,8 @@
         <div class="hotel-search-form-area">
             <div class="container-fluid">
                 <div class="hotel-search-form">
-                    <form action="" method="post">
+                    <form method="post">
+                        @csrf          
                         <div class="row justify-content-between align-items-end">
                             <div class="col-6 col-md-2 col-lg-3"><label for="name">Name</label> <input
                                     class="form-control" id="name" name="name" type="text" /></div>
@@ -123,7 +124,7 @@
                                     class="form-control" id="email" name="email" type="text" /></div>
 
                             <div class="col-6 col-md-2 col-lg-3"><label for="roomtype">Room Type</label> <select
-                                    class="form-control" id="roomtype" name="roomtype">
+                                    class="form-control" id="roomtype" name="roomtype" required>
                                     <option value="royalsuites">Royal Suites</option>
                                     <option value="classicsuites">Classic Suites</option>
                                     <option value="orangesuites">Orange Suites</option>
