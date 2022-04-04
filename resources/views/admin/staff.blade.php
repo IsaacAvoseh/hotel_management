@@ -158,13 +158,43 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-6">
+                    </div>
 
 
+                </div>
+
+
+            </div>
+
+            @if(isset($staffs) && count($staffs) > 0)
+
+            @foreach ($staffs as $staff)
+            <div class="col-md-3">
+                <div class="white_card position-relative">
+                    <div class="card-body">
+                        <div class="ribbon1 rib1-primary"><span class="text-white text-center rib1-primary">Staff No: {{ $loop->iteration }}</span></div>
+                        <img src="{{ $staff->image }}" alt="" class="d-block mx-auto my-2" height="150" width="170">
+                        <div class="row my-2">
+                            <div class="col"><span class="badge_btn_3  mb-1">{{ $staff->roles->name }}</span></div>
+                            <div class="col-auto">
+                                <h4 class="text-dark mt-0">Name: {{ $staff->first_name. ' '. $staff->last_name }}</h4>
+
+                            </div>
+                        </div>
+                        <div>
+                            <button class="btn_2 btn-block">View Details</button>
+                            <button class="btn_2 btn-block">Suspend</button>
+                            <button class="btn_2 btn-block">Delete</button>
                         </div>
                     </div>
+
                 </div>
             </div>
+            @endforeach
+
+            @endif
+
+
         </div>
     </div>
 </div>

@@ -88,9 +88,9 @@ class DashBoardController extends Controller
                 $image = $request->file('image');
                 $image_name = $image->getClientOriginalName();
                 $image->move(public_path('/admin/images'), $image_name);
-                $image_path = 'admin/images' . $image_name;
+                $image_path = 'admin/images/' . $image_name;
             } else {
-                $image_path = '/admin/images/default.jpg';
+                $image_path = '/admin/default.jpg';
             }
 
             $user->name = $request->name;
@@ -134,6 +134,10 @@ class DashBoardController extends Controller
     {
 
         $roles = Role::all();
+        $staffs = Staff::with('roles')->get();
+        // dd($staffs->filter->relationLoaded('make')->isEmpty()); 
+
+        // dd($staffs[0]->roles);
 
        if($request->isMethod('post')){
            //add new staff and use phone number as password
@@ -150,9 +154,9 @@ class DashBoardController extends Controller
                 $image = $request->file('image');
                 $image_name = $image->getClientOriginalName();
                 $image->move(public_path('/admin/images'), $image_name);
-                $image_path = 'admin/images' . $image_name;
+                $image_path = '/admin/images/'.$image_name;
             } else {
-                $image_path = '/admin/images/default.jpg';
+                $image_path = '/admin/default.jpg';
              }
 
              $staff =  new Staff();
@@ -172,7 +176,7 @@ class DashBoardController extends Controller
                 }
         
     }
-    return view('admin.staff', compact('roles'));
+    return view('admin.staff', compact('roles', 'staffs'));
 }
 
 }
