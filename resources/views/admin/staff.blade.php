@@ -175,7 +175,7 @@
                         <div class="ribbon1 rib1-primary"><span class="text-white text-center rib1-primary">Staff No: {{ $loop->iteration }}</span></div>
                         <img src="{{ $staff->image }}" alt="" class="d-block mx-auto my-2" height="150" width="170">
                         <div class="row my-2">
-                            <div class="col"><span class="badge_btn_3  mb-1">{{ $staff->role }}</span></div>
+                            <div class="col"><span class="badge_btn_3  mb-1">{{ $staff->roles->name }}</span></div>
                             <div class="col-auto">
                                 <h4 class="text-dark mt-0">Name: {{ $staff->first_name. ' '. $staff->last_name }}</h4>
 

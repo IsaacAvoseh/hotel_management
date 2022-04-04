@@ -9,8 +9,8 @@ class Role extends Model
 {
     use HasFactory;
 
-    public function staff()
-    {
-        return $this->hasMany(Staff::class);
-    }
+    // public function staff()
+    // {
+    //     return $this->belongsTo(Staff::class);
+    // }
 }

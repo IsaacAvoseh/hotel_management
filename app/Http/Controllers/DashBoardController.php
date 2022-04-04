@@ -134,11 +134,10 @@ class DashBoardController extends Controller
     {
 
         $roles = Role::all();
-        $staffs = Staff::with('role')->get();
+        $staffs = Staff::with('roles')->get();
         // dd($staffs->filter->relationLoaded('make')->isEmpty()); 
-    
-        // $staffs = Staff::with('role')->get();
-        dd($staffs);
+
+        // dd($staffs[0]->roles);
 
        if($request->isMethod('post')){
            //add new staff and use phone number as password

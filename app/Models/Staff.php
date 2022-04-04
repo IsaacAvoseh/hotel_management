@@ -9,8 +9,8 @@ class Staff extends Model
 {
     use HasFactory;
 
-    public function role()
+    public function roles()
     {
-        return $this->belongsTo(Role::class, 'role');
+        return $this->hasOne(Role::class, 'id', 'role');
     }
 }
