@@ -23,8 +23,9 @@
                 </div>
             </div>
             <div class="col-lg-12">
-                @include('flash.flash')
-                <div class="white_box mb_30">
+
+
+                @include('flash.flash') <div class="white_box mb_30">
 
                     <div class="QA_table mb_30">
 
@@ -47,10 +48,10 @@
                                     <td>{{ $message->email }}</td>
                                     <td>{{ \Illuminate\Support\Str::limit($message->message, 20, $end='....') }}</td>
                                     <td>{{ date('d/m/Y', strtotime($message->created_at))  }}</td>
-                                    <td><a href="#" class="status_btn">Active</a></td>
+                                    <td><a href="#" class="{{ $message->status? 'bg-danger status_btn': 'status_btn'}}">{{ $message->status? 'Unread': 'Replied' }}</a></td>
                                     <td>
-                                        <a href="#" class="btn btn-primary">View</a>
-                                        <a href="#" class="btn btn-danger">Delete</a>
+                                        <a href="/admin/messages/{{base64_encode($message->id)}}" class="btn btn-primary">View</a>
+                                        <a href="/admin/messages/delete/{{ base64_encode($message->id) }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this message?')">Delete</a>
                                     </td>
                                 </tr>
                                 @endforeach

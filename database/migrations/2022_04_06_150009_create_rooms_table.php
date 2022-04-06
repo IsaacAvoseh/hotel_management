@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddServicesIdAndRoomtypeIdToRoomsTable extends Migration
+class CreateRoomsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class AddServicesIdAndRoomtypeIdToRoomsTable extends Migration
      */
     public function up()
     {
-        Schema::table('rooms', function (Blueprint $table) {
-            $table->foreignId('services_id')->constrained('services')->onDelete('cascade')->onUpdate('cascade');
+        Schema::create('rooms', function (Blueprint $table) {
+            $table->id();
+            $table->string('name')->nullable();
             $table->foreignId('room_type_id')->constrained('room_types')->onDelete('cascade')->onUpdate('cascade');
+            $table->timestamps();
         });
     }
 
@@ -26,8 +28,6 @@ class AddServicesIdAndRoomtypeIdToRoomsTable extends Migration
      */
     public function down()
     {
-        Schema::table('rooms', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('rooms');
     }
 }
