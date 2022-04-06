@@ -1,203 +1,226 @@
 @extends('layouts/main')
 @section('content')
-
-<div class="main_content_iner ">
-    <div class="container-fluid p-0">
-        <div class="row justify-content-center">
-            <div class="col-12">
-                <div class="dashboard_header mb_50">
-
-
-
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="dashboard_header_title">
-                                <h3> Admin Dashboard</h3>
+    <div class="main_content_iner ">
+        <div class="container-fluid p-0">
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <div class="dashboard_header mb_50">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="dashboard_header_title">
+                                    <h3> Admin Dashboard</h3>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="dashboard_breadcam text-right">
-                                <p><a href="index.html">Dashboard</a> <i class="fas fa-caret-right"></i>Room</p>
+                            <div class="col-lg-6">
+                                <div class="dashboard_breadcam text-right">
+                                    <p><a href="index.html">Dashboard</a> <i class="fas fa-caret-right"></i>Room</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-12">
-                @include('flash.flash')
-
-
-                <div class="white_box mb_30">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-6">
-                            <div class="card_box box_shadow position-relative mb_30">
-                                <div class="white_box_tittle ">
-                                    <div class="main-title2 ">
-                                        <div class="modal-content cs_modal">
-                                            <div style="background-color: #323246;" class="modal-header justify-content-center">
-
-                                                <h5 class="modal-title text_white">Rooms</h5>
-                                            </div>
-
-                                        </div>
-                                    </div>
+                <div class="col-lg-12">
+                    @include('flash.flash')
+                    <div class="box_body">
+                        <div class="default-according" id="accordion">
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link collapsed" data-toggle="collapse"
+                                            data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseOne">Add
+                                            Room Type<span class="digits"></span></button>
+                                    </h5>
                                 </div>
-                                <div class="box_body">
-                                    <div class="default-according" id="accordion">
-                                        <div class="card">
-                                            <div class="card-header" id="headingOne">
-                                                <h5 class="mb-0">
-                                                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Click here to add new Staff<span class="digits"></span></button>
-                                                </h5>
-                                            </div>
-                                            <div class="collapse" id="collapseOne" aria-labelledby="headingOne" data-parent="#accordion" style="">
+                                <div class="collapse" id="collapseTwo" aria-labelledby="headingOne"
+                                    data-parent="#accordion" style="">
+                                    <div class="card-body">
 
-                                                <div class="card-body">
-
-                                                    <div class="modal-body">
-                                                        <form action="{{ route('staff') }}" method="POST" enctype="multipart/form-data">
-                                                            @csrf
-                                                            <div class="form-group">
-                                                                <input type="text" name="first_name" class="form-control" placeholder="First Name">
-                                                                <span class="text-danger">@error ('first_name') {{$message}} @enderror</span>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <input type="text" name="last_name" class="form-control" placeholder="Last Name">
-                                                                <span class="text-danger">@error ('last_name') {{$message}} @enderror</span>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <input type="text" name="email" class="form-control" placeholder="Enter staff email">
-                                                                <span class="text-danger">@error ('email') {{$message}} @enderror</span>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <input type="file" name="image" class="form-control">
-
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <input type="text" class="form-control" name="phone" placeholder="Enter staff phone number">
-                                                                <span class="text-danger">@error ('phone') {{$message}} @enderror</span>
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <select name="role" id="role" class="form-control">
-                                                                    <option value="">Select Role</option>
-                                                                    @if(isset($roles) && count($roles) > 0)
-                                                                    @foreach ($roles as $role)
-                                                                    <option value="{{ $role->id }}">{{ $role->name }}</option>
-                                                                    @endforeach
-                                                                    @endif
-                                                                </select>
-                                                                <span class="text-danger">@error ('role') {{$message}} @enderror</span>
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <input type="text" class="form-control" name="address" placeholder="Enter staff home address">
-                                                                <span class="text-danger">@error ('address') {{$message}} @enderror</span>
-                                                            </div>
-
-
-                                                            <button type="submit" style="background-color: #323246;" class="btn_1 full_width text-center">Add Staff</button>
-
-                                                        </form>
-                                                    </div>
+                                        <div class="modal-body">
+                                            <form action="{{ route('roomfeatures') }}" method="POST">
+                                                @csrf
+                                                <div class="form-group">
+                                                    <input type="text" name="name" class="form-control"
+                                                        placeholder="Room Type">
+                                                    <span class="text-danger">
+                                                        @error('name')
+                                                            {{ $message }}
+                                                        @enderror
+                                                    </span>
                                                 </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6">
-                            <div class="card_box box_shadow position-relative mb_30">
-                                <div class="white_box_tittle ">
-                                    <div class="main-title2 ">
-                                        <div class="modal-content cs_modal">
-                                            <div style="background-color: #323246;" class="modal-header justify-content-center">
-
-                                                <h5 class="modal-title text_white">Staff Role</h5>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="box_body">
-                                    <div class="default-according" id="accordion">
-                                        <div class="card">
-                                            <div class="card-header" id="headingOne">
-                                                <h5 class="mb-0">
-                                                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseOne">Click here to add new role<span class="digits"></span></button>
-                                                </h5>
-                                            </div>
-                                            <div class="collapse" id="collapseTwo" aria-labelledby="headingOne" data-parent="#accordion" style="">
-                                                <div class="card-body">
-
-                                                    <div class="modal-body">
-                                                        <form action="{{ route('role') }}" method="POST">
-                                                            @csrf
-                                                            <div class="form-group">
-                                                                <input type="text" name="name" class="form-control" placeholder="Role">
-                                                                <span class="text-danger">@error ('name') {{$message}} @enderror</span>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <textarea name="description" id="" cols="15" rows="10" class="form-control" placeholder="Enter role description"></textarea>
-                                                                <span class="text-danger">@error ('description') {{$message}} @enderror</span>
-                                                            </div>
-
-                                                            <button type="submit" style="background-color: #323246;" class="btn_1 full_width text-center">Add Role</button>
-
-                                                        </form>
-                                                    </div>
+                                                <div class="form-group">
+                                                    <input type="text" name="price" class="form-control"
+                                                        placeholder="Price">
+                                                    <span class="text-danger">
+                                                        @error('price')
+                                                            {{ $message }}
+                                                        @enderror
+                                                    </span>
                                                 </div>
-                                            </div>
-                                        </div>
+                                                <div class="form-group">
+                                                    <select name="service_id" id="roomfeatures" class="form-control">
+                                                        <option value="">Select Room Features</option>
+                                                        @if (isset($services) && count($services) > 0)
+                                                            @foreach ($services as $service)
+                                                                <option value="{{ $service->id }}">{{ $service->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        @endif
+                                                    </select>
+                                                    <span class="text-danger">
+                                                        @error('service_id')
+                                                            {{ $message }}
+                                                        @enderror
+                                                    </span>
+                                                </div>
+                                                <button type="submit" style="background-color: #323246;"
+                                                    class="btn_1 full_width text-center">Add Room Type</button>
 
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="default-according" id="accordion">
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link collapsed" data-toggle="collapse"
+                                            data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Add
+                                            Room<span class="digits"></span></button>
+                                    </h5>
+                                </div>
+                                <div class="collapse" id="collapseOne" aria-labelledby="headingOne"
+                                    data-parent="#accordion" style="">
 
-                    </div>
+                                    <div class="card-body">
 
+                                        <div class="modal-body">
+                                            <form action="{{ route('staff') }}" method="POST"
+                                                enctype="multipart/form-data">
+                                                @csrf
+                                                <div class="form-group">
+                                                    <select name="roomtype" id="roomtype" class="form-control">
+                                                        <option value="">Select Room Type</option>
+                                                        @if (isset($roomsTypes) && count($roomsTypes) > 0)
+                                                            @foreach ($roomsTypes as $roomsType)
+                                                                <option value="{{ $roomsType->id }}">
+                                                                    {{ $roomsType->name }}</option>
+                                                            @endforeach
+                                                        @endif
+                                                    </select>
+                                                    <span class="text-danger">
+                                                        @error('role')
+                                                            {{ $message }}
+                                                        @enderror
+                                                    </span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="text" name="size" class="form-control"
+                                                        placeholder="Size">
+                                                    <span class="text-danger">
+                                                        @error('size')
+                                                            {{ $message }}
+                                                        @enderror
+                                                    </span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="text" name="capacity" class="form-control"
+                                                        placeholder="Capacity">
+                                                    <span class="text-danger">
+                                                        @error('capacity')
+                                                            {{ $message }}
+                                                        @enderror
+                                                    </span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="text" name="bed" class="form-control" placeholder="Bed">
+                                                    <span class="text-danger">
+                                                        @error('bed')
+                                                            {{ $message }}
+                                                        @enderror
+                                                    </span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="file" name="image" class="form-control">
 
-                </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="file" name="image" class="form-control">
 
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="file" name="image" class="form-control">
 
-            </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="file" name="image" class="form-control">
 
-            @if(isset($staffs) && count($staffs) > 0)
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="file" name="image" class="form-control">
 
-            @foreach ($staffs as $staff)
-            <div class="col-md-3">
-                <div class="white_card position-relative">
-                    <div class="card-body">
-                        <div class="ribbon1 rib1-primary"><span class="text-white text-center rib1-primary">Staff No: {{ $loop->iteration }}</span></div>
-                        <img src="{{ $staff->image }}" alt="" class="d-block mx-auto my-2" height="150" width="170">
-                        <div class="row my-2">
-                            <div class="col"><span class="badge_btn_3  mb-1">{{ $staff->roles->name }}</span></div>
-                            <div class="col-auto">
-                                <h4 class="text-dark mt-0">Name: {{ $staff->first_name. ' '. $staff->last_name }}</h4>
+                                                </div>
+                                                {{-- <div class="form-group">
+                                                    <input type="text" class="form-control" name="phone"
+                                                        placeholder="Enter staff phone number">
+                                                    <span class="text-danger">
+                                                        @error('phone')
+                                                            {{ $message }}
+                                                        @enderror
+                                                    </span>
+                                                </div> --}}
+                                                {{-- <div class="form-group">
+                                                    <input type="text" class="form-control" name="image"
+                                                        placeholder="Image">
+                                                    <span class="text-danger">
+                                                        @error('image')
+                                                            {{ $message }}
+                                                        @enderror
+                                                    </span>
+                                                </div> --}}
+                                                <button type="submit" style="background-color: #323246;"
+                                                    class="btn_1 full_width text-center">Add Room</button>
 
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div>
-                            <button class="btn_2 btn-block">View Details</button>
-                            <button class="btn_2 btn-block">Suspend</button>
-                            <button class="btn_2 btn-block">Delete</button>
+                    </div>
+                    <div class="white_box mb_30">
+                        <div class="QA_table mb_30">
+
+                            <table class="table lms_table_active ">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">S/N</th>
+                                        <th scope="col">Room type</th>
+                                        <th scope="col">Room Features</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td scope="row">1</td>
+                                        <td>Royal Suites</td>
+                                        <td>Features 1</td>
+                                        <td>#60000</td>
+                                        <td>Available</td>
+                                        <td>
+                                            <a href="roomsingle" class="btn btn-primary">View</a>
+                                            <a href="#" class="btn btn-danger">Edit</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-
                 </div>
             </div>
-            @endforeach
-
-            @endif
-
-
         </div>
     </div>
-</div>
-
-
 @endsection

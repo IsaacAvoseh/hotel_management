@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Contact;
 use App\Models\Role;
+use App\Models\Room;
+use App\Models\RoomType;
 use App\Models\Service;
 use App\Models\Staff;
 use App\Models\User;
@@ -196,13 +198,41 @@ class DashBoardController extends Controller
                     } else {
                         return redirect()->back()->with('error', 'Staff not added');
                     }
-            
+
         }
         return view('admin.staff', compact('roles', 'staffs'));
     }
 
-    public function room(){
-        return view('admin.room');
+    public function room(Request $request){
+        $services = Service::all();
+        $roomsTypes = RoomType::all();
+
+        if ($request -> isMethod('post')) {
+            $request->validate([
+                'room_type' => 'required',
+                'room_number' => 'required',
+                'price' => 'required',
+                'service' => 'required',
+            ]);
+
+            $room = new Room();
+            $room->room_type = $request->room_type;
+            $room->room_number = $request->room_number;
+            $room->price = $request->price;
+            $room->service = $request->service;
+            $saved = $room->save();
+            if ($saved) {
+                return redirect()->back()->with('success', 'Room added successfully');
+            } else {
+                return redirect()->back()->with('error', 'Room not added');
+            }
+        }
+
+        return view('admin.room', compact('services', 'roomsTypes'));
+    }
+
+    public function roomsingle(){
+        return view('admin.roomsingle');
     }
 
 
@@ -233,9 +263,33 @@ class DashBoardController extends Controller
         return view('admin.services');
     }
 
+    public function addRoomFeatures (Request $request) {
+            $request->validate([
+            'name' => 'required',
+            'price' => 'required',
+            'service_id' => 'required',
+            ]);
+
+        $roomFeatures = new RoomType();
+        $roomFeatures->name = $request->name;
+        $roomFeatures->price = $request->price;
+        $roomFeatures->service_id = $request->service_id;
+        $saved = $roomFeatures->save();
+        if ($saved) {
+            return redirect()->back()->with('success', 'Room Type added successfully');
+        } else {
+            return redirect()->back()->with('error', 'Room Type not added');
+        }       
+    }
+
     public function messages(Request $request){
         $messages = Contact::all();
         return view('admin.messages', compact('messages'));
+    }
+
+    public function bookings(Request $request){
+        
+        return view('admin.booking');
     }
 
 
