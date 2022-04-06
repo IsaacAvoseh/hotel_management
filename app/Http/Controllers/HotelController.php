@@ -35,11 +35,11 @@ class HotelController extends Controller
             $saved = $contact->save();
             if($saved)
             {
-                return redirect()->back()->with('success', 'Message sent successfully');
+                return redirect()->back()->with('success', 'Message sent successfully, We will contact you soon, Please check your mail');
             }
             else
             {
-                return redirect()->back()->with('error', 'Message not sent');
+                return redirect()->back()->with('error', 'Something Went wrong, please try again');
             }
         }
         return view('user.contact');

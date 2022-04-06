@@ -30,6 +30,13 @@ Route::post('/admin/staff/roomfeatures', [DashBoardController::class, 'addRoomFe
 Route::match(['get', 'post'], '/admin/roomsingle', [DashBoardController::class, 'roomsingle'])->name('roomsingle');
 Route::match(['get', 'post'], '/admin/roomfeatures', [DashBoardController::class, 'services'])->name('services');
 Route::match(['get', 'post'], '/admin/messages', [DashBoardController::class, 'messages'])->name('messages');
+
+Route::match(['get', 'post'], '/admin/messages/{id}', [DashBoardController::class, 'replyMessage'])->name('reply');
+Route::match(['get', 'post'], '/admin/messages/delete/{id}', [DashBoardController::class, 'deleteMessage'])->name('delete_message');
+
+Route::match(['get', 'post'], '/ad', [DashBoardController::class, 'mail'])->name('mail');
+
+
 Route::match(['get', 'post'], '/admin/bookings', [DashBoardController::class, 'bookings'])->name('bookings');
 
 Route::match(['get', 'post'], '/', [HotelController::class, 'Home']);
