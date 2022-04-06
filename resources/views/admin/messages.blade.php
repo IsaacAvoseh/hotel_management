@@ -48,7 +48,7 @@
                                     <td>{{ $message->email }}</td>
                                     <td>{{ \Illuminate\Support\Str::limit($message->message, 20, $end='....') }}</td>
                                     <td>{{ date('d/m/Y', strtotime($message->created_at))  }}</td>
-                                    <td><a href="#" class="{{ $message->status? 'bg-danger status_btn': 'status_btn'}}">{{ $message->status? 'Unread': 'Replied' }}</a></td>
+                                    <td><a href="#" class="{{ $message->status? 'status_btn': 'bg-danger status_btn'}}">{{ $message->status? 'Replied': 'Unread' }}</a></td>
                                     <td>
                                         <a href="/admin/messages/{{base64_encode($message->id)}}" class="btn btn-primary">View</a>
                                         <a href="/admin/messages/delete/{{ base64_encode($message->id) }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this message?')">Delete</a>
