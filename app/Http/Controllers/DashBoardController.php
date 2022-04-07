@@ -211,24 +211,106 @@ class DashBoardController extends Controller
         $roomsTypes = RoomType::all();
 
         if ($request -> isMethod('post')) {
-            $request->validate([
-                'room_type' => 'required',
-                'room_number' => 'required',
-                'price' => 'required',
-                'service' => 'required',
-            ]);
+            // $request->validate([
+            //     'room_type' => 'required',
+            //     'room_number' => 'required',
+            //     'price' => 'required',
+            //     'service' => 'required',
+            // ]);
 
-            $room = new Room();
-            $room->room_type = $request->room_type;
-            $room->room_number = $request->room_number;
-            $room->price = $request->price;
-            $room->service = $request->service;
-            $saved = $room->save();
-            if ($saved) {
-                return redirect()->back()->with('success', 'Room added successfully');
-            } else {
-                return redirect()->back()->with('error', 'Room not added');
+            // $room = new Room();
+            // $room->room_type = $request->room_type;
+            // $room->room_number = $request->room_number;
+            // $room->price = $request->price;
+            // $room->service = $request->service;
+            // $saved = $room->save();
+            // if ($saved) {
+            //     return redirect()->back()->with('success', 'Room added successfully');
+            // } else {
+            //     return redirect()->back()->with('error', 'Room not added');
+            // }
+
+            $room_type = new RoomType();
+            $room_type->name = $request->room_type;
+            $room_type->price = $request->price;
+            $room_type->size = $request->size;
+            $room_type->capacity = $request->capacity;
+            $room_type->bed = $request->bed;
+            $room_type->no_0f_rooms = $request->no_of_rooms;
+            
+
+            if($request->hasFile('image')){
+                $image = $request->file('image');
+                $image_name = $image->getClientOriginalName();
+                $image->move(public_path('/admin/rooms'), $image_name);
+                $image_path = '/admin/rooms/'.$image_name;
+            }else{
+                $image_path = '/admin/room.jpg';
             }
+            if($request->hasFile('image_1')){
+                $image1 = $request->file('image_1');
+                $image_name1 = $image1->getClientOriginalName();
+                $image1->move(public_path('/admin/rooms'), $image_name1);
+                $image_path1 = '/admin/rooms/'.$image_name1;
+            }else{
+                $image_path2 = '/admin/room.jpg';
+            }
+            if($request->hasFile('image_2')){
+                $image2 = $request->file('image_2');
+                $image_name2 = $image2->getClientOriginalName();
+                $image2->move(public_path('/admin/rooms'), $image_name2);
+                $image_path2 = '/admin/rooms/'.$image_name2;
+            }else{
+                $image_path2 = '/admin/room.jpg';
+            }
+            if($request->hasFile('image_3')){
+                $image3 = $request->file('image_3');
+                $image_name3 = $image3->getClientOriginalName();
+                $image3->move(public_path('/admin/rooms'), $image_name3);
+                $image_path3 = '/admin/rooms/'.$image_name3;
+            }else{
+                $image_path3 = '/admin/room.jpg';
+            }
+            if($request->hasFile('image_4')){
+                $image4 = $request->file('image_4');
+                $image_name4 = $image4->getClientOriginalName();
+                $image4->move(public_path('/admin/rooms'), $image_name4);
+                $image_path4 = '/admin/rooms/'.$image_name4;
+            }else{
+                $image_path4 = '/admin/room.jpg';
+            }
+
+            $room_type->image = $image_path;
+            $room_type->image_1 = $image_path1;
+            $room_type->image_2 = $image_path2;
+            $room_type->image_3 = $image_path3;
+            $room_type->image_4 = $image_path4;
+            $room_type->service_id = $request->service;
+            $saved = RoomType::create($room_type->toArray());
+            if ($saved['id']) {
+                dd($saved['id']);
+                //save list of room to table rooms depending on the number of $request->no_of_rooms entered, if $request->no_of_rooms is 10 , save 10 rooms to database
+
+                $room = new Room();
+
+                for ($i = 0; $i < number_format($room_type->no_of_rooms); $i++){
+                    $room->name = 'Room'.$i;
+                    $room->room_type_id = $saved['id'];
+                    $saved1 = $room->save();
+                }
+                if($saved1){
+
+                    return redirect()->back()->with('success', 'Room added successfully');
+                }else{
+                    return back()->with('error', 'Something went wrong while adding Room');
+                }
+
+            } else {
+                return redirect()->back()->with('error', 'Something went wrong, Please try again');
+            }
+           
+
+
         }
 
         return view('admin.room', compact('services', 'roomsTypes'));
@@ -334,6 +416,5 @@ class DashBoardController extends Controller
         return view('admin.booking');
     }
 
-
-
+    
 }
