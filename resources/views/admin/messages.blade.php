@@ -44,7 +44,7 @@
                                 @if(isset($messages))
                                 @foreach($messages as $message)
                                 <tr>
-                                    <th scope="row"> <a href="#" class="question_content"> {{ $message->name }} </a></th>
+                                    <th scope="row"> <a href="/admin/messages/{{base64_encode($message->id)}}" class="question_content"> {{ $message->name }} </a></th>
                                     <td>{{ $message->email }}</td>
                                     <td>{{ \Illuminate\Support\Str::limit($message->message, 20, $end='....') }}</td>
                                     <td>{{ date('d/m/Y', strtotime($message->created_at))  }}</td>

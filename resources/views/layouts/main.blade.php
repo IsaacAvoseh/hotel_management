@@ -58,7 +58,7 @@
         @if (Auth::check())
             <ul id="sidebar_menu">
                 <li class="mm-active">
-                    <a href="/admin" class="has-arrow/" href="#" aria-expanded="false">
+                    <a href="/admin/dashboard" class="has-arrow/" href="#" aria-expanded="false">
                         <div class="icon_menu">
                             <img src="/img/menu-icon/dashboard.svg" alt="">
                         </div>
