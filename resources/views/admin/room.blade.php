@@ -28,7 +28,7 @@
                                     <h5 class="mb-0">
                                         <button class="btn btn-link collapsed" data-toggle="collapse"
                                             data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseOne">Add
-                                            Room Type<span class="digits"></span></button>
+                                            Room<span class="digits"></span></button>
                                     </h5>
                                 </div>
                                 <div class="collapse" id="collapseTwo" aria-labelledby="headingOne"
@@ -40,7 +40,7 @@
                                                 @csrf
                                                 <div class="form-group">
                                                     <input type="text" name="name" class="form-control"
-                                                        placeholder="Room Type">
+                                                        placeholder="Room Name">
                                                     <span class="text-danger">
                                                         @error('name')
                                                             {{ $message }}
@@ -48,17 +48,8 @@
                                                     </span>
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="text" name="price" class="form-control"
-                                                        placeholder="Price">
-                                                    <span class="text-danger">
-                                                        @error('price')
-                                                            {{ $message }}
-                                                        @enderror
-                                                    </span>
-                                                </div>
-                                                <div class="form-group">
                                                     <select name="service_id" id="roomfeatures" class="form-control">
-                                                        <option value="">Select Room Features</option>
+                                                        <option value="">Select Room Type</option>
                                                         @if (isset($services) && count($services) > 0)
                                                             @foreach ($services as $service)
                                                                 <option value="{{ $service->id }}">{{ $service->name }}
@@ -87,7 +78,7 @@
                                     <h5 class="mb-0">
                                         <button class="btn btn-link collapsed" data-toggle="collapse"
                                             data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Add
-                                            Room<span class="digits"></span></button>
+                                            Room Type<span class="digits"></span></button>
                                     </h5>
                                 </div>
                                 <div class="collapse" id="collapseOne" aria-labelledby="headingOne"
@@ -96,21 +87,21 @@
                                     <div class="card-body">
 
                                         <div class="modal-body">
-                                            <form action="{{ route('staff') }}" method="POST"
+                                            <form action="{{ route('room') }}" method="POST"
                                                 enctype="multipart/form-data">
                                                 @csrf
                                                 <div class="form-group">
-                                                    <select name="roomtype" id="roomtype" class="form-control">
-                                                        <option value="">Select Room Type</option>
-                                                        @if (isset($roomsTypes) && count($roomsTypes) > 0)
-                                                            @foreach ($roomsTypes as $roomsType)
-                                                                <option value="{{ $roomsType->id }}">
-                                                                    {{ $roomsType->name }}</option>
+                                                    <select name="service_id" id="roomfeatures" class="form-control">
+                                                        <option value="">Select Room Service</option>
+                                                        @if (isset($services) && count($services) > 0)
+                                                            @foreach ($services as $service)
+                                                                <option value="{{ $service->id }}">{{ $service->name }}
+                                                                </option>
                                                             @endforeach
                                                         @endif
                                                     </select>
                                                     <span class="text-danger">
-                                                        @error('role')
+                                                        @error('service_id')
                                                             {{ $message }}
                                                         @enderror
                                                     </span>
@@ -142,23 +133,39 @@
                                                     </span>
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="file" name="image" class="form-control">
-
+                                                    <input type="text" name="price" class="form-control" placeholder="Price">
+                                                    <span class="text-danger">
+                                                        @error('price')
+                                                            {{ $message }}
+                                                        @enderror
+                                                    </span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="number" name="no_of_rooms" class="form-control" placeholder="Number Of Rooms">
+                                                    <span class="text-danger">
+                                                        @error('no_of_rooms')
+                                                            {{ $message }}
+                                                        @enderror
+                                                    </span>
                                                 </div>
                                                 <div class="form-group">
                                                     <input type="file" name="image" class="form-control">
 
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="file" name="image" class="form-control">
+                                                    <input type="file" name="image_1" class="form-control">
 
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="file" name="image" class="form-control">
+                                                    <input type="file" name="image_2" class="form-control">
 
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="file" name="image" class="form-control">
+                                                    <input type="file" name="image_3" class="form-control">
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="file" name="image_4" class="form-control">
 
                                                 </div>
                                                 {{-- <div class="form-group">
