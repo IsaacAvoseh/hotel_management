@@ -267,18 +267,22 @@ class DashBoardController extends Controller
             $room_type->image_2 = $image_path2;
             $room_type->image_3 = $image_path3;
             $room_type->image_4 = $image_path4;
-            $room_type->service_id = $request->service;
+            $room_type->service_id = $request->service_id;
             $saved = RoomType::create($room_type->toArray());
             if ($saved['id']) {
                 // dd($saved['id']);
                 //save list of room to table rooms depending on the number of $request->no_of_rooms entered, if $request->no_of_rooms is 10 , save 10 rooms to database
-
-                $room = new Room();
-
-                for ($i = 0; $i < number_format($room_type->no_of_rooms); $i++){
-                    $room->name = 'Room'.$i+1;
-                    $room->room_type_id = $saved['id'];
-                    $saved1 = $room->save();
+                for ($i = 0; $i < number_format($room_type->no_of_rooms);) {
+                    
+                   
+                       $room = new Room();
+                        $room->name = 'Room' . $i + 1;
+                        $room->room_type_id = $saved['id'];
+                        // $room->status = 'available';
+                        $room->room_no = strtoupper('R'.rand(100,999));
+                        $saved1 = $room->save();
+                        $i++;
+                    
                 }
                 if($saved1){
 
