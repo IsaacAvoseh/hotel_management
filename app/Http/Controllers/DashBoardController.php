@@ -210,14 +210,15 @@ class DashBoardController extends Controller
         $services = Service::all();
 
         if ($request -> isMethod('post')) {
+            // dd($request->all());
            
             $room_type = new RoomType();
-            $room_type->name = $request->room_type;
+            $room_type->name = $request->name;
             $room_type->price = $request->price;
             $room_type->size = $request->size;
             $room_type->capacity = $request->capacity;
             $room_type->bed = $request->bed;
-            $room_type->no_0f_rooms = $request->no_of_rooms;
+            $room_type->no_of_rooms = $request->no_of_rooms;
             
 
             if($request->hasFile('image')){
@@ -234,7 +235,7 @@ class DashBoardController extends Controller
                 $image1->move(public_path('/admin/rooms'), $image_name1);
                 $image_path1 = '/admin/rooms/'.$image_name1;
             }else{
-                $image_path2 = '/admin/room.jpg';
+                $image_path1 = '/admin/room.jpg';
             }
             if($request->hasFile('image_2')){
                 $image2 = $request->file('image_2');
@@ -269,13 +270,13 @@ class DashBoardController extends Controller
             $room_type->service_id = $request->service;
             $saved = RoomType::create($room_type->toArray());
             if ($saved['id']) {
-                dd($saved['id']);
+                // dd($saved['id']);
                 //save list of room to table rooms depending on the number of $request->no_of_rooms entered, if $request->no_of_rooms is 10 , save 10 rooms to database
 
                 $room = new Room();
 
                 for ($i = 0; $i < number_format($room_type->no_of_rooms); $i++){
-                    $room->name = 'Room'.$i;
+                    $room->name = 'Room'.$i+1;
                     $room->room_type_id = $saved['id'];
                     $saved1 = $room->save();
                 }
