@@ -107,6 +107,15 @@
                                                     </span>
                                                 </div>
                                                 <div class="form-group">
+                                                    <input type="text" name="name" class="form-control"
+                                                        placeholder="Name">
+                                                    <span class="text-danger">
+                                                        @error('name')
+                                                            {{ $message }}
+                                                        @enderror
+                                                    </span>
+                                                </div>
+                                                <div class="form-group">
                                                     <input type="text" name="size" class="form-control"
                                                         placeholder="Size">
                                                     <span class="text-danger">
