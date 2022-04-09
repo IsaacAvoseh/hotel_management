@@ -4,9 +4,10 @@
     <div class="col-12">
         <div class="white_card position-relative mb_20">
             <div class="card-body">
+                @include('flash.flash')
                 <div class="row">
                     <div class="col-lg-6 align-self-center">
-                        <img src="/admin/room.jpg" alt="" class="mx-auto d-block sm_w_100" height="300" />
+                        <img src="{{ $booking->roomType->image }}" alt="" class="mx-auto d-block sm_w_100" height="300" />
                     </div>
 
                     <div class="col-lg-6 align-self-center">
@@ -31,8 +32,8 @@
                             </ul>
                             <ul class="list-unstyled text-primary border-0">
 
-                                <li>Check-In: 22/01/2022</li>
-                                <li>Check-Out: 22/01/2022</li>
+                                <li>Check-In: {{ $booking->check_in }}</li>
+                                <li>Check-Out: {{ $booking->check_out }}</li>
 
 
 
@@ -42,14 +43,24 @@
 
 
 
-                            <div class="quantity mt-3">
+                            <div class="quantity mt-3" style="display: flex;">
 
-                                <a href="" class="btn green_bg text-white px-4 d-inline-block ">
-                                    <i class="me-2"></i>Approve
-                                </a>
-                                <a href="" onclick="return confirm('Are you sure you want to reject this booking request?')" class="btn btn-danger text-white px-4 d-inline-block ">
-                                    <i class="me-2"></i>Reject
-                                </a>
+
+                                <form action="/admin/booking-details/update/{{ base64_encode($booking->id) }}" method="POST" class="mx-2">
+                                    @csrf
+                                    <input type="hidden" name="status" value="approved">
+                                    <button type="submit" class="btn btn-success px-4 d-inline-block ">
+                                        <i class="me-2"></i>Approve
+                                    </button>
+                                </form>
+
+                                <form action="/admin/booking-details/update/{{ base64_encode($booking->id) }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="status" value="cancelled">
+                                    <button onclick="return confirm('Are you sure you want to cancel this booking?')" type="submit" class="btn btn-danger px-4 d-inline-block ">
+                                        <i class="me-2"></i>Cancel
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>

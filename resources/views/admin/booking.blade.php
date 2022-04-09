@@ -48,10 +48,28 @@
                                     <td>{{ $booking->phone }}</td>
                                     <td>{{ $booking->check_in }}</td>
                                     <td>{{ $booking->check_out }}</td>
-                                    <td>{{ $booking->status }}</td>
+                                    <td> {{ $booking->status }} </td>
                                     <td>
-                                        <a href="/admin/booking-details/{{ base64_encode($booking->id) }}" class="btn btn-primary">View more</a>
-                                        <a href="#" onclick="checkName()" class="btn btn-success">Approve</a>
+                                        <div class="quantity mt-3" style="display: flex;">
+
+                                            <a href="/admin/booking-details/{{ base64_encode($booking->id) }}" class="btn btn-primary">View more</a>
+
+                                            <form action="/admin/booking-details/update/{{ base64_encode($booking->id) }}" method="POST" class="mx-2">
+                                                @csrf
+                                                <input type="hidden" name="status" value="approved">
+                                                <button onclick="checkName()" id="approve" type="submit" class="btn btn-success px-4 d-inline-block ">
+                                                    <i class="me-2"></i>Approve
+                                                </button>
+                                            </form>
+
+                                            <form action="/admin/booking-details/update/{{ base64_encode($booking->id) }}" method="POST">
+                                                @csrf
+                                                <input type="hidden" name="status" value="cancelled">
+                                                <button onclick="return confirm('Are you sure you want to cancel this booking?')" type="submit" class="btn btn-danger px-4 d-inline-block ">
+                                                    <i class="me-2"></i>Cancel
+                                                </button>
+                                            </form>
+                                        </div>
                                     </td>
 
                                 </tr>
@@ -66,27 +84,71 @@
             </div>
         </div>
     </div>
+    <!-- <div id="dialog-form">
+        <form>
+            <label for="name">Name</label>
+            <input type="text" name="name" id="txt2" class="text ui-widget-content ui-corner-all" />
+        </form>
+    </div> -->
 </div>
 
 <script>
-    let again = false;
+    var maxClick = 3;
+
+    function ask2() {
+        $("#approve").click(function() {
+            $.dialog({
+                "body": "fjkfgjgjg!",
+                "title": "jfjfk",
+                "show": true
+            });
+        });
+    }
     var checkName = (function ask() {
         //check if name is the logged in user
-        var name = prompt("Please enter your full name to Approve");
+        var name = prompt("Please view the details of this booking before you approve or Enter your full name to Approve");
         if (name == "{{ Auth::user()->name }}") {
-            alert("Approved");
-            return true;
-        } else{
+            $('#approve').attr('type', 'submit');
+            confirm("Are you sure you want to approve this booking?");;
+            // return true;
+        } else {
             if (name == '') {
                 alert("Please enter {{ Auth::user()->name }}");
-                return ask();
-            } 
-              else{    
+                if (--maxClick > 0)
+                    return ask();
+            } else {
                 alert("You are not allowed to approve this booking, please contact admin or enter {{ Auth::user()->name }} to Approve");
-                return false;
+
+                $('#approve').attr('type', 'button');
+
             }
         }
-        
+
+    });
+
+
+    $(function() {
+        $("#dialog-form").dialog({
+            autoOpen: false,
+            modal: true,
+            buttons: {
+                "Ok": function() {
+                    var text1 = $("#txt1");
+                    var text2 = $("#txt2");
+                    //Do your code here
+                    text1.val(text2.val().substr(1, 9));
+                    $(this).dialog("close");
+                },
+                "Cancel": function() {
+                    $(this).dialog("close");
+                }
+            }
+        });
+
+
+        $('#approve').click(function checkName() {
+            $("#dialog-form").dialog("open");
+        });
 
     });
 </script>

@@ -94,6 +94,23 @@ class DashBoardController extends Controller
 
     public function register(Request $request)
     {
+        // if ($request->session()->has('user')) {
+        //     return view('dashboard');
+        // } else {
+        //     return redirect('/admin/login');
+        // }
+
+        //admin registration
+        if ($request->isMethod('post')) {
+            // dd($ request->all());
+            $request->validate([
+                'name' => 'required',
+                'email' => 'required|email',
+                'password' => 'required',
+                'password_confirmation' => 'required|same:password',
+            ]);
+
+
 
         // if ($request->session()->has('user')) {
         //     return view('dashboard');
@@ -111,6 +128,7 @@ class DashBoardController extends Controller
                 'password_confirmation' => 'required|same:password',
             ]);
 
+          
             $user = new User();
 
             if ($request->hasFile('image')) {
@@ -363,7 +381,9 @@ class DashBoardController extends Controller
 
     public function replyMessage(Request $request, $id)
     {
-        $message = Contact::find(base64_decode($id));
+
+        $message = Contact::findOrfail(base64_decode($id));
+
         // dd(date('d-m-Y', strtotime(Carbon::now())));
         if ($request->isMethod('post')) {
             // dd($message);
@@ -380,7 +400,13 @@ class DashBoardController extends Controller
             $saved = $message->save();
 
             if ($saved) {
-                Mail::to($message->email)->send(new ReplyMessage($message));
+
+                try {
+                    Mail::to($message->email)->send(new ReplyMessage($message));
+                } catch (\Exception $e) {
+                    return redirect()->back()->with('error', 'Something went wrong while sending email, Message not sent');
+                }
+
                 return redirect()->back()->with('success', 'Message replied successfully');
             } else {
                 return redirect()->back()->with('error', 'Message not replied');
@@ -413,6 +439,41 @@ class DashBoardController extends Controller
     {
         $booking = Booking::find(base64_decode($id))->with('room', 'roomType')->first();
         // dd($booking);
+
         return view('admin.booking_details', compact('booking'));
     }
+
+    public function updateBooking(Request $request, $id)
+    {
+        $booking = Booking::find(base64_decode($id));
+        if ($request->isMethod('post')) {
+            $request->validate([
+                'status' => 'required',
+
+            ]);
+            // dd($request->all());
+            try {
+                $saved = $booking->update([
+                    'status' => $request->status,
+                    'approved_by' => Auth::user()->name,
+                ]);
+            } catch (\Exception $e) {
+                return redirect()->back()->with('error', 'Something went wrong while updating booking status');
+            }
+            if ($saved) {
+                return redirect()->back()->with('success', 'Booking updated successfully');
+            } else {
+                return redirect()->back()->with('error', 'Booking not updated, Something went wrong');
+            }
+        }
+
+        // return view('admin.update_booking', compact('booking'));
+    }
+
+    public function bookingReport(Request $request)
+    {
+        $bookings = Booking::with('room', 'roomType')->get();
+        return view('admin.bookings_report', compact('bookings'));
+    }
+
 }
