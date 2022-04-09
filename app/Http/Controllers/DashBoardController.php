@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\ReplyMessage;
+use App\Models\Booking;
 use App\Models\Contact;
 use App\Models\Role;
 use App\Models\Room;
@@ -390,14 +391,22 @@ class DashBoardController extends Controller
         return redirect()->back()->with('success', 'Message deleted successfully');
     }
 
+   
+
     public function mail(){
         return view('mail.reply_message');
     }
 
     public function bookings(Request $request){
-        
-        return view('admin.booking');
+        $bookings = Booking::with('room', 'roomType')->get();
+        return view('admin.booking', compact('bookings'));
     }
+
+    public function bookingDetails(Request $request, $id){   
+        $booking = Booking::find(base64_decode($id))->with('room', 'roomType')->first();
+        // dd($booking);
+        return view('admin.booking_details', compact('booking'));
+        }
 
     
 }
