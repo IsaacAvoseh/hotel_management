@@ -85,6 +85,24 @@
 
                 </li>
                 <li class="">
+                    <a class="has-arrow/" href="/admin/booking-report" aria-expanded="false">
+                        <div class="icon_menu">
+                            <img src="/img/menu-icon/3.svg" alt="">
+                        </div>
+                        <span>Booking Reports</span>
+                    </a>
+
+                </li>
+                <li class="">
+                    <a class="has-arrow/" href="/admin/payments" aria-expanded="false">
+                        <div class="icon_menu">
+                            <img src="/img/menu-icon/3.svg" alt="">
+                        </div>
+                        <span>Payments</span>
+                    </a>
+
+                </li>
+                <li class="">
                     <a href="/admin/messages" class="has-arrow/" aria-expanded="false">
                         <div class="icon_menu">
                             <img src="/img/menu-icon/4.svg" alt="">
