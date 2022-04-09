@@ -144,10 +144,10 @@
                                     <div class="card">
                                         <div class="card-header" id="headingOne">
                                             <h5 class="mb-0">
-                                                <button class="btn btn-link collapsed" data-toggle="collapse"
+                                                <a href="/admin/all-room/{{base64_encode($room->id)}}" class="btn btn-link collapsed" data-toggle="collapse"
                                                     data-target="#collapseTwo" aria-expanded="false"
                                                     aria-controls="collapseOne">{{ $room->name }}<span
-                                                        class="digits"></span></button>
+                                                        class="digits"></span></a>
                                             </h5>
                                         </div>
                                         <div class="collapse" id="collapseTwo" aria-labelledby="headingOne"
