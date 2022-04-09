@@ -115,7 +115,7 @@ class DashBoardController extends Controller
                     $image = $request->file('image');
                     $image_name = $image->getClientOriginalName();
                     $image->move(public_path('/admin/images'), $image_name);
-                    $image_path = 'admin/images/' . $image_name;
+                    $image_path = '/admin/images/' . $image_name;
                 } else {
                     $image_path = '/admin/default.jpg';
                 }
@@ -208,6 +208,7 @@ class DashBoardController extends Controller
 
     public function room(Request $request){
         $services = Service::all();
+        $rooms = RoomType::all();
 
         if ($request -> isMethod('post')) {
             // dd($request->all());
@@ -297,7 +298,7 @@ class DashBoardController extends Controller
            
         }
 
-        return view('admin.room', compact('services'));
+        return view('admin.room', compact('services', 'rooms'));
     }
 
     public function roomsingle(){
