@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\ReplyMessage;
+use App\Models\About;
 use App\Models\Booking;
 use App\Models\Contact;
 use App\Models\Role;
@@ -68,7 +69,7 @@ class DashBoardController extends Controller
                         // }
 
                         // Auth::login($staff);
-                        dd(Auth::user());
+                        // dd(Auth::user());
                         $request->session()->put('staff', $staff);
                         return redirect()->route('dashboard');
                     } else {
@@ -112,46 +113,47 @@ class DashBoardController extends Controller
 
 
 
-        // if ($request->session()->has('user')) {
-        //     return view('dashboard');
-        // } else {
-        //     return redirect('/admin/login');
-        // }
+            // if ($request->session()->has('user')) {
+            //     return view('dashboard');
+            // } else {
+            //     return redirect('/admin/login');
+            // }
 
-        //admin registration
-        if ($request->isMethod('post')) {
-            // dd($ request->all());
-            $request->validate([
-                'name' => 'required',
-                'email' => 'required|email',
-                'password' => 'required',
-                'password_confirmation' => 'required|same:password',
-            ]);
+            //admin registration
+            if ($request->isMethod('post')) {
+                // dd($ request->all());
+                $request->validate([
+                    'name' => 'required',
+                    'email' => 'required|email',
+                    'password' => 'required',
+                    'password_confirmation' => 'required|same:password',
+                ]);
 
-          
-            $user = new User();
 
-            if ($request->hasFile('image')) {
-                $image = $request->file('image');
-                $image_name = $image->getClientOriginalName();
-                $image->move(public_path('/admin/images'), $image_name);
-                $image_path = '/admin/images/' . $image_name;
-            } else {
-                $image_path = '/admin/default.jpg';
+                $user = new User();
+
+                if ($request->hasFile('image')) {
+                    $image = $request->file('image');
+                    $image_name = $image->getClientOriginalName();
+                    $image->move(public_path('/admin/images'), $image_name);
+                    $image_path = '/admin/images/' . $image_name;
+                } else {
+                    $image_path = '/admin/default.jpg';
+                }
+
+                $user->name = $request->name;
+                $user->email = $request->email;
+                $user->password = Hash::make($request->password);
+                $user->image = $image_path;
+                $saved = $user->save();
+                if ($saved) {
+                    return redirect('/admin/login')->with('success', 'Registration Successful');
+                } else {
+                    return redirect('/admin/register')->with('error', 'Registration Failed');
+                }
             }
-
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->password = Hash::make($request->password);
-            $user->image = $image_path;
-            $saved = $user->save();
-            if ($saved) {
-                return redirect('/admin/login')->with('success', 'Registration Successful');
-            } else {
-                return redirect('/admin/register')->with('error', 'Registration Failed');
-            }
+            return view('admin.register');
         }
-        return view('admin.register');
     }
 
     //add new role 
@@ -473,7 +475,55 @@ class DashBoardController extends Controller
     public function bookingReport(Request $request)
     {
         $bookings = Booking::with('room', 'roomType')->get();
+        // dd($bookings);
         return view('admin.bookings_report', compact('bookings'));
     }
 
+    public function About(Request $request)
+    {
+        $abouts = About::find(1);
+        // dd($abouts);
+        if ($request->isMethod('post')) {
+            $request->validate([
+                'phone' => 'required',
+                'email' => 'required',
+                'address' => 'required',
+            ]);
+            $about = new About();
+            $about->phone = $request->phone;
+            $about->email = $request->email;
+            $about->address = $request->address;
+            $saved = $about->save();
+            if ($saved) {
+                return redirect()->back()->with('success', 'About added successfully');
+            } else {
+                return redirect()->back()->with('error', 'About not added');
+            }
+        }
+
+        return view('admin.about', compact('abouts'));
+    }
+
+    public function EditAbout(Request $request)
+    {
+        $abouts = About::find(1);
+        if ($request->isMethod('post')) {
+            $request->validate([
+                'phone' => 'required',
+                'email' => 'required',
+                'address' => 'required',
+            ]);
+            $saved = $abouts->update([
+                'phone' => $request->phone,
+                'email' => $request->email,
+                'address' => $request->address,
+            ]);
+            if ($saved) {
+                return redirect()->back()->with('success', 'About Edited successfully');
+            } else {
+                return redirect()->back()->with('error', 'About not Edited');
+            }
+        }
+        return view('admin.editabout', compact('abouts'));
+    }
 }
