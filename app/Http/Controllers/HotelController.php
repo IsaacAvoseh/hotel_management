@@ -2,29 +2,44 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\About;
 use App\Models\Booking;
 use App\Models\Contact;
 use App\Models\Room;
 use App\Models\RoomType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 
 class HotelController extends Controller
 {
     public function Home()
     {
-        return view('user.home');
-    }
-
-    public function Room()
-    {
+        $abouts = About::all();
         $room_type = RoomType::all();
-        return view('user.rooms', compact('room_type'));
+        $rooms = RoomType::all();
+        return view('user.home', compact('room_type', 'abouts', 'rooms'));
     }
 
+    public function Room(Request $request )
+    {
+        $abouts = About::all();
+        $room_type = RoomType::all();  
+        $rooms = RoomType::all();  
+        // dd($room_type);
+
+        return view('user.rooms', compact('room_type', 'rooms', 'abouts'));
+    }
+
+    public function Orange(Request $request)
+    {
+        $abouts = About::all();
+        $room = RoomType::find(base64_decode($request->id));
+        return view('user.orange', compact('room', 'abouts'));
+    }
 
     //get rooms under a room type
     public function getRooms(Request $request)
-    {   
+    {
         // dd($request->all());
         $room_type_id = RoomType::find(base64_decode($request->id));
         echo  json_encode(Room::where('room_type_id', $room_type_id->id)->get());
@@ -38,10 +53,10 @@ class HotelController extends Controller
 
     public function Contact(Request $request)
     {
-        if($request->isMethod('post'))
-        {
+        $abouts = About::all();
+        if ($request->isMethod('post')) {
             // dd($request->all());
-           $request->validate([
+            $request->validate([
                 'name' => 'required',
                 'email' => 'required',
                 'message' => 'required',
@@ -52,56 +67,21 @@ class HotelController extends Controller
             $contact->email = $data['email'];
             $contact->message = $data['message'];
             $saved = $contact->save();
-            if($saved)
-            {
+            if ($saved) {
                 return redirect()->back()->with('success', 'Message sent successfully, We will contact you soon, Please check your mail');
-            }
-            else
-            {
+            } else {
                 return redirect()->back()->with('error', 'Something Went wrong, please try again');
             }
         }
-        return view('user.contact');
+        return view('user.contact', compact('abouts'));
     }
 
     public function Booking()
     {
-        return view('user.booking');
-    }
+        $abouts = About::all();
+        $room_type = RoomType::all();
 
-    public function Royal()
-    {
-        return view('user.royal');
-    }
-
-    public function Business()
-    {
-        return view('user.business');
-    }
-
-    public function Purple()
-    {
-        return view('user.purple');
-    }
-
-    public function Regular()
-    {
-        return view('user.regular');
-    }
-
-    public function Green()
-    {
-        return view('user.green');
-    }
-
-    public function Orange()
-    {
-        return view('user.orange');
-    }
-
-    public function Classic()
-    {
-        return view('user.classic');
+        return view('user.booking', compact('room_type', 'abouts'));
     }
 
     public function getBookings(Request $request)
@@ -116,7 +96,7 @@ class HotelController extends Controller
         ]);
         // dd($request->all());
         // dd(base64_decode($request->room_type), base64_decode($request->room));
-      $booking = new Booking();
+        $booking = new Booking();
         $booking->check_in = $request->check_in;
         $booking->check_out = $request->check_out;
         $booking->name = $request->name;
@@ -127,10 +107,10 @@ class HotelController extends Controller
         $booking->room_type_id = base64_decode($request->room_type);
         $booking->room_id = base64_decode($request->room);
         $saved = $booking->save();
-        if($saved) {
+        if ($saved) {
             return redirect()->back()->with('success', 'Room Booked Successfully, we wil get back to you shortly, please check your email. Thank you for choosing us');
         } else {
             return redirect()->back()->with('error', 'Something Went wrong, please try again');
         }
-     }
+    }
 }

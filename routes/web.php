@@ -33,13 +33,13 @@ Route::match(['get', 'post'], '/admin/messages', [DashBoardController::class, 'm
 Route::match(['get', 'post'], '/admin/booking-details/{id}', [DashBoardController::class, 'bookingDetails'])->name('booking-details');
 Route::post('/admin/booking-details/update/{id}', [DashBoardController::class, 'updateBooking'])->name('update-booking');
 Route::match(['get', 'post'],'/admin/booking-report', [DashBoardController::class, 'bookingReport'])->name('booking-report');
-
 Route::match(['get', 'post'], '/admin/messages/{id}', [DashBoardController::class, 'replyMessage'])->name('reply');
 Route::match(['get', 'post'], '/admin/messages/delete/{id}', [DashBoardController::class, 'deleteMessage'])->name('delete_message');
 Route::match(['get', 'post'], '/ad', [DashBoardController::class, 'mail'])->name('mail');
-
-
 Route::match(['get', 'post'], '/admin/bookings', [DashBoardController::class, 'bookings'])->name('bookings');
+Route::match(['get', 'post'], '/admin/about', [DashBoardController::class, 'About'])->name('about');
+Route::match(['get', 'post'], '/admin/editabout', [DashBoardController::class, 'EditAbout'])->name('editabout');
+
 
 Route::match(['get', 'post'], '/', [HotelController::class, 'Home']);
 Route::match(['get', 'post'], '/room', [HotelController::class, 'Room']);
@@ -47,10 +47,4 @@ Route::match(['get', 'post'], '/get-rooms', [HotelController::class, 'getRooms']
 Route::match(['get', 'post'], '/contact', [HotelController::class, 'Contact']);
 Route::match(['get', 'post'], '/booking', [HotelController::class, 'Booking']);
 Route::match(['get', 'post'], '/get-booking', [HotelController::class, 'getBookings'])->name('get-booking');
-Route::match(['get', 'post'], '/royal', [HotelController::class, 'Royal']);
-Route::match(['get', 'post'], '/business', [HotelController::class, 'Business']);
-Route::match(['get', 'post'], '/purple', [HotelController::class, 'Purple']);
-Route::match(['get', 'post'], '/regular', [HotelController::class, 'Regular']);
-Route::match(['get', 'post'], '/green', [HotelController::class, 'Green']);
-Route::match(['get', 'post'], '/orange', [HotelController::class, 'Orange']);
-Route::match(['get', 'post'], '/classic', [HotelController::class, 'Classic']);
+Route::match(['get', 'post'], '/room/{id}', [HotelController::class, 'Orange']);

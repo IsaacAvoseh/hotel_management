@@ -128,11 +128,11 @@
                     </a>
                 </li>
                 <li class="">
-                    <a href="#" aria-expanded="false">
+                    <a href="/admin/about" aria-expanded="false">
                         <div class="icon_menu">
                             <img src="/img/menu-icon/7.svg" alt="">
                         </div>
-                        <span>Menu</span>
+                        <span>About</span>
                     </a>
                 </li>
                 <li class="">
