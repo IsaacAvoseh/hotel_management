@@ -10,11 +10,13 @@ class BookingsController extends Controller
 {
 
     public function approveBooking(Request $request, $id){
-    // dd($request->all());
-    //   return redirect()->route('payment', ['booking' => base64_encode($booking)])->with('success', 'Booking successful, Please select payment method');
-    //     } else {
-    //         return redirect()->back()->with('error', 'Something Went wrong, please try again');
-    //     }
+        $booking = Booking::findOrfail(base64_decode($request->id));
+    //   dd($booking);
+        if($booking){
+      return redirect()->route('payment', ['booking' => base64_encode($booking)])->with('success', 'Booking successful, Please select payment method');
+         } else {
+             return redirect()->back()->with('error', 'Something Went wrong, please try again');
+         }
     }
 
     public function bookingsByStaff(Request $request)

@@ -49,8 +49,8 @@ Route::match(['get', 'post'], '/get-rooms', [HotelController::class, 'getRooms']
 Route::match(['get', 'post'], '/contact', [HotelController::class, 'Contact']);
 Route::match(['get', 'post'], '/booking', [HotelController::class, 'Booking']);
 Route::match(['get', 'post'], '/get-booking', [HotelController::class, 'getBookings'])->name('get-booking');
-Route::match(['get', 'post'], '/staff-booking', [BookingsController::class, 'bookingsByStaff'])->name('staff-booking');
-Route::match(['get', 'post'], '/approve-booking/{id}', [BookingsController::class, 'approveBooking'])->name('approve-booking');
+Route::match(['get', 'post'], '/admin/staff-booking', [BookingsController::class, 'bookingsByStaff'])->name('staff-booking');
+Route::match(['get', 'post'], 'admin/approve-booking/{id}', [BookingsController::class, 'approveBooking'])->name('approve-booking');
 Route::match(['get', 'post'], '/admin/payment', [PaymentController::class, 'payment'])->name('payment');
 
 Route::match(['get', 'post'], '/room/{id}', [HotelController::class, 'Orange']);

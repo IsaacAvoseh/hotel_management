@@ -184,18 +184,23 @@
 
                                             <a href="/admin/booking-details/{{ base64_encode($booking->id) }}" class="btn btn-primary">View more</a>
 
-                                           
-                                               <form> 
-                                            <a href="/admin/approve-booking/{{ base64_encode($booking->id) }}" class="btn btn-success">Approve</a>
-                                               </form>
 
-                                            <form action="/admin/booking-details/update/{{ base64_encode($booking->id) }}" method="POST">
+
+
+                                            <form action="/admin/approve-booking/{{ base64_encode($booking->id) }}" method="POST">
                                                 @csrf
-                                                <input type="hidden" name="status" value="cancelled">
-                                                <button onclick="return confirm('Are you sure you want to cancel this booking?')" type="submit" class="btn btn-danger px-4 d-inline-block ">
-                                                    <i class="me-2"></i>Cancel
+                                                <input type="hidden" name="id" value="{{ base64_encode( $booking->id ) }}">
+                                                <button type="submit" class="btn btn-success px-4 d-inline-block ">
+                                                    <i class="me-2"></i>Approve
                                                 </button>
-                                            </form>
+
+                                                <form action="/admin/booking-details/update/{{ base64_encode($booking->id) }}" method="POST">
+                                                    @csrf
+                                                    <input type="hidden" name="status" value="cancelled">
+                                                    <button onclick="return confirm('Are you sure you want to cancel this booking?')" type="submit" class="btn btn-danger px-4 d-inline-block ">
+                                                        <i class="me-2"></i>Cancel
+                                                    </button>
+                                                </form>
                                         </div>
                                     </td>
 

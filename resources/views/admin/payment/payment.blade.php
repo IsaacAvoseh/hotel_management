@@ -224,7 +224,7 @@
 
                             },
                             error: function(data) {
-                                console.log('rrtrttttttt');
+                                console.log('error', data);
                                 alert('error');
                             }
 
