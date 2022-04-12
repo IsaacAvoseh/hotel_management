@@ -193,6 +193,7 @@
                                                 <button type="submit" class="btn btn-success px-4 d-inline-block ">
                                                     <i class="me-2"></i>Approve
                                                 </button>
+                                            </form>
 
                                                 <form action="/admin/booking-details/update/{{ base64_encode($booking->id) }}" method="POST">
                                                     @csrf
