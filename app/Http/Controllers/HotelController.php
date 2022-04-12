@@ -15,16 +15,17 @@ class HotelController extends Controller
     public function Home()
     {
         $abouts = About::all();
+        $aboutus = About::find(1);
         $room_type = RoomType::all();
         $rooms = RoomType::all();
-        return view('user.home', compact('room_type', 'abouts', 'rooms'));
+        return view('user.home', compact('room_type', 'abouts', 'rooms', 'aboutus'));
     }
 
-    public function Room(Request $request )
+    public function Room(Request $request)
     {
         $abouts = About::all();
-        $room_type = RoomType::all();  
-        $rooms = RoomType::all();  
+        $room_type = RoomType::all();
+        $rooms = RoomType::all();
         // dd($room_type);
 
         return view('user.rooms', compact('room_type', 'rooms', 'abouts'));
@@ -54,6 +55,7 @@ class HotelController extends Controller
     public function Contact(Request $request)
     {
         $abouts = About::all();
+        $aboutus = About::find(1);
         if ($request->isMethod('post')) {
             // dd($request->all());
             $request->validate([
@@ -73,7 +75,7 @@ class HotelController extends Controller
                 return redirect()->back()->with('error', 'Something Went wrong, please try again');
             }
         }
-        return view('user.contact', compact('abouts'));
+        return view('user.contact', compact('abouts', 'aboutus'));
     }
 
     public function Booking()

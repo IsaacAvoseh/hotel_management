@@ -491,11 +491,15 @@ class DashBoardController extends Controller
                 'phone' => 'required',
                 'email' => 'required',
                 'address' => 'required',
+                'title' => 'required',
+                'content' => 'required',
             ]);
             $about = new About();
             $about->phone = $request->phone;
             $about->email = $request->email;
             $about->address = $request->address;
+            $about->title = $request->title;
+            $about->content = $request->content;
             $saved = $about->save();
             if ($saved) {
                 return redirect()->back()->with('success', 'About added successfully');
@@ -515,11 +519,15 @@ class DashBoardController extends Controller
                 'phone' => 'required',
                 'email' => 'required',
                 'address' => 'required',
+                'title' => 'required',
+                'content' => 'required',
             ]);
             $saved = $abouts->update([
                 'phone' => $request->phone,
                 'email' => $request->email,
                 'address' => $request->address,
+                'title' => $request->title,
+                'content' => $request->content,
             ]);
             if ($saved) {
                 return redirect()->back()->with('success', 'About Edited successfully');

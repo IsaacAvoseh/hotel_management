@@ -30,6 +30,7 @@ class PaymentController extends Controller
             $payment->reference = $bookingData['reference'];
             $saved = $payment->save();
             if ($saved) {
+
               return response()->json([
                   'status' => 'success',
                   'message' => 'Payment Successful'
