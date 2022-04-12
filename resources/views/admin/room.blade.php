@@ -27,22 +27,38 @@
                                 <div class="card-header" id="headingOne">
                                     <h5 class="mb-0">
                                         <button class="btn btn-link collapsed" data-toggle="collapse"
-                                            data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Add
+                                            data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseOne">Add
                                             Room Type<span class="digits"></span></button>
                                     </h5>
                                 </div>
-                                <div class="collapse" id="collapseOne" aria-labelledby="headingOne"
+                                <div class="collapse" id="collapseTwo" aria-labelledby="headingOne"
                                     data-parent="#accordion" style="">
-
                                     <div class="card-body">
 
                                         <div class="modal-body">
-                                            <form action="{{ route('room') }}" method="POST"
-                                                enctype="multipart/form-data">
+                                            <form action="{{ route('roomfeatures') }}" method="POST">
                                                 @csrf
                                                 <div class="form-group">
+                                                    <input type="text" name="name" class="form-control"
+                                                        placeholder="Room Type">
+                                                    <span class="text-danger">
+                                                        @error('name')
+                                                            {{ $message }}
+                                                        @enderror
+                                                    </span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="text" name="price" class="form-control"
+                                                        placeholder="Price">
+                                                    <span class="text-danger">
+                                                        @error('price')
+                                                            {{ $message }}
+                                                        @enderror
+                                                    </span>
+                                                </div>
+                                                <div class="form-group">
                                                     <select name="service_id" id="roomfeatures" class="form-control">
-                                                        <option value="">Select Room Service</option>
+                                                        <option value="">Select Room Features</option>
                                                         @if (isset($services) && count($services) > 0)
                                                             @foreach ($services as $service)
                                                                 <option value="{{ $service->id }}">{{ $service->name }}
@@ -56,11 +72,45 @@
                                                         @enderror
                                                     </span>
                                                 </div>
+                                                <button type="submit" style="background-color: #323246;"
+                                                    class="btn_1 full_width text-center">Add Room Type</button>
+
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="default-according" id="accordion">
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link collapsed" data-toggle="collapse"
+                                            data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Add
+                                            Room<span class="digits"></span></button>
+                                    </h5>
+                                </div>
+                                <div class="collapse" id="collapseOne" aria-labelledby="headingOne"
+                                    data-parent="#accordion" style="">
+
+                                    <div class="card-body">
+
+                                        <div class="modal-body">
+                                            <form action="{{ route('staff') }}" method="POST"
+                                                enctype="multipart/form-data">
+                                                @csrf
                                                 <div class="form-group">
-                                                    <input type="text" name="name" class="form-control"
-                                                        placeholder="Name">
+                                                    <select name="roomtype" id="roomtype" class="form-control">
+                                                        <option value="">Select Room Type</option>
+                                                        @if (isset($roomsTypes) && count($roomsTypes) > 0)
+                                                            @foreach ($roomsTypes as $roomsType)
+                                                                <option value="{{ $roomsType->id }}">
+                                                                    {{ $roomsType->name }}</option>
+                                                            @endforeach
+                                                        @endif
+                                                    </select>
                                                     <span class="text-danger">
-                                                        @error('name')
+                                                        @error('role')
                                                             {{ $message }}
                                                         @enderror
                                                     </span>
@@ -92,43 +142,43 @@
                                                     </span>
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="text" name="price" class="form-control"
-                                                        placeholder="Price">
-                                                    <span class="text-danger">
-                                                        @error('price')
-                                                            {{ $message }}
-                                                        @enderror
-                                                    </span>
-                                                </div>
-                                                <div class="form-group">
-                                                    <input type="number" name="no_of_rooms" class="form-control"
-                                                        placeholder="Number Of Rooms">
-                                                    <span class="text-danger">
-                                                        @error('no_of_rooms')
-                                                            {{ $message }}
-                                                        @enderror
-                                                    </span>
+                                                    <input type="file" name="image" class="form-control">
+
                                                 </div>
                                                 <div class="form-group">
                                                     <input type="file" name="image" class="form-control">
 
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="file" name="image_1" class="form-control">
+                                                    <input type="file" name="image" class="form-control">
 
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="file" name="image_2" class="form-control">
+                                                    <input type="file" name="image" class="form-control">
 
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="file" name="image_3" class="form-control">
+                                                    <input type="file" name="image" class="form-control">
 
                                                 </div>
-                                                <div class="form-group">
-                                                    <input type="file" name="image_4" class="form-control">
-
-                                                </div>
+                                                {{-- <div class="form-group">
+                                                    <input type="text" class="form-control" name="phone"
+                                                        placeholder="Enter staff phone number">
+                                                    <span class="text-danger">
+                                                        @error('phone')
+                                                            {{ $message }}
+                                                        @enderror
+                                                    </span>
+                                                </div> --}}
+                                                {{-- <div class="form-group">
+                                                    <input type="text" class="form-control" name="image"
+                                                        placeholder="Image">
+                                                    <span class="text-danger">
+                                                        @error('image')
+                                                            {{ $message }}
+                                                        @enderror
+                                                    </span>
+                                                </div> --}}
                                                 <button type="submit" style="background-color: #323246;"
                                                     class="btn_1 full_width text-center">Add Room</button>
 
@@ -138,62 +188,36 @@
                                 </div>
                             </div>
                         </div>
-                        @if (isset($rooms) && count($rooms) > 0)
-                            @foreach ($rooms as $room)
-                                <div class="default-according" id="accordion">
-                                    <div class="card">
-                                        <div class="card-header" id="headingOne">
-                                            <h5 class="mb-0">
-                                                <a href="/admin/all-room/{{base64_encode($room->id)}}" class="btn btn-link collapsed" data-toggle="collapse"
-                                                    data-target="#collapseTwo" aria-expanded="false"
-                                                    aria-controls="collapseOne">{{ $room->name }}<span
-                                                        class="digits"></span></a>
-                                            </h5>
-                                        </div>
-                                        <div class="collapse" id="collapseTwo" aria-labelledby="headingOne"
-                                            data-parent="#accordion" style="">
-                                            <div class="card-body">
-                                                <div class="white_box mb_30">
-                                                    <div class="QA_table mb_30">
+                    </div>
+                    <div class="white_box mb_30">
+                        <div class="QA_table mb_30">
 
-                                                        <table class="table lms_table_active ">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th scope="col">S/N</th>
-                                                                    <th scope="col">Room type</th>
-                                                                    <th scope="col">Room Features</th>
-                                                                    <th scope="col">Price</th>
-                                                                    <th scope="col">Status</th>
-                                                                    <th scope="col">Action</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                @if (isset($rooms) && count($rooms) > 0)
-                                                                    @foreach ($rooms as $room)
-                                                                        <tr>
-                                                                            <td scope="row">1</td>
-                                                                            <td>{{ $room->name }}</td>
-                                                                            <td>{{ $room->service_id }}</td>
-                                                                            <td>{{ $room->price }}</td>
-                                                                            <td>Available</td>
-                                                                            <td>
-                                                                                <a href="roomsingle"
-                                                                                    class="btn btn-primary">View</a>
-                                                                                <a href="#" class="btn btn-danger">Edit</a>
-                                                                            </td>
-                                                                        </tr>
-                                                                    @endforeach
-                                                                @endif
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        @endif
+                            <table class="table lms_table_active ">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">S/N</th>
+                                        <th scope="col">Room type</th>
+                                        <th scope="col">Room Features</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td scope="row">1</td>
+                                        <td>Royal Suites</td>
+                                        <td>Features 1</td>
+                                        <td>#60000</td>
+                                        <td>Available</td>
+                                        <td>
+                                            <a href="roomsingle" class="btn btn-primary">View</a>
+                                            <a href="#" class="btn btn-danger">Edit</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
