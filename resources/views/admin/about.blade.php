@@ -65,6 +65,23 @@
                                                         @enderror
                                                     </span>
                                                 </div>
+                                                <div class="form-group">
+                                                    <input type="text" name="title" class="form-control"
+                                                        placeholder="Title">
+                                                    <span class="text-danger">
+                                                        @error('title')
+                                                            {{ $message }}
+                                                        @enderror
+                                                    </span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <textarea type="text" name="content" class="form-control" placeholder="Content"></textarea>
+                                                    <span class="text-danger">
+                                                        @error('content')
+                                                            {{ $message }}
+                                                        @enderror
+                                                    </span>
+                                                </div>
                                                 <button type="submit" style="background-color: #323246;"
                                                     class="btn_1 full_width text-center">Add About</button>
 
@@ -86,6 +103,8 @@
                                         <th scope="col">Address</th>
                                         <th scope="col">Open Time</th>
                                         <th scope="col">Email</th>
+                                        <th scope="col">Title</th>
+                                        <th scope="col">Content</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
@@ -96,6 +115,8 @@
                                         <td>{{ $abouts->address }}</td>
                                         <td>24HRS</td>
                                         <td>{{ $abouts->email }}</td>
+                                        <td>{{ $abouts->title }}</td>
+                                        <td>{{ $abouts->content }}</td>
                                         <td>
                                             <a href="/admin/editabout" class="btn btn-primary">Edit</button>
                                         </td>
