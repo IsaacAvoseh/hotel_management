@@ -6,8 +6,8 @@
             <div class="row h-100 align-items-end">
                 <div class="col-12">
                     <div class="breadcrumb-content d-flex align-items-center justify-content-between pb-5">
-                        <h2 class="room-title">Orange Room View</h2>
-                        <h2 class="room-price">₦30,000 <span>/ Per Night</span></h2>
+                        <h2 class="room-title">{{ $room->name }} View</h2>
+                        <h2 class="room-price">₦{{ $room->price }} <span>/ Per Night</span></h2>
                     </div>
                 </div>
             </div>
@@ -27,37 +27,37 @@
                             <div id="room-thumbnail--slide" class="carousel slide" data-ride="carousel">
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
-                                        <img src="/horizon/img/orange/2.jpg" class="d-block w-100" alt="">
+                                        <img src="{{ $room->image }}" class="d-block w-100" alt="">
                                     </div>
                                     <div class="carousel-item">
-                                        <img src="/horizon/img/orange/42.jpg" class="d-block w-100" alt="">
+                                        <img src="{{ $room->image_1 }}" class="d-block w-100" alt="">
                                     </div>
                                     <div class="carousel-item">
-                                        <img src="/horizon/img/orange/51.jpg" class="d-block w-100" alt="">
+                                        <img src="{{ $room->image_2 }}" class="d-block w-100" alt="">
                                     </div>
                                     <div class="carousel-item">
-                                        <img src="/horizon/img/orange/30.jpg" class="d-block w-100" alt="">
+                                        <img src="{{ $room->image_3 }}" class="d-block w-100" alt="">
                                     </div>
                                     <div class="carousel-item">
-                                        <img src="/horizon/img/orange/41.jpg" class="d-block w-100" alt="">
+                                        <img src="{{ $room->image_4 }}" class="d-block w-100" alt="">
                                     </div>
                                 </div>
 
                                 <ol class="carousel-indicators">
                                     <li data-target="#room-thumbnail--slide" data-slide-to="0" class="active">
-                                        <img src="/horizon/img/orange/2.jpg" class="d-block w-100" alt="">
+                                        <img src="{{ $room->image }}" class="d-block w-100" alt="">
                                     </li>
                                     <li data-target="#room-thumbnail--slide" data-slide-to="2">
-                                        <img src="/horizon/img/orange/42.jpg" class="d-block w-100" alt="">
+                                        <img src="{{ $room->image_1 }}" class="d-block w-100" alt="">
                                     </li>
                                     <li data-target="#room-thumbnail--slide" data-slide-to="3">
-                                        <img src="/horizon/img/orange/51.jpg" class="d-block w-100" alt="">
+                                        <img src="{{ $room->image_2 }}" class="d-block w-100" alt="">
                                     </li>
                                     <li data-target="#room-thumbnail--slide" data-slide-to="4">
-                                        <img src="/horizon/img/orange/30.jpg" class="d-block w-100" alt="">
+                                        <img src="{{ $room->image_3 }}" class="d-block w-100" alt="">
                                     </li>
                                     <li data-target="#room-thumbnail--slide" data-slide-to="4">
-                                        <img src="/horizonimg/orange/41.jpg" class="d-block w-100" alt="">
+                                        <img src="{{ $room->image_4 }}" class="d-block w-100" alt="">
                                     </li>
                                 </ol>
                             </div>
@@ -65,9 +65,9 @@
 
                         <!-- Room Features -->
                         <div class="room-features-area d-flex flex-wrap mb-50">
-                            <h6>Size: <span>350-425sqf</span></h6>
-                            <h6>Capacity: <span>Max person 2</span></h6>
-                            <h6>Bed: <span>King beds</span></h6>
+                            <h6>Size: <span>{{$room->size}}</span></h6>
+                            <h6>Capacity: <span>Max person {{$room->capacity}}</span></h6>
+                            <h6>Bed: <span>{{$room->bed}}</span></h6>
                             <h6>Services: <span>Wifi, television ...</span></h6>
                         </div>
 
@@ -96,69 +96,108 @@
 
                 <div class="col-12 col-lg-4">
                     <!-- Hotel Reservation Area -->
-                    <!-- Hotel Reservation Area -->
                     <div class="hotel-reservation--area mb-100">
-                        <form action="http://www.horizonsuites.com.ng/reservation.php" method="post">
-                            <div class="form-group mb-30">
-                                <label for="checkInDate">Date</label>
+                        @include('flash.flash')
+                        <form action="{{ route('get-booking') }}" method="post">
+                            @csrf
+                            <div class="form-group mb-30"><label for="checkInDate">Date</label>
                                 <div class="input-daterange" id="datepicker">
                                     <div class="row no-gutters">
-                                        <div class="col-6">
-                                            <input type="text" class="input-small form-control" name="checkin" id="checkin"
-                                                placeholder="Check In">
+                                        <div class="col-6"><input class="input-small form-control" id="checkin"
+                                                name="check_in" placeholder="Check In" value="{{ old('check_in') }}"
+                                                type="text" />
+                                            <span class="text-danger">
+                                                @error('check_in')
+                                                    {{ $message }}
+                                                @enderror
+                                            </span>
                                         </div>
-                                        <div class="col-6">
-                                            <input type="text" class="input-small form-control" name="checkout"
-                                                name="checkout" placeholder="Check Out">
+
+                                        <div class="col-6"><input class="input-small form-control" name="check_out"
+                                                value="{{ old('check_out') }}" placeholder="Check Out" type="text" />
+                                            <span class="text-danger">
+                                                @error('check_out')
+                                                    {{ $message }}
+                                                @enderror
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group mb-30">
-                                <label>Details</label>
+                            <div class="form-group mb-30"><label>Details</label>
                                 <div class="row no-gutters">
-                                    <div class="col-6">
-                                        <input type="text" class="input-small form-control" name="name"
-                                            placeholder="Enter name">
+                                    <div class="col-6"><input class="input-small form-control" name="name"
+                                            placeholder="Enter name" type="text" />
+                                        <span class="text-danger">
+                                            @error('name')
+                                                {{ $message }}
+                                            @enderror
+                                        </span>
                                     </div>
-                                    <div class="col-6">
-                                        <input type="text" class="input-small form-control" name="phone"
-                                            placeholder="Phone No:">
+
+                                    <div class="col-6"><input class="input-small form-control" name="phone"
+                                            placeholder="Phone No:" value="{{ old('phone') }}" type="text" />
+                                        <span class="text-danger">
+                                            @error('phone')
+                                                {{ $message }}
+                                            @enderror
+                                        </span>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group mb-30">
-                                <label>Room Details</label>
-                                <div class="row no-gutters">
-                                    <div class="col-6">
-                                        <label for="roomtype">Room Type</label>
-                                        <select name="roomtype" id="roomtype" class="form-control">
-                                            <option value="royalsuites">Royal Suites</option>
-                                            <option value="classicsuites">Classic Suites</option>
-                                            <option value="orangesuites">Orange Suites</option>
-                                            <option value="greensuites">Green Deluxe Suite</option>
-                                            <option value="businesssuites">Business Suites</option>
-                                            <option value="regularsuite">Regular Double</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-6">
-                                        <label for="rooms">Room</label>
-                                        <select name="rooms" id="rooms" class="form-control">
-                                            <option value="01">01</option>
-                                            <option value="02">02</option>
-                                            <option value="03">03</option>
-                                            <option value="04">04</option>
-                                            <option value="05">05</option>
-                                            <option value="06">06</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group mb-30">
-                                <label for="guests">Guests</label>
                                 <div class="row">
-                                    <div class="col-6">
-                                        <select name="adults" id="adults" class="form-control">
+                                    <div class="col"><input class="input-small form-control" name="email"
+                                            placeholder="Email:" type="text" value="{{ old('email') }}" />
+                                        <span class="text-danger">
+                                            @error('email')
+                                                {{ $message }}
+                                            @enderror
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group mb-30"><label>Room Details</label>
+                                <div class="row no-gutters">
+                                    <div class="col-6"><label for="roomtype">Room Type</label>
+                                        <div>
+                                            <select class="form-control formselect required" placeholder="Select Category"
+                                                name="room_type" id="sub_category_name">
+                                                <option value="0" disabled selected>Select Room type</option>
+                                                @if (isset($room_type))
+                                                    @foreach ($room_type as $type)
+                                                        <option value="{{ base64_encode($type->id) }}">
+                                                            {{ ucfirst($type->name) }}
+                                                        </option>
+                                                    @endforeach
+                                                @endif
+                                            </select>
+                                        </div>
+                                        <span class="text-danger">
+                                            @error('room_type')
+                                                {{ $message }}
+                                            @enderror
+                                        </span>
+                                    </div>
+                                    <div class="col-6"><label for="room">Room</label>
+                                        <div>
+                                            <select name="room" class="form-control required"
+                                                placeholder="Select Sub Category" id="sub_category">
+                                            </select>
+                                        </div>
+
+                                        <span class="text-danger">
+                                            @error('room')
+                                                {{ $message }}
+                                            @enderror
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group mb-30"><label for="guests">Guests</label>
+
+                                <div class="row">
+                                    <div class="col-6"><select class="form-control" id="adults" name="adults">
                                             <option value="adults">Adults</option>
                                             <option value="01">01</option>
                                             <option value="02">02</option>
@@ -167,9 +206,13 @@
                                             <option value="05">05</option>
                                             <option value="06">06</option>
                                         </select>
+                                        @error('adults')
+                                            {{ $message }}
+                                        @enderror
                                     </div>
-                                    <div class="col-6">
-                                        <select name="children" id="children" class="form-control">
+
+                                    <div class="col-6"><select class="form-control" id="children"
+                                            name="children">
                                             <option value="children">Children</option>
                                             <option value="01">01</option>
                                             <option value="02">02</option>
@@ -181,20 +224,19 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="form-group mb-50">
                                 <div class="slider-range">
-                                    <div data-min="0" data-max="3000" data-unit="$"
-                                        class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"
-                                        data-value-min="0" data-value-max="3000" data-label-result="Max Price: ">
+                                    <div class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"
+                                        data-label-result="Max Price: " data-max="3000" data-min="0" data-unit="$"
+                                        data-value-max="3000" data-value-min="0">
                                         <div class="ui-slider-range ui-widget-header ui-corner-all"></div>
-                                        <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
-                                        <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn roberto-btn w-100">Book Now</button>
-                            </div>
+
+                            <div class="form-group"><button class="btn roberto-btn w-100" type="submit">Book
+                                    Now</button></div>
                         </form>
                     </div>
                 </div>
@@ -220,5 +262,53 @@
             </div>
         </div>
     </section>
+
     <!-- Call To Action Area End -->
+    <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            console.log('ready');
+            $('#sub_category_name').on('change', function() {
+                let id = $(this).val();
+                console.log('id', id);
+                $('#sub_category').empty();
+                // $('#sub_category').style.display = 'block';
+                $('.nice-select').show();
+                $('#sub_category').show();
+                // $(".nice-select").hide();
+                $('#sub_category').append(`<option value="0" disabled selected>Processing...</option>`);
+                $.ajax({
+                    type: 'GET',
+                    url: '/get-rooms',
+                    data: {
+                        id: id
+                    },
+                    success: function(response) {
+                        // alert('yes', response.room)
+                        console.log('response', response);
+                        var response = JSON.parse(response);
+                        console.log('response', response);
+                        $('#sub_category').empty();
+                        $('#sub_category').append(
+                            `<option value="0" disabled selected>Select Sub Category*</option>`
+                        );
+                        response.forEach(element => {
+                            $('#sub_category').append(
+                                `<option value="${ btoa(element['id'])}">${element['name']}</option>`
+                            );
+                        });
+
+                        console.log('response', response.room);
+
+
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        alert("some error", errorThrown);
+                        console.log(XMLHttpRequest, textStatus, errorThrown);
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

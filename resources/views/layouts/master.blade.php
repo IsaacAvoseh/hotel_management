@@ -47,25 +47,24 @@
         <div class="top-header-area">
             <div class="container">
                 <div class="row">
-
-                    <div class="col-6">
-                        <div class="top-header-content">
-                            <a href="#"><i class="icon_phone"></i> <span>+234 802 472 5065</span></a>
-                            <a href="#"><i class="icon_mail"></i> <span>info@horizonsuites.com.ng</span></a>
-                        </div>
-                    </div>
-
+                    @if (isset($abouts) && count($abouts) > 0)
+                        @foreach ($abouts as $about)
+                            <div class="col-6">
+                                <div class="top-header-content">
+                                    <a href="#"><i class="icon_phone"></i> <span>{{ $about->phone }}</span></a>
+                                    <a href="#"><i class="icon_mail"></i> <span>{{ $about->email }}</span></a>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
                     <div class="col-6">
                         <div class="top-header-content">
                             <!-- Top Social Area -->
                             <div class="top-social-area ml-auto">
-                                <a href=""><i class="fa fa-facebook"
-                                        aria-hidden="true"></i></a>
-                                <a href=""><i class="fa fa-twitter"
-                                        aria-hidden="true"></i></a>
+                                <a href=""><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                <a href=""><i class="fa fa-twitter" aria-hidden="true"></i></a>
                                 <a href="#"><i class="fa fa-tripadvisor" aria-hidden="true"></i></a>
-                                <a href=""><i class="fa fa-instagram"
-                                        aria-hidden="true"></i></a>
+                                <a href=""><i class="fa fa-instagram" aria-hidden="true"></i></a>
                             </div>
                         </div>
                     </div>
@@ -102,7 +101,7 @@
                                 <ul id="nav">
                                     <li class="active"><a href="/">Home</a></li>
                                     <li><a href="room">Rooms</a></li>
-                                    <li><a href="contact">Contact</a></li>
+                                    <li><a href="/contact">Contact</a></li>
                                 </ul>
 
                                 <!-- Search -->
@@ -139,15 +138,18 @@
                 <div class="row align-items-baseline justify-content-between">
                     <!-- Single Footer Widget Area -->
                     <div class="col-12 col-sm-6 col-lg-3">
-                        <div class="single-footer-widget mb-80">
-                            <!-- Footer Logo -->
-                            <a href="#" class="footer-logo"><img src="/img/core-img/logo2.png" alt=""></a>
+                        @if (isset($abouts) && count($abouts) > 0)
+                            @foreach ($abouts as $about)
+                                <div class="single-footer-widget mb-80">
+                                    <!-- Footer Logo -->
+                                    <a href="#" class="footer-logo"><img src="/img/core-img/logo2.png" alt=""></a>
 
-                            <h4>0802 472 5065</h4>
-                            <h4>0815 364 5433</h4>
-                            <span>info@horizonsuites.com.ng</span>
-                            <span>No 1, Isaac Boladuro street, 7UP Road, Oluyole Estate, Ibadan, Nigeria</span>
-                        </div>
+                                    <h4>{{ $about->phone }}</h4>
+                                    <span>{{ $about->email }}</span>
+                                    <span>{{ $about->address }}</span>
+                                </div>
+                            @endforeach
+                        @endif
                     </div>
 
                     <!-- Single Footer Widget Area -->
@@ -231,12 +233,9 @@
                     <div class="col-12 col-md-4">
                         <!-- Social Info -->
                         <div class="social-info">
-                            <a href=""><i class="fa fa-facebook"
-                                    aria-hidden="true"></i></a>
-                            <a href=""><i class="fa fa-twitter"
-                                    aria-hidden="true"></i></a>
-                            <a href=""><i class="fa fa-instagram"
-                                    aria-hidden="true"></i></a>
+                            <a href=""><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                            <a href=""><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                            <a href=""><i class="fa fa-instagram" aria-hidden="true"></i></a>
                             <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
                         </div>
                     </div>
@@ -274,7 +273,7 @@
         //     s0.parentNode.insertBefore(s1, s0);
         // })();
     </script>
-    
+
     <!--End of Tawk.to Script-->
 
 </body>
