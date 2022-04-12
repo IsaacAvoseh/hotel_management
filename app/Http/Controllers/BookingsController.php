@@ -8,6 +8,15 @@ use Illuminate\Support\Facades\Auth;
 
 class BookingsController extends Controller
 {
+
+    public function approveBooking(Request $request, $id){
+    // dd($request->all());
+    //   return redirect()->route('payment', ['booking' => base64_encode($booking)])->with('success', 'Booking successful, Please select payment method');
+    //     } else {
+    //         return redirect()->back()->with('error', 'Something Went wrong, please try again');
+    //     }
+    }
+
     public function bookingsByStaff(Request $request)
     {
         $request->validate([
@@ -33,7 +42,7 @@ class BookingsController extends Controller
         $booking->room_id = base64_decode($request->room);
         $saved = $booking->save();
         if ($saved) {
-            return redirect()->route('payment', ['booking' => base64_encode($booking)])->with('success', 'Booking successful');
+            return redirect()->route('payment', ['booking' => base64_encode($booking)])->with('success', 'Booking successful, Please select payment method');
         } else {
             return redirect()->back()->with('error', 'Something Went wrong, please try again');
         }

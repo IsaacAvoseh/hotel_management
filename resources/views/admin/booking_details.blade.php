@@ -4,6 +4,13 @@
     <div class="col-12">
         <div class="white_card position-relative mb_20">
             <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="main_title" id="message">
+
+                        </div>
+                    </div>
+                </div>
                 @include('flash.flash')
                 <div class="row">
                     <div class="col-lg-6 align-self-center">

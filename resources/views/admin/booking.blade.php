@@ -22,6 +22,7 @@
 
             <div class="col-lg-12">
                 @include('flash.flash')
+                @include('sweetalert::alert')
                 <div class="white_box mb_30">
 
                     <div class="default-according col-lg-8 mx-auto" id="accordion">
@@ -183,13 +184,10 @@
 
                                             <a href="/admin/booking-details/{{ base64_encode($booking->id) }}" class="btn btn-primary">View more</a>
 
-                                            <form action="/admin/booking-details/update/{{ base64_encode($booking->id) }}" method="POST" class="mx-2">
-                                                @csrf
-                                                <input type="hidden" name="status" value="approved">
-                                                <button onclick="checkName()" id="approve" type="submit" class="btn btn-success px-4 d-inline-block ">
-                                                    <i class="me-2"></i>Approve
-                                                </button>
-                                            </form>
+                                           
+                                               <form> 
+                                            <a href="/admin/approve-booking/{{ base64_encode($booking->id) }}" class="btn btn-success">Approve</a>
+                                               </form>
 
                                             <form action="/admin/booking-details/update/{{ base64_encode($booking->id) }}" method="POST">
                                                 @csrf
@@ -224,6 +222,22 @@
 <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
 
 <script>
+    $(function() {
+        var hash = window.location.hash
+        if (hash == "#success") {
+            swal("Success!", "Payment Successfull!", "success");
+
+            window.location.href = "/admin/bookings";
+        }
+    });
+    $(function() {
+        var hash = window.location.hash
+        if (hash == "#cash") {
+            swal("Success!", "Cash Payment logged Successfully, Keep it Safe !", "success");
+
+            window.location.href = "/admin/bookings";
+        }
+    });
     $(document).ready(function() {
         console.log('ready');
         $('#sub_category_name').on('change', function() {
@@ -257,7 +271,7 @@
 
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
-                    alert("some error", errorThrown);
+                    swal("Oops!", "An error occurred while getting availabel rooms!", "error");
                     console.log(XMLHttpRequest, textStatus, errorThrown);
                 }
             });
@@ -270,25 +284,16 @@
 
     var maxClick = 3;
 
-    function ask2() {
-        $("#approve").click(function() {
-            $.dialog({
-                "body": "fjkfgjgjg!",
-                "title": "jfjfk",
-                "show": true
-            });
-        });
-    }
     var checkName = (function ask() {
         //check if name is the logged in user
         var name = prompt("Please view the details of this booking before you approve or Enter your full name to Approve");
         if (name == "{{ Auth::user()->name }}") {
             $('#approve').attr('type', 'submit');
-            confirm("Are you sure you want to approve this booking?");;
+            swal.confirm("Are you sure you want to approve this booking?");;
             // return true;
         } else {
             if (name == '') {
-                alert("Please enter {{ Auth::user()->name }}");
+                swal("Please enter {{ Auth::user()->name }}");
                 if (--maxClick > 0)
                     return ask();
             } else {
