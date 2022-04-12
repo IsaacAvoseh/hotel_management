@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\BookingsController;
 use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\HotelController;
+use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,6 +49,8 @@ Route::match(['get', 'post'], '/get-rooms', [HotelController::class, 'getRooms']
 Route::match(['get', 'post'], '/contact', [HotelController::class, 'Contact']);
 Route::match(['get', 'post'], '/booking', [HotelController::class, 'Booking']);
 Route::match(['get', 'post'], '/get-booking', [HotelController::class, 'getBookings'])->name('get-booking');
+Route::match(['get', 'post'], '/staff-booking', [BookingsController::class, 'bookingsByStaff'])->name('staff-booking');
+Route::match(['get', 'post'], '/admin/payment', [PaymentController::class, 'payment'])->name('payment');
 Route::match(['get', 'post'], '/royal', [HotelController::class, 'Royal']);
 Route::match(['get', 'post'], '/business', [HotelController::class, 'Business']);
 Route::match(['get', 'post'], '/purple', [HotelController::class, 'Purple']);

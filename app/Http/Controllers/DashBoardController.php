@@ -112,22 +112,11 @@ class DashBoardController extends Controller
 
 
 
-        // if ($request->session()->has('user')) {
-        //     return view('dashboard');
-        // } else {
-        //     return redirect('/admin/login');
-        // }
-
-        //admin registration
-        if ($request->isMethod('post')) {
-            // dd($ request->all());
-            $request->validate([
-                'name' => 'required',
-                'email' => 'required|email',
-                'password' => 'required',
-                'password_confirmation' => 'required|same:password',
-            ]);
-
+            // if ($request->session()->has('user')) {
+            //     return view('dashboard');
+            // } else {
+            //     return redirect('/admin/login');
+            // }
           
             $user = new User();
 
@@ -153,7 +142,7 @@ class DashBoardController extends Controller
         }
         return view('admin.register');
     }
-
+    
     //add new role 
     public function addRole(Request $request)
     {
@@ -432,7 +421,8 @@ class DashBoardController extends Controller
     public function bookings(Request $request)
     {
         $bookings = Booking::with('room', 'roomType')->get();
-        return view('admin.booking', compact('bookings'));
+        $room_type = RoomType::all();
+        return view('admin.booking', compact('bookings', 'room_type'));
     }
 
     public function bookingDetails(Request $request, $id)
