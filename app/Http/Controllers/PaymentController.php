@@ -46,4 +46,10 @@ class PaymentController extends Controller
         // dd($roomType);
         return view('admin.payment.payment', compact('bookingData', 'roomType'));
     }
+
+    public function paymentReport(Request $request)
+    {
+        $payments = Payment::all();
+        return view('admin.payment.payment_report', compact('payments'));
+    }
 }
