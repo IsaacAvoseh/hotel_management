@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class About extends Model
 {
     protected $table = 'abouts';
-    protected $fillable = ['phone', 'address', 'email'];
+    protected $fillable = ['phone', 'address', 'email', 'title', 'content'];
 }

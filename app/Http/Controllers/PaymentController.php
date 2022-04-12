@@ -10,14 +10,15 @@ use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
 {
-    public function payment(Request $request){
+    public function payment(Request $request)
+    {
         $bookingData = base64_decode($request->booking);
         // $bookingData = base64_decode($request->booking)==null ? Booking::find(base64_decode($request->booking->id)) : base64_decode($request->booking);
         $bookingData = json_decode($bookingData);
         // $bookingData = Booking::find(base64_decode($request->bookingId));
         // dd(json_decode($bookingData));
         $payment = new Payment();
-        if($request->isMethod('post')){
+        if ($request->isMethod('post')) {
             $bookingData = $request->all();
             // dd($bookingData);
             $payment->booking_id = $bookingData['booking_id'];
@@ -27,7 +28,13 @@ class PaymentController extends Controller
             $payment->status = 'success';
             $payment->user_id = Auth::user()->id;
             $payment->reference = $bookingData['reference'];
-            dd($payment);
+            $saved = $payment->save();
+            if ($saved) {
+                return redirect()->route('bookings')->with('success', 'Payment Successful');
+            } else {
+                return redirect()->route('bookings')->with('error', 'Payment Failed');
+            }
+            // dd($payment);
         }
         $roomType = RoomType::find($bookingData->room_type_id);
         // dd($roomType);

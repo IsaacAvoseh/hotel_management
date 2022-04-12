@@ -52,6 +52,24 @@
                                         @enderror
                                     </span>
                                 </div>
+                                <div class="form-group">
+                                    <input type="text" name="title" value="{{ $abouts->title }}" class="form-control"
+                                        placeholder="Title">
+                                    <span class="text-danger">
+                                        @error('title')
+                                            {{ $message }}
+                                        @enderror
+                                    </span>
+                                </div>
+                                <div class="form-group">
+                                    <textarea type="text" name="content" value="{{ $abouts->content }}" class="form-control"
+                                        placeholder="Content"></textarea>
+                                    <span class="text-danger">
+                                        @error('content')
+                                            {{ $message }}
+                                        @enderror
+                                    </span>
+                                </div>
                                 <button type="submit" style="background-color: #323246;"
                                     class="btn_1 full_width text-center">Edit About</button>
 
