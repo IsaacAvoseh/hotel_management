@@ -100,7 +100,7 @@
                             <div class="classynav">
                                 <ul id="nav">
                                     <li class="active"><a href="/">Home</a></li>
-                                    <li><a href="room">Rooms</a></li>
+                                    <li><a href="/room">Rooms</a></li>
                                     <li><a href="/contact">Contact</a></li>
                                 </ul>
 

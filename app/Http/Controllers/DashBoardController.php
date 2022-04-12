@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use PhpParser\Node\Expr\FuncCall;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class DashBoardController extends Controller
 {
@@ -49,7 +50,11 @@ class DashBoardController extends Controller
                 'password' => 'required',
             ]);
             $data = $request->all();
-            $user = User::where('email', $data['email'])->first();
+            try{
+                $user = User::where('email', $data['email'])->first();
+            }catch (\Exception $e){
+                return redirect()->back()->with('error', 'Server Error');
+            }
             if ($user) {
                 if (Hash::check($data['password'], $user->password)) {
                     Auth::login($user);
@@ -61,6 +66,8 @@ class DashBoardController extends Controller
             } else {
                 $staff = Staff::where('email', $data['email'])->first();
                 if ($staff) {
+
+                    //this is for staff login, not yet implemented
                     if (Auth::guard('webstaff')->attempt($cred)) {
                         //     $request->session()->put('staff', $staff);
                         //     return redirect()->route('staff.dashboard')->with('success', 'Staff successfully logged in');
@@ -182,7 +189,7 @@ class DashBoardController extends Controller
 
         $roles = Role::all();
         $staffs = Staff::with('roles')->get();
-        // dd($staffs->filter->relationLoaded('make')->isEmpty()); 
+
 
         // dd($staffs[0]->roles);
 
@@ -316,7 +323,7 @@ class DashBoardController extends Controller
                 return redirect()->back()->with('error', 'Something went wrong, Please try again');
             }
         }
-
+Alert::success('error', 'Damaged Page, Please Correct the errors on the page and on the form' );
         return view('admin.room', compact('services', 'rooms'));
     }
 
@@ -432,7 +439,7 @@ class DashBoardController extends Controller
 
     public function bookings(Request $request)
     {
-        $bookings = Booking::with('room', 'roomType')->get();
+        $bookings = Booking::with('room', 'roomType')->where('status', 'pending')->get();
         $room_type = RoomType::all();
         return view('admin.booking', compact('bookings', 'room_type'));
     }

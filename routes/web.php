@@ -52,6 +52,7 @@ Route::match(['get', 'post'], '/get-booking', [HotelController::class, 'getBooki
 Route::match(['get', 'post'], '/admin/staff-booking', [BookingsController::class, 'bookingsByStaff'])->name('staff-booking');
 Route::match(['get', 'post'], 'admin/approve-booking/{id}', [BookingsController::class, 'approveBooking'])->name('approve-booking');
 Route::match(['get', 'post'], '/admin/payment', [PaymentController::class, 'payment'])->name('payment');
+Route::match(['get', 'post'], '/admin/payments-report', [PaymentController::class, 'paymentReport'])->name('payment-report');
 
 Route::match(['get', 'post'], '/room/{id}', [HotelController::class, 'Orange']);
 

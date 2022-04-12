@@ -34,8 +34,9 @@ class HotelController extends Controller
     public function Orange(Request $request)
     {
         $abouts = About::all();
+        $room_type = RoomType::all();
         $room = RoomType::find(base64_decode($request->id));
-        return view('user.orange', compact('room', 'abouts'));
+        return view('user.orange', compact('room', 'room_type', 'abouts'));
     }
 
     //get rooms under a room type

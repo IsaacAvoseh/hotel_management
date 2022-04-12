@@ -94,11 +94,11 @@
 
             </li>
             <li class="">
-                <a class="has-arrow/" href="/admin/payments" aria-expanded="false">
+                <a class="has-arrow/" href="/admin/payments-report" aria-expanded="false">
                     <div class="icon_menu">
                         <img src="/img/menu-icon/3.svg" alt="">
                     </div>
-                    <span>Payments</span>
+                    <span>Payments Report</span>
                 </a>
 
             </li>
