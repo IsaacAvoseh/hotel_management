@@ -432,7 +432,7 @@ class DashBoardController extends Controller
 
     public function bookings(Request $request)
     {
-        $bookings = Booking::with('room', 'roomType')->get();
+        $bookings = Booking::with('room', 'roomType')->where('status', 'pending')->get();
         $room_type = RoomType::all();
         return view('admin.booking', compact('bookings', 'room_type'));
     }
