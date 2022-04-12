@@ -463,6 +463,9 @@ class DashBoardController extends Controller
                 return redirect()->back()->with('error', 'Something went wrong while updating booking status');
             }
             if ($saved) {
+                if( $request->wantsJson() ) {
+                    return response()->json(['success' => 'Booking status updated successfully'], 200);
+                }
                 return redirect()->back()->with('success', 'Booking updated successfully');
             } else {
                 return redirect()->back()->with('error', 'Booking not updated, Something went wrong');

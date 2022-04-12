@@ -23,18 +23,24 @@ class PaymentController extends Controller
             // dd($bookingData);
             $payment->booking_id = $bookingData['booking_id'];
             $payment->amount = $bookingData['amount'];
-            $payment->payment_method = 'paystack';
+            $payment->payment_method = $bookingData['payment_method'];
             $payment->guest_name = $bookingData['guest_name'];
-            $payment->status = 'success';
+            $payment->status = $bookingData['status'];
             $payment->user_id = Auth::user()->id;
             $payment->reference = $bookingData['reference'];
             $saved = $payment->save();
             if ($saved) {
-                return redirect()->route('bookings')->with('success', 'Payment Successful');
+
+              return response()->json([
+                  'status' => 'success',
+                  'message' => 'Payment Successful'
+              ], 200);
             } else {
-                return redirect()->route('bookings')->with('error', 'Payment Failed');
-            }
-            // dd($payment);
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Payment Failed'
+                ], 302);
+                }
         }
         $roomType = RoomType::find($bookingData->room_type_id);
         // dd($roomType);

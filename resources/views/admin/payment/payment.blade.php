@@ -23,28 +23,132 @@
 
             <div class="col-lg-6">
                 @include('flash.flash')
+                @include('sweetalert::alert')
                 <div class="white_box mb_30">
 
 
-                    <div class="white_card_body">
-                        <h6 class="card-subtitle mb-2">It's difficult to find examples of lorem ipsum in use before Letraset made it popular as a dummy text in the 1960s, although McClintock says he remembers coming across the lorem ipsum passage in a book of old metal type samples..</h6>
-                        <form>
-                            <div class="mb-3">
-                                <label class="form-label text-danger" for="exampleInputEmail1">You cannot edit this amount</label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" readonly value="{{ $roomType->price }}">
 
+
+
+
+
+
+
+                    <div class="box_body">
+                        <div class="default-according" id="accordion">
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseOne">Pay With Cash<span class="digits"></span></button>
+                                    </h5>
+                                </div>
+                                <div class="collapse" id="collapseTwo" aria-labelledby="headingOne" data-parent="#accordion" style="">
+                                    <div class="card-body">
+
+                                        <div class="modal-body">
+                                            <div class="white_card_body">
+                                                <h6 class="card-subtitle mb-2">
+                                                    Details below and customer is paying with cash
+                                                </h6>
+                                                <form>
+                                                    <div class="mb-3">
+                                                        <label class="form-label text-danger" for="exampleInputEmail1">You cannot edit this amount</label>
+                                                        <input type="text" class="form-control" id="exampleInputEmail1" readonly value="{{ $roomType->price }}">
+
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label class="form-label" for="exampleInputEmail1"> Guest Name </label>
+                                                        <input type="text" class="form-control" id="exampleInputEmail1" readonly value="{{ $bookingData->name }}">
+
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label class="form-label" for="exampleInputEmail1">Room</label>
+                                                        <input type="text" class="form-control" id="exampleInputEmail1" readonly value="{{ $roomType->name }}">
+
+                                                    </div>
+                                                    <div class="mb-3">
+
+                                                        <button type="button" onclick="payWithCash()" class="btn btn-primary">Cash Payment</button>
+
+                                                    </div>
+
+
+
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="mb-3">
-
-                                <button type="button" onclick="payNow()" class="btn btn-primary">Pay Now</button>
-
+                        </div>
+                    </div>
+                    <hr style="height: 20px;">
+                    <div class="default-according" id="accordion">
+                        <div class="card">
+                            <div class="card-header" id="headingOne">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne"> Pay with Card or Bank Account <span class="digits"></span></button>
+                                </h5>
                             </div>
+                            <div class="collapse" id="collapseOne" aria-labelledby="headingOne" data-parent="#accordion">
+                                <div class="card-body">
+
+                                    <div class="modal-body">
 
 
 
-                        </form>
+                                        <div class="white_card_body">
+                                            <h6 class="card-subtitle mb-2">
+                                                Details below and customer is paying with card or bank account.
+
+                                            </h6>
+                                            <form>
+                                                <div class="mb-3">
+                                                    <label class="form-label text-danger" for="exampleInputEmail1">You cannot edit this amount</label>
+                                                    <input type="text" class="form-control" id="exampleInputEmail1" readonly value="{{ $roomType->price }}">
+
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label class="form-label" for="exampleInputEmail1"> Guest Name </label>
+                                                    <input type="text" class="form-control" id="exampleInputEmail1" readonly value="{{ $bookingData->name }}">
+
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label" for="exampleInputEmail1">Room</label>
+                                                    <input type="text" class="form-control" id="exampleInputEmail1" readonly value="{{ $roomType->name }}">
+
+                                                </div>
+                                                <div class="mb-3">
+
+                                                    <button type="button" onclick="payNow()" class="btn btn-primary">Pay Now</button>
+
+
+                                                </div>
+
+
+
+                                            </form>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+
+
+
+
+
+
+
+
+
+
             </div>
         </div>
     </div>
@@ -53,9 +157,10 @@
 </div>
 </div>
 </div>
+</div>
 <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
-<script src="https://js.paystack.co/v1/inline.js"></script>
+
 <script>
     // function uploadReceipt(paymentId) {
     //     document.getElementById('payment-id').value = paymentId;
@@ -84,28 +189,53 @@
                         guest_name: "{{ $bookingData->name }}",
                         reference: response.reference,
                         booking_id: "{{ $bookingData->id }}",
-                        _token: '{{ csrf_token() }}'
-
-                        // user_id: "{{ auth()->id() }}"
+                        payment_method: "Paystack",
+                        _token: '{{ csrf_token() }}',
+                        status: response.status
                     },
                     dataType: 'json',
                     success: function(response) {
-                        // window.location = data.data
-                        console.log(response);
+
                         swal({
-                            title: "Success!",
-                            text: response.data,
-                            icon: "success"
-                        }).then(function() {
-                            window.location.href = "{{ url()->current() }}";
+                            title: 'Payment Successful',
+                            text: 'Please wait while we verify your payment...',
+                            icon: 'success',
+                            timer: 3000,
+                            buttons: false,
+                        })
+                        $.ajax({
+                            url: '/admin/booking-details/update/{{ base64_encode($bookingData->id) }}',
+                            type: 'POST',
+                            data: {
+                                status: 'approved',
+                                id: '{{ base64_encode($bookingData->id) }}',
+                                _token: '{{ csrf_token() }}'
+                            },
+                            success: function(data) {
+                                console.log(data);
+                                // alert('success');
+                                console.log(response);
+                                swal({
+                                    title: "Success!",
+                                    text: response.data,
+                                    icon: "success"
+                                })
+                                window.location.href = '/admin/bookings#success';
+
+                            },
+                            error: function(data) {
+                                console.log('error', data);
+                                alert('error');
+                            }
+
+
+
                         });
+
                     },
                     error: function(error) {
-                        swal({
-                            title: "Error!",
-                            text: error.responseJSON.data,
-                            icon: "error",
-                        });
+                        alert('An error occured');
+
                     }
                 });
             },
@@ -115,6 +245,79 @@
         });
         handler.openIframe();
         // console.log('handler', handler);
+    }
+
+    function payWithCash() {
+        alert('Are you sure you want to pay with cash?');
+        swal({
+            title: 'Cash Payment',
+            text: 'Customer is paying with cash',
+            icon: 'warning',
+            buttons: true,
+            dangerMode: true,
+
+        })
+        setTimeout(() => {
+
+
+            $.ajax({
+                method: 'post',
+                url: '/admin/payment',
+                data: {
+                    amount: "{{ $roomType->price }}",
+                    guest_name: "{{ $bookingData->name }}",
+                    reference: Math.floor((Math.random() * 1000000000) + 1),
+                    booking_id: "{{ $bookingData->id }}",
+                    payment_method: "Cash",
+                    _token: '{{ csrf_token() }}',
+                    status: 'paid'
+                },
+                dataType: 'json',
+                success: function(response) {
+
+                    swal({
+                        title: 'Cash Payment',
+                        text: 'Cashier wil verify your payment...',
+                        icon: 'success',
+                        timer: 3000,
+                        buttons: false,
+                    })
+                    $.ajax({
+                        url: '/admin/booking-details/update/{{ base64_encode($bookingData->id) }}',
+                        type: 'POST',
+                        data: {
+                            status: 'approved',
+                            id: '{{ base64_encode($bookingData->id) }}',
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function(data) {
+                            console.log(data);
+                            // alert('success');
+                            console.log(response);
+                            swal({
+                                title: "Thank you!",
+                                text: 'Please verify the cash payment',
+                                icon: "success"
+                            })
+                            window.location.href = '/admin/bookings#cash';
+
+                        },
+                        error: function(data) {
+                            console.log('rrtrttttttt');
+                            alert('error');
+                        }
+
+
+
+                    });
+
+                },
+                error: function(error) {
+                    alert('An error occured');
+
+                }
+            });
+        }, 2000)
     }
 </script>
 
