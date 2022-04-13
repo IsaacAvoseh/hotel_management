@@ -49,9 +49,9 @@
                                     <td>{{ $payment->amount }}</td>
                                     <td>{{ $payment->status }}</td>
                                     <td>{{ $payment->payment_method }}</td>
-<!--                                     
+                                    
                                         <td>{{ \Carbon\Carbon::parse($payment->created_at)->diffForHumans() }}</td>
-                                    -->
+                                   
                                 </tr>
                                 @endforeach
                                 @endif
