@@ -21,7 +21,7 @@
             </div>
             <div class="col-lg-12">
                 <div class="white_box mb_30">
-                    <button class="btn btn-primary">Export to PDF</button>
+                    <a href="/admin/bookings-pdf" class="btn btn-primary">Export to PDF</a>
                     <div class="QA_table mb_30">
                         <table class="table lms_table_active ">
                             <thead>
@@ -34,6 +34,7 @@
                                     <th scope="col">Check Out</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Approved By</th>
+                                    <th scope="col">Created</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -48,6 +49,7 @@
                                     <td>{{ $booking->check_out }}</td>
                                     <td>{{ $booking->status }}</td>
                                     <td>{{ $booking->approved_by }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($booking->created_at)->diffForHumans() }}</td> 
                                 </tr>
                                 @endforeach
                                 @endif

@@ -7,6 +7,7 @@ use App\Models\Payment;
 use App\Models\RoomType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use PDF;
 
 class PaymentController extends Controller
 {
@@ -17,7 +18,7 @@ class PaymentController extends Controller
             'login', 'register'
         ]);
     }
-    
+
     public function payment(Request $request)
     {
         $bookingData = base64_decode($request->booking);
@@ -59,5 +60,13 @@ class PaymentController extends Controller
     {
         $payments = Payment::all();
         return view('admin.payment.payment_report', compact('payments'));
+    }
+
+    public function paymentsPdf(Request $request)
+    {
+        $payments = Payment::all();
+        view()->share('admin.payment.payments_pdf', $payments);
+        $pdf = PDF::loadView('admin.payment.payments_pdf', compact('payments'));
+        return $pdf->download('Payments.pdf');
     }
 }

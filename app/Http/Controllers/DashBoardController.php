@@ -53,6 +53,7 @@ class DashBoardController extends Controller
             try {
                 $user = User::where('email', $data['email'])->first();
             } catch (\Exception $e) {
+          Alert::error('Server Error', 'Error');
                 return redirect()->back()->with('error', 'Server Error');
             }
             if ($user) {
