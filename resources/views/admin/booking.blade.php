@@ -195,23 +195,26 @@
                                                 </button>
                                             </form>
 
-                                                <form action="/admin/booking-details/update/{{ base64_encode($booking->id) }}" method="POST">
-                                                    @csrf
-                                                    <input type="hidden" name="status" value="cancelled">
-                                                    <button onclick="return confirm('Are you sure you want to cancel this booking?')" type="submit" class="btn btn-danger px-4 d-inline-block ">
-                                                        <i class="me-2"></i>Cancel
-                                                    </button>
-                                                </form>
+                                            <form action="/admin/booking-details/update/{{ base64_encode($booking->id) }}" method="POST">
+                                                @csrf
+                                                <input type="hidden" name="status" value="cancelled">
+                                                <button onclick="return confirm('Are you sure you want to cancel this booking?')" type="submit" class="btn btn-danger px-4 d-inline-block ">
+                                                    <i class="me-2"></i>Cancel
+                                                </button>
+                                            </form>
                                         </div>
                                     </td>
 
                                 </tr>
                                 @endforeach
-                                @else
-                                <tr>No Booking data available at the moment</tr>
+
                                 @endif
+
                             </tbody>
+
                         </table>
+                        @if($bookings->count() < 1) <tr>No pending booking data available at the moment</tr>
+                            @endif
                     </div>
                 </div>
             </div>

@@ -50,7 +50,7 @@
 
     <nav class="sidebar vertical-scroll dark_sidebar  ps-container ps-theme-default ps-active-y">
         <div class="logo d-flex justify-content-between">
-            <a href="index.html"><img src="/img/logo_white.png" alt=""></a>
+            <a href="/admin/dashboard"><img src="/img/logo_white.png" alt=""></a>
             <div class="sidebar_close_icon d-lg-none">
                 <i class="ti-close"></i>
             </div>

@@ -9,6 +9,16 @@ use Illuminate\Support\Facades\Auth;
 class BookingsController extends Controller
 {
 
+
+
+    public function __construct()
+    {
+        $this->middleware('auth')->except([
+            'login', 'register'
+        ]);
+    }
+
+    
     public function approveBooking(Request $request, $id){
         $booking = Booking::findOrfail(base64_decode($request->id));
     //   dd($booking);

@@ -324,7 +324,10 @@ class DashBoardController extends Controller
                 return redirect()->back()->with('error', 'Something went wrong, Please try again');
             }
         }
-        Alert::success('error', 'Damaged Page, Please Correct the errors on the page and on the form');
+        
+      if($services->count() < 1){
+          Alert::error('Please add a feature first', 'Error');
+      }
         return view('admin.room', compact('services', 'rooms'));
     }
 
