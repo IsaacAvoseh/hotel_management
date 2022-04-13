@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Booking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use PDF;
 
 class BookingsController extends Controller
 {
@@ -18,7 +19,7 @@ class BookingsController extends Controller
         ]);
     }
 
-    
+
     public function approveBooking(Request $request, $id){
         $booking = Booking::findOrfail(base64_decode($request->id));
     //   dd($booking);
@@ -59,5 +60,20 @@ class BookingsController extends Controller
             return redirect()->back()->with('error', 'Something Went wrong, please try again');
         }
     }
+
+    public function bookingsPdf(Request $request)
+    {
+        $bookings = Booking::all();
+        view()->share('admin.bookings_pdf', $bookings);
+        $pdf = PDF::loadView('admin.bookings_pdf', compact('bookings'));
+        return $pdf->download('Bookings.pdf');
+    }
+
+    // public function ggg()
+    // {
+    //     $bookings = Booking::all();
+
+    //     return view('admin.bookings_pdf', compact('bookings'));
+    // }
 
 }
