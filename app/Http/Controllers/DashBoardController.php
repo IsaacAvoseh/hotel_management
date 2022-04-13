@@ -50,9 +50,9 @@ class DashBoardController extends Controller
                 'password' => 'required',
             ]);
             $data = $request->all();
-            try{
+            try {
                 $user = User::where('email', $data['email'])->first();
-            }catch (\Exception $e){
+            } catch (\Exception $e) {
                 return redirect()->back()->with('error', 'Server Error');
             }
             if ($user) {
@@ -125,7 +125,7 @@ class DashBoardController extends Controller
             // } else {
             //     return redirect('/admin/login');
             // }
-          
+
             $user = new User();
 
             //admin registration
@@ -161,7 +161,7 @@ class DashBoardController extends Controller
             return view('admin.register');
         }
     }
-    
+
     //add new role 
     public function addRole(Request $request)
     {
@@ -236,6 +236,7 @@ class DashBoardController extends Controller
     {
         $services = Service::all();
         $rooms = RoomType::all();
+        // dd($rooms);
         $roomNumber = Room::with('roomNumber')->get();
         // dd($roomNumber);
 
@@ -323,7 +324,7 @@ class DashBoardController extends Controller
                 return redirect()->back()->with('error', 'Something went wrong, Please try again');
             }
         }
-Alert::success('error', 'Damaged Page, Please Correct the errors on the page and on the form' );
+        Alert::success('error', 'Damaged Page, Please Correct the errors on the page and on the form');
         return view('admin.room', compact('services', 'rooms'));
     }
 
@@ -470,7 +471,7 @@ Alert::success('error', 'Damaged Page, Please Correct the errors on the page and
                 return redirect()->back()->with('error', 'Something went wrong while updating booking status');
             }
             if ($saved) {
-                if( $request->wantsJson() ) {
+                if ($request->wantsJson()) {
                     return response()->json(['success' => 'Booking status updated successfully'], 200);
                 }
                 return redirect()->back()->with('success', 'Booking updated successfully');
