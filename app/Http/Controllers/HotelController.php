@@ -9,34 +9,52 @@ use App\Models\Room;
 use App\Models\RoomType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
+use RealRashid\SweetAlert\Facades\Alert;
+
+use function PHPSTORM_META\type;
 
 class HotelController extends Controller
 {
     public function Home()
     {
-        $abouts = About::all();
-        $aboutus = About::find(1);
-        $room_type = RoomType::all();
-        $rooms = RoomType::all();
-        return view('user.home', compact('room_type', 'abouts', 'rooms', 'aboutus'));
+       try{
+            $abouts = About::all();
+            $aboutus = About::find(1);
+            $room_type = RoomType::all();
+            $rooms = RoomType::all();
+            return view('user.home', compact('room_type', 'abouts', 'rooms', 'aboutus'));
+       }catch (\Exception $e){
+           Alert::error('Error', 'Something went wrong! Server not running');
+           return view('user.home');
+       }
     }
 
     public function Room(Request $request)
     {
-        $abouts = About::all();
-        $room_type = RoomType::all();
-        $rooms = RoomType::all();
-        // dd($room_type);
+       try{
+            $abouts = About::all();
+            $room_type = RoomType::all();
+            $rooms = RoomType::all();
+            // dd($room_type);
 
-        return view('user.rooms', compact('room_type', 'rooms', 'abouts'));
+            return view('user.rooms', compact('room_type', 'rooms', 'abouts'));
+       }catch (\Exception $e){
+           Alert::error('Error', 'Something went wrong! Server not running');
+           return view('user.rooms');
+       }
     }
 
     public function Orange(Request $request)
     {
-        $abouts = About::all();
-        $room_type = RoomType::all();
-        $room = RoomType::find(base64_decode($request->id));
-        return view('user.orange', compact('room', 'room_type', 'abouts'));
+       try{
+            $abouts = About::all();
+            $room_type = RoomType::all();
+            $room = RoomType::find(base64_decode($request->id));
+            return view('user.orange', compact('room', 'room_type', 'abouts'));
+       }catch (\Exception $e){
+           Alert::error('Error', 'Something went wrong! Server not running');
+           return view('user.orange');
+       }
     }
 
     //get rooms under a room type
@@ -55,8 +73,15 @@ class HotelController extends Controller
 
     public function Contact(Request $request)
     {
-        $abouts = About::all();
-        $aboutus = About::find(1);
+         try{
+                $abouts = About::all();
+                $contacts = Contact::all();
+                return view('user.contact', compact('abouts', 'contacts'));
+            }catch (\Exception $e){
+                Alert::error('Error', 'Something went wrong! Server not running');
+                return view('user.contact');
+            }
+    
         if ($request->isMethod('post')) {
             // dd($request->all());
             $request->validate([
@@ -69,22 +94,32 @@ class HotelController extends Controller
             $contact->name = $data['name'];
             $contact->email = $data['email'];
             $contact->message = $data['message'];
-            $saved = $contact->save();
-            if ($saved) {
-                return redirect()->back()->with('success', 'Message sent successfully, We will contact you soon, Please check your mail');
-            } else {
+           
+            try{
+                $saved = $contact->save();
+                if ($saved) {
+                    return redirect()->back()->with('success', 'Message sent successfully, We will contact you soon, Please check your mail');
+                } else {
+                    return redirect()->back()->with('error', 'Something Went wrong, please try again');
+                }
+            }catch (\Exception $e){
+                Alert::error('Error', 'Something went wrong! Server not running');
                 return redirect()->back()->with('error', 'Something Went wrong, please try again');
             }
         }
-        return view('user.contact', compact('abouts', 'aboutus'));
+        // return view('user.contact', compact('abouts', 'aboutus'));
     }
 
     public function Booking()
     {
-        $abouts = About::all();
-        $room_type = RoomType::all();
-
-        return view('user.booking', compact('room_type', 'abouts'));
+       try{
+            $abouts = About::all();
+            $bookings = Booking::all();
+            return view('user.booking', compact('abouts', 'bookings'));
+       }catch (\Exception $e){
+           Alert::error('Error', 'Something went wrong! Server not running');
+           return view('user.booking');
+       }
     }
 
     public function getBookings(Request $request)
