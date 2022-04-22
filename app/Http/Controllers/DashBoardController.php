@@ -43,7 +43,10 @@ class DashBoardController extends Controller
     public function login(Request $request)
     {
 
-        //admin login
+        //redirect to dashboard if user is already logged in
+        if (Auth::check()) {
+            return redirect()->route('dashboard');
+        }
         if ($request->isMethod('post')) {
             $cred = $request->validate([
                 'email' => 'required',
@@ -108,6 +111,11 @@ class DashBoardController extends Controller
         // } else {
         //     return redirect('/admin/login');
         // }
+        //redirect to dashboard if user is already logged in
+
+        if (Auth::check()) {
+            return redirect()->route('dashboard');
+        }
 
         //admin registration
         if ($request->isMethod('post')) {
@@ -159,8 +167,8 @@ class DashBoardController extends Controller
                     return redirect('/admin/register')->with('error', 'Registration Failed');
                 }
             }
-            return view('admin.register');
         }
+        return view('admin.register');
     }
 
     //add new role 

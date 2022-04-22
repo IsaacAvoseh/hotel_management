@@ -16,7 +16,7 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="dashboard_breadcam text-right">
-                                <p><a href="/admin">Dashboard</a> <i class="fas fa-caret-right"></i> login</p>
+                                <p><a href="/admin">Dashboard</a> <i class="fas fa-caret-right"></i> Password</p>
                             </div>
                         </div>
                     </div>
@@ -31,24 +31,23 @@
                             <div class="modal-content cs_modal">
                                 @include('flash.flash')
                                 <div style="background-color: #323246;" class="modal-header justify-content-center">
-                                    <h5 class="modal-title text_white">Log in</h5>
+                                    <h5 class="modal-title text_white">Reset Password</h5>
                                 </div>
                                 <div class="modal-body">
-                                    <form method="POST">
+                                    <form method="POST" action="{{ route('password.update') }}">
                                         @csrf
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" name="email"
-                                            value="{{ old('email') }}" placeholder="Enter your email">
-                                            <span class="text-danger">@error ('email') {{$message}} @enderror</span>
+                                        <div class="">
+                                            <input type="email" class="form-control" name="email" placeholder="Enter your email">
                                         </div>
-                                        <div class="form-group">
-                                            <input type="password" class="form-control" name="password" placeholder="Password">
-                                            <span class="text-danger">@error ('password') {{$message}} @enderror</span>
+                                        <div class="">
+                                            <input type="password" class="form-control" name="password" placeholder="Enter you new password">
                                         </div>
-                                        <button type="submit" style="background-color: #323246;" class="btn_1 full_width text-center">Log in</button>
-                                        <p>Need an account? <a class="btn btn-primary text-white" href="/admin/register">Sign Up</a></p>
-                                        <div class="text-center">
-                                            <a href="/admin/forgot-password" class="pass_forget_btn">Forget Password?</a>
+                                        <div class="">
+                                            <input type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password">
+                                        </div>
+                                        <input hidden name="token" value="{{ $token }}" type="text">
+                                        <div>
+                                            <button type="submit" class="btn btn-primary">Reset</button>
                                         </div>
                                     </form>
                                 </div>
