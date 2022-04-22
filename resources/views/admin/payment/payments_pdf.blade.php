@@ -39,8 +39,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if (isset($payments) && count($payments) > 0)
-                                @foreach ($payments as $payment)
+                                
+                                @forelse ($payments as $payment)
                                 <tr>
                                     <td scope="row">
                                         {{ $loop->iteration }}
@@ -53,8 +53,10 @@
                                         <td>{{ \Carbon\Carbon::parse($payment->created_at)->diffForHumans() }}</td>
                                    
                                 </tr>
-                                @endforeach
-                                @endif
+                                @empty
+                                <tr>No records</tr>
+                                @endforelse
+                                
                             </tbody>
                         </table>
                     </div>

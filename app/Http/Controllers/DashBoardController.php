@@ -417,7 +417,7 @@ class DashBoardController extends Controller
                 try {
                     Mail::to($message->email)->send(new ReplyMessage($message));
                 } catch (\Exception $e) {
-                    return redirect()->back()->with('error', 'Something went wrong while sending email, Message not sent');
+                    return redirect()->back()->with('not-sent', 'Something went wrong while sending email, Message not sent');
                 }
 
                 return redirect()->back()->with('success', 'Message replied successfully');

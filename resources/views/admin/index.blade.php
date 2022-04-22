@@ -92,7 +92,7 @@
                 <div class="sales_unit_footer d-flex justify-content-between">
                     <div class="single_sales">
                         <p>This Month Revenue</p>
-                        <h3>$57k</h3>
+                        <h3>$77k</h3>
                         <p class="d-flex align-items-center"> <i class="ti-arrow-up"></i> <span> 14.5%</span> Up From Last Month </p>
                     </div>
                     <div class="single_sales disable_sales">
