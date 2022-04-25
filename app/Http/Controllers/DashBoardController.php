@@ -73,15 +73,16 @@ class DashBoardController extends Controller
 
                     //this is for staff login, not yet implemented
                     if (Auth::guard('webstaff')->attempt($cred)) {
+                        // dd($staff);
                         //     $request->session()->put('staff', $staff);
                         //     return redirect()->route('staff.dashboard')->with('success', 'Staff successfully logged in');
                         // } else {
                         //     return redirect()->back()->with('error', 'Invalid password');
                         // }
 
-                        // Auth::login($staff);
+                        Auth::login($staff);
                         // dd(Auth::user());
-                        $request->session()->put('staff', $staff);
+                        session()->put('staff', $staff);
                         return redirect()->route('dashboard');
                     } else {
                         return redirect()->back()->with('error', 'Invalid password');
