@@ -150,12 +150,11 @@
                         @foreach ($rooms as $room)
                         <div class="card-header" id="headingOne">
                             <h5 class="mb-0">
-                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseOne">{{ $room->name }}<span class="digits"></span></button>
+                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo{{$room->id}}" aria-expanded="false" aria-controls="collapseOne">{{ $room->name }}<span class="digits"></span></button>
                             </h5>
                         </div>
-                        @endforeach
-                        @endif
-                        <div class="collapse" id="collapseTwo" aria-labelledby="headingOne" data-parent="#accordion" style="">
+
+                        <div class="collapse" id="collapseTwo{{ $room->id }}" aria-labelledby="headingOne" data-parent="#accordion" style="">
                             <div class="card-body">
                                 <div class="modal-body">
                                     <div class="white_box mb_30">
@@ -172,17 +171,22 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    @foreach($roomNumber as $roomN)
+                                                    @if($roomN->room_type_id == $room->id)
                                                     <tr>
-                                                        <td scope="row">1</td>
-                                                        <td>Royal Suites</td>
-                                                        <td>Features 1</td>
-                                                        <td>#60000</td>
-                                                        <td>Available</td>
+                                                        <td scope="row">{{ $loop->iteration }}</td>
+                                                        <td>{{ $roomN->roomType->name }}</td>
+                                                        <td>{{ $roomN->roomType->service->name == null? "Feature": $roomN->roomType->service->name }}</td>
+                                                        <td>{{ $roomN->roomType->price }}</td>
+                                                        <td>{{ ucfirst($roomN->status) }}</td>
                                                         <td>
-                                                            <a href="roomsingle" class="btn btn-primary">View</a>
+                                                            <a href="#" class="btn btn-primary">View</a>
                                                             <a href="#" class="btn btn-danger">Edit</a>
                                                         </td>
                                                     </tr>
+                                                    @endif
+
+                                                    @endforeach
                                                 </tbody>
                                             </table>
                                         </div>
@@ -190,6 +194,10 @@
                                 </div>
                             </div>
                         </div>
+
+                        @endforeach
+                        @endif
+
                     </div>
                 </div>
             </div>

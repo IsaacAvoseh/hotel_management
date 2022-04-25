@@ -73,15 +73,16 @@ class DashBoardController extends Controller
 
                     //this is for staff login, not yet implemented
                     if (Auth::guard('webstaff')->attempt($cred)) {
+                        // dd($staff);
                         //     $request->session()->put('staff', $staff);
                         //     return redirect()->route('staff.dashboard')->with('success', 'Staff successfully logged in');
                         // } else {
                         //     return redirect()->back()->with('error', 'Invalid password');
                         // }
 
-                        // Auth::login($staff);
+                        Auth::login($staff);
                         // dd(Auth::user());
-                        $request->session()->put('staff', $staff);
+                        session()->put('staff', $staff);
                         return redirect()->route('dashboard');
                     } else {
                         return redirect()->back()->with('error', 'Invalid password');
@@ -246,7 +247,7 @@ class DashBoardController extends Controller
         $services = Service::all();
         $rooms = RoomType::all();
         // dd($rooms);
-        $roomNumber = Room::with('roomNumber')->get();
+        $roomNumber = Room::with('roomType.service')->get();
         // dd($roomNumber);
 
         if ($request->isMethod('post')) {
@@ -337,7 +338,7 @@ class DashBoardController extends Controller
       if($services->count() < 1){
           Alert::error('Please add a feature first', 'Error');
       }
-        return view('admin.room', compact('services', 'rooms'));
+        return view('admin.room', compact('services', 'rooms', 'roomNumber'));
     }
 
     public function roomsingle()
@@ -418,7 +419,7 @@ class DashBoardController extends Controller
                 'reply_time' => date('d-m-Y', strtotime(Carbon::now())),
 
             ]);
-            $saved = $message->save();
+            // $saved = $message->save();
 
             if ($saved) {
 

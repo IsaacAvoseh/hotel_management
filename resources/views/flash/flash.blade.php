@@ -10,6 +10,12 @@
 </div>
 @endif
 
+@if(session('not-sent'))
+<div class="alert alert-danger">
+    {!! session('not-sent') !!}
+</div>
+@endif
+
 @if ($errors->any())
 <div class="alert alert-danger alert-dismissable margin5">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>

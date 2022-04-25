@@ -3,10 +3,12 @@
 
 
 
-<div class="main_content_iner ">
+<div class="main_content_iner">
     <div class="container-fluid p-0">
         <div class="row justify-content-center">
             <div class="col-12">
+    
+             
                 <div class="dashboard_header mb_50">
                     <div class="row">
                         <div class="col-lg-6">
@@ -23,7 +25,9 @@
 
                 </div>
             </div>
-            <div class="col-lg-12 ">
+            <div class="col-lg-12">
+
+
                 <div class="white_box mb_30">
                     <div class="row justify-content-center">
                         <div class="col-lg-6">
@@ -40,7 +44,7 @@
                                             <input type="email" class="form-control" name="email" placeholder="Enter your email">
                                         </div>
                                         <div>
-                                            <button type="submit" class="btn btn-primary">SEND</button>
+                                            <button onclick="showLoading()" type="submit" class="btn btn-primary">SEND</button>
                                         </div>
                                     </form>
                                 </div>
