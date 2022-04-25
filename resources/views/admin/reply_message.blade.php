@@ -41,7 +41,7 @@
                     <img src="img/messages/1.png" alt="">
                 </div>
             </div>
-            @if($message->status == 1)
+            @if(session('not-sent'))
             <div>
                 <b class="text-danger"> Message Not Sent</b>
                 <form action="/admin/messages/{{ base64_encode($message->id) }}" method="POST">
@@ -51,7 +51,7 @@
                         <textarea hidden name="reply_body" class="form-control" id="exampleFormControlTextarea1" col="10" rows="5">
                         {{ $message->reply_body }}
                         </textarea>
-                        <button type="submit" class="btn_1 full_width m-2">Retry</button>
+                        <button onclick="showLoading()" type="submit" class="btn_1 full_width m-2">Retry</button>
                     </div>
                 </form>
 
@@ -80,7 +80,7 @@
                 <div class="form-group col-md-6">
                     <input type="text" name="reply_title" class="form-control mb-2" placeholder="Message title" value=" {{ old('reply_title') }} ">
                     <textarea placeholder="Type your message" name="reply_body" class="form-control" id="exampleFormControlTextarea1" col="10" rows="5"></textarea>
-                    <button type="submit" class="btn_1 full_width m-2">Send</button>
+                    <button type="submit" onclick="showLoading()" class="btn_1 full_width m-2">Send</button>
                 </div>
             </form>
         </div>

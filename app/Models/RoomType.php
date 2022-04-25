@@ -23,4 +23,8 @@ class RoomType extends Model
         'image_4',
         'service_id',   
     ];
+
+    public function service(){
+        return $this->belongsTo(Service::class);
+    }
 }

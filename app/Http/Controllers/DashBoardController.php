@@ -246,7 +246,7 @@ class DashBoardController extends Controller
         $services = Service::all();
         $rooms = RoomType::all();
         // dd($rooms);
-        $roomNumber = Room::with('roomNumber')->get();
+        $roomNumber = Room::with('roomType.service')->get();
         // dd($roomNumber);
 
         if ($request->isMethod('post')) {
@@ -337,7 +337,7 @@ class DashBoardController extends Controller
       if($services->count() < 1){
           Alert::error('Please add a feature first', 'Error');
       }
-        return view('admin.room', compact('services', 'rooms'));
+        return view('admin.room', compact('services', 'rooms', 'roomNumber'));
     }
 
     public function roomsingle()
@@ -418,7 +418,7 @@ class DashBoardController extends Controller
                 'reply_time' => date('d-m-Y', strtotime(Carbon::now())),
 
             ]);
-            $saved = $message->save();
+            // $saved = $message->save();
 
             if ($saved) {
 
