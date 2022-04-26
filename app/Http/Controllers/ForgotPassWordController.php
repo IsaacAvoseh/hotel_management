@@ -18,7 +18,7 @@ class ForgotPassWordController extends Controller
                 'email' => 'required|email',
             ]);
 
-           try{
+        //    try{
                 $status = Password::sendResetLink(
                     $request->only('email'),
                     //  function (Message $message) {
@@ -30,9 +30,9 @@ class ForgotPassWordController extends Controller
                         'status' => __($status)
                     ])
                     : back()->withErrors(['email' => __($status)]);
-            }catch(\Exception $e){
-                return back()->withErrors(['email' => 'Something went wrong, please try again later.']);
-            }
+            // }catch(\Exception $e){
+                // return back()->withErrors(['email' => 'Something went wrong, please try again later.']);
+            // }
            }
         return view('admin.forgot-password.forgot-password');
     }
