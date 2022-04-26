@@ -56,7 +56,7 @@ class DashBoardController extends Controller
             try {
                 $user = User::where('email', $data['email'])->first();
             } catch (\Exception $e) {
-          Alert::error('Server Error', 'Error');
+                Alert::error('Server Error', 'Error');
                 return redirect()->back()->with('error', 'Server Error');
             }
             if ($user) {
@@ -334,10 +334,10 @@ class DashBoardController extends Controller
                 return redirect()->back()->with('error', 'Something went wrong, Please try again');
             }
         }
-        
-      if($services->count() < 1){
-          Alert::error('Please add a feature first', 'Error');
-      }
+
+        if ($services->count() < 1) {
+            Alert::error('Please add a feature first', 'Error');
+        }
         return view('admin.room', compact('services', 'rooms', 'roomNumber'));
     }
 
@@ -469,16 +469,23 @@ class DashBoardController extends Controller
     public function updateBooking(Request $request, $id)
     {
         $booking = Booking::find(base64_decode($id));
+        // dd($booking);
         if ($request->isMethod('post')) {
             $request->validate([
                 'status' => 'required',
 
             ]);
-            // dd($request->all());
+            $room = Room::find($booking->room_id);
+            // dd($room);
+
             try {
                 $saved = $booking->update([
                     'status' => $request->status,
                     'approved_by' => Auth::user()->name,
+                ]);
+
+                $room->update([
+                    'status' => 'booked',
                 ]);
             } catch (\Exception $e) {
                 return redirect()->back()->with('error', 'Something went wrong while updating booking status');

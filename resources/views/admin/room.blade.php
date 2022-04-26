@@ -134,7 +134,7 @@
 
                                         </div>
 
-                                        <button type="submit" style="background-color: #323246;" class="btn_1 full_width text-center">Add Room</button>
+                                        <button type="submit" onclick="showLoading()" style="background-color: #323246;" class="btn_1 full_width text-center">Add Room</button>
                                     </form>
                                 </div>
                             </div>
@@ -154,7 +154,7 @@
                             </h5>
                         </div>
 
-                        <div class="collapse" id="collapseTwo{{ $room->id }}" aria-labelledby="headingOne" data-parent="#accordion" style="">
+                        <div class="collapse" id="collapseTwo{{ $room->id }}" aria-labelledby="headingOne" data-parent="#accordion">
                             <div class="card-body">
                                 <div class="modal-body">
                                     <div class="white_box mb_30">
@@ -162,7 +162,7 @@
                                             <table class="table lms_table_active ">
                                                 <thead>
                                                     <tr>
-                                                        <th scope="col">S/N</th>
+                                                        <th scope="col">Room</th>
                                                         <th scope="col">Room type</th>
                                                         <th scope="col">Room Features</th>
                                                         <th scope="col">Price</th>
@@ -174,11 +174,11 @@
                                                     @foreach($roomNumber as $roomN)
                                                     @if($roomN->room_type_id == $room->id)
                                                     <tr>
-                                                        <td scope="row">{{ $loop->iteration }}</td>
+                                                        <td scope="row">{{ $roomN->name }}</td>
                                                         <td>{{ $roomN->roomType->name }}</td>
                                                         <td>{{ $roomN->roomType->service->name == null? "Feature": $roomN->roomType->service->name }}</td>
                                                         <td>{{ $roomN->roomType->price }}</td>
-                                                        <td>{{ ucfirst($roomN->status) }}</td>
+                                                        <td class="{{ $roomN->status == 'available'? 'status_btn sm': 'bg-danger status_btn'}}">{{ ucfirst($roomN->status) }}</td>
                                                         <td>
                                                             <a href="#" class="btn btn-primary">View</a>
                                                             <a href="#" class="btn btn-danger">Edit</a>
