@@ -53,7 +53,7 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.4);
-            
+
         }
 
         .loading-content {
@@ -434,6 +434,7 @@
             document.querySelector('#loading-content').classList.remove('loading-content');
         }
     </script>
+   
 </body>
 
 <!-- Mirrored from demo.dashboardpack.com/sales-html/index_3.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 24 Mar 2022 14:36:05 GMT -->
