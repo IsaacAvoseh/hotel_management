@@ -56,42 +56,22 @@ class DashBoardController extends Controller
             try {
                 $user = User::where('email', $data['email'])->first();
             } catch (\Exception $e) {
-          Alert::error('Server Error', 'Error');
+                Alert::error('Server Error', 'Error');
                 return redirect()->back()->with('error', 'Server Error');
             }
             if ($user) {
                 if (Hash::check($data['password'], $user->password)) {
                     Auth::login($user);
                     $request->session()->put('user', $user);
-                    return redirect()->route('dashboard')->with('success', 'Admin successfully logged in');
+                    return redirect()->route('dashboard')->with('success', ucfirst($user->type) . ' '. 'Logged In Successfully');
                 } else {
                     return redirect()->back()->with('error', 'Invalid password');
                 }
             } else {
-                $staff = Staff::where('email', $data['email'])->first();
-                if ($staff) {
-
-                    //this is for staff login, not yet implemented
-                    if (Auth::guard('webstaff')->attempt($cred)) {
-                        // dd($staff);
-                        //     $request->session()->put('staff', $staff);
-                        //     return redirect()->route('staff.dashboard')->with('success', 'Staff successfully logged in');
-                        // } else {
-                        //     return redirect()->back()->with('error', 'Invalid password');
-                        // }
-
-                        Auth::login($staff);
-                        // dd(Auth::user());
-                        session()->put('staff', $staff);
-                        return redirect()->route('dashboard');
-                    } else {
-                        return redirect()->back()->with('error', 'Invalid password');
-                    }
-                } else {
-
+                
                     return redirect()->back()->with('error', 'Invalid email');
-                }
-            }
+              }
+            
         }
 
         return view('admin.login');
@@ -107,13 +87,7 @@ class DashBoardController extends Controller
 
     public function register(Request $request)
     {
-        // if ($request->session()->has('user')) {
-        //     return view('dashboard');
-        // } else {
-        //     return redirect('/admin/login');
-        // }
         //redirect to dashboard if user is already logged in
-
         if (Auth::check()) {
             return redirect()->route('dashboard');
         }
@@ -128,13 +102,6 @@ class DashBoardController extends Controller
                 'password_confirmation' => 'required|same:password',
             ]);
 
-
-
-            // if ($request->session()->has('user')) {
-            //     return view('dashboard');
-            // } else {
-            //     return redirect('/admin/login');
-            // }
 
             $user = new User();
 
@@ -161,6 +128,7 @@ class DashBoardController extends Controller
                 $user->email = $request->email;
                 $user->password = Hash::make($request->password);
                 $user->image = $image_path;
+                $user->type = 'admin';
                 $saved = $user->save();
                 if ($saved) {
                     return redirect('/admin/login')->with('success', 'Registration Successful');
@@ -223,20 +191,40 @@ class DashBoardController extends Controller
                 $image_path = '/admin/default.jpg';
             }
 
-            $staff =  new Staff();
-            $staff->first_name = $request->first_name;
-            $staff->last_name = $request->last_name;
-            $staff->email = $request->email;
-            $staff->address = $request->address;
-            $staff->phone = $request->phone;
-            $staff->image = $image_path;
-            $staff->role = $request->role;
-            $staff->password = Hash::make($request->phone);
-            $saved = $staff->save();
-            if ($saved) {
-                return redirect()->back()->with('success', 'Staff added successfully');
-            } else {
-                return redirect()->back()->with('error', 'Staff not added');
+            try {
+                $staff =  new Staff();
+                $staff->first_name = $request->first_name;
+                $staff->last_name = $request->last_name;
+                $staff->email = $request->email;
+                $staff->address = $request->address;
+                $staff->phone = $request->phone;
+                $staff->image = $image_path;
+                $staff->role = $request->role;
+                $staff->status = 'active';
+                $staff->password = Hash::make($request->phone);
+                $staff->save();
+            } catch (\Exception $e) {
+                return redirect()->back()->with('error', 'Staff not added, try again');
+            }
+            try {
+                //save staff to users table
+                $user = new User();
+                $user->name = $request->first_name . ' ' . $request->last_name;
+                $user->email = $request->email;
+                $user->password = Hash::make($request->phone);
+                $user->image = $image_path;
+                $user->type = 'staff';
+                $user->phone = $request->phone;
+                $user->address = $request->address;
+                $user->role = $request->role;
+                $user->status = 'active';
+                $saved = $user->save();
+
+                if ($saved) {
+                    return redirect()->back()->with('success', 'Staff added successfully and staff account created successfully');
+                }
+            } catch (\Exception $e) {
+                return redirect()->back()->with('error', ' Staff Added , but something went wrong, while creating staff account, please try again');
             }
         }
         return view('admin.staff', compact('roles', 'staffs'));
@@ -334,10 +322,10 @@ class DashBoardController extends Controller
                 return redirect()->back()->with('error', 'Something went wrong, Please try again');
             }
         }
-        
-      if($services->count() < 1){
-          Alert::error('Please add a feature first', 'Error');
-      }
+
+        if ($services->count() < 1) {
+            Alert::error('Please add a feature first', 'Error');
+        }
         return view('admin.room', compact('services', 'rooms', 'roomNumber'));
     }
 
@@ -469,16 +457,23 @@ class DashBoardController extends Controller
     public function updateBooking(Request $request, $id)
     {
         $booking = Booking::find(base64_decode($id));
+        // dd($booking);
         if ($request->isMethod('post')) {
             $request->validate([
                 'status' => 'required',
 
             ]);
-            // dd($request->all());
+            $room = Room::find($booking->room_id);
+            // dd($room);
+
             try {
                 $saved = $booking->update([
                     'status' => $request->status,
                     'approved_by' => Auth::user()->name,
+                ]);
+
+                $room->update([
+                    'status' => 'booked',
                 ]);
             } catch (\Exception $e) {
                 return redirect()->back()->with('error', 'Something went wrong while updating booking status');

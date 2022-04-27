@@ -60,7 +60,7 @@
                                                 Keep me up to date
                                             </label>
                                         </div>
-                                        <button type="submit" style="background-color: #323246;" class="btn_1 full_width text-center"> Sign Up</button>
+                                        <button onclick="showLoading()" type="submit" style="background-color: #323246;" class="btn_1 full_width text-center"> Sign Up</button>
                                         <p>Have an an account? <a class="btn btn-primary text-white" href="/admin/login">Log in</a></p>
                                         <div class="text-center">
                                             <a href="#" data-toggle="modal" data-target="#forgot_password" data-dismiss="modal" class="pass_forget_btn">Forget Password?</a>

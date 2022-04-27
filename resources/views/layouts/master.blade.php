@@ -36,8 +36,7 @@
         <div class="search-form d-flex align-items-center">
             <div class="container">
                 <form action="" method="get">
-                    <input type="search" name="search-form-input" id="searchFormInput"
-                        placeholder="Type your keyword ...">
+                    <input type="search" name="search-form-input" id="searchFormInput" placeholder="Type your keyword ...">
                     <button type="submit"><i class="icon_search"></i></button>
                 </form>
             </div>
@@ -48,14 +47,14 @@
             <div class="container">
                 <div class="row">
                     @if (isset($abouts) && count($abouts) > 0)
-                        @foreach ($abouts as $about)
-                            <div class="col-6">
-                                <div class="top-header-content">
-                                    <a href="#"><i class="icon_phone"></i> <span>{{ $about->phone }}</span></a>
-                                    <a href="#"><i class="icon_mail"></i> <span>{{ $about->email }}</span></a>
-                                </div>
-                            </div>
-                        @endforeach
+                    @foreach ($abouts as $about)
+                    <div class="col-6">
+                        <div class="top-header-content">
+                            <a href="#"><i class="icon_phone"></i> <span>{{ $about->phone }}</span></a>
+                            <a href="#"><i class="icon_mail"></i> <span>{{ $about->email }}</span></a>
+                        </div>
+                    </div>
+                    @endforeach
                     @endif
                     <div class="col-6">
                         <div class="top-header-content">
@@ -93,8 +92,7 @@
                         <div class="classy-menu">
                             <!-- Menu Close Button -->
                             <div class="classycloseIcon">
-                                <div class="cross-wrap"><span class="top"></span><span
-                                        class="bottom"></span></div>
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
                             </div>
                             <!-- Nav Start -->
                             <div class="classynav">
@@ -111,8 +109,7 @@
 
                                 <!-- Book Now -->
                                 <div class="book-now-btn ml-3 ml-lg-5">
-                                    <a href="booking">Book Now <i class="fa fa-long-arrow-right"
-                                            aria-hidden="true"></i></a>
+                                    <a href="booking">Book Now <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
                                 </div>
                             </div>
                             <!-- Nav End -->
@@ -139,16 +136,16 @@
                     <!-- Single Footer Widget Area -->
                     <div class="col-12 col-sm-6 col-lg-3">
                         @if (isset($abouts) && count($abouts) > 0)
-                            @foreach ($abouts as $about)
-                                <div class="single-footer-widget mb-80">
-                                    <!-- Footer Logo -->
-                                    <a href="#" class="footer-logo"><img src="/img/core-img/logo2.png" alt=""></a>
+                        @foreach ($abouts as $about)
+                        <div class="single-footer-widget mb-80">
+                            <!-- Footer Logo -->
+                            <a href="#" class="footer-logo"><img src="/img/core-img/logo2.png" alt=""></a>
 
-                                    <h4>{{ $about->phone }}</h4>
-                                    <span>{{ $about->email }}</span>
-                                    <span>{{ $about->address }}</span>
-                                </div>
-                            @endforeach
+                            <h4>{{ $about->phone }}</h4>
+                            <span>{{ $about->email }}</span>
+                            <span>{{ $about->address }}</span>
+                        </div>
+                        @endforeach
                         @endif
                     </div>
 
@@ -223,9 +220,7 @@
                                 Copyright &copy;
                                 <script>
                                     document.write(new Date().getFullYear());
-                                </script> All rights reserved | This template is made with <i
-                                    class="fa fa-heart-o" aria-hidden="true"></i> by <a href="#"
-                                    target="_blank">Horizon Suites</a>
+                                </script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="#" target="_blank">Horizon Suites</a>
                                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                             </p>
                         </div>
@@ -259,23 +254,22 @@
     <script src="/horizon/js/default-assets/active.js"></script>
 
 
+    <!--End of Tawk.to Script-->
     <!--Start of Tawk.to Script-->
     <script type="text/javascript">
-        // var Tawk_API = Tawk_API || {},
-        //     Tawk_LoadStart = new Date();
-        // (function() {
-        //     var s1 = document.createElement("script"),
-        //         s0 = document.getElementsByTagName("script")[0];
-        //     s1.async = true;
-        //     s1.src = 'https://embed';
-        //     s1.charset = 'UTF-8';
-        //     s1.setAttribute('crossorigin', '*');
-        //     s0.parentNode.insertBefore(s1, s0);
-        // })();
+        var Tawk_API = Tawk_API || {},
+            Tawk_LoadStart = new Date();
+        (function() {
+            var s1 = document.createElement("script"),
+                s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/625eecceb0d10b6f3e6e558f/1g11cq257';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
     </script>
-
     <!--End of Tawk.to Script-->
-
 </body>
 
 </html>

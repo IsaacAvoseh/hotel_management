@@ -37,15 +37,14 @@
                                     <form method="POST">
                                         @csrf
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="email"
-                                            value="{{ old('email') }}" placeholder="Enter your email">
+                                            <input type="text" class="form-control" name="email" value="{{ old('email') }}" placeholder="Enter your email">
                                             <span class="text-danger">@error ('email') {{$message}} @enderror</span>
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control" name="password" placeholder="Password">
                                             <span class="text-danger">@error ('password') {{$message}} @enderror</span>
                                         </div>
-                                        <button type="submit" style="background-color: #323246;" class="btn_1 full_width text-center">Log in</button>
+                                        <button onclick="showLoading()" type="submit" style="background-color: #323246;" class="btn_1 full_width text-center">Log in</button>
                                         <p>Need an account? <a class="btn btn-primary text-white" href="/admin/register">Sign Up</a></p>
                                         <div class="text-center">
                                             <a href="/admin/forgot-password" class="pass_forget_btn">Forget Password?</a>
