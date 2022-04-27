@@ -109,18 +109,20 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td scope="row">{{ $abouts->id }}</td>
-                                        <td scope="row">{{ $abouts->phone }}</td>
-                                        <td>{{ $abouts->address }}</td>
-                                        <td>24HRS</td>
-                                        <td>{{ $abouts->email }}</td>
-                                        <td>{{ $abouts->title }}</td>
-                                        <td>{{ $abouts->content }}</td>
-                                        <td>
-                                            <a href="/admin/editabout" class="btn btn-primary">Edit</button>
-                                        </td>
-                                    </tr>
+                                    @if (isset($abouts))
+                                        <tr>
+                                            <td scope="row">{{ $abouts->id }}</td>
+                                            <td scope="row">{{ $abouts->phone }}</td>
+                                            <td>{{ $abouts->address }}</td>
+                                            <td>24HRS</td>
+                                            <td>{{ $abouts->email }}</td>
+                                            <td>{{ $abouts->title }}</td>
+                                            <td>{{ $abouts->content }}</td>
+                                            <td>
+                                                <a href="/admin/editabout" class="btn btn-primary" onclick="showLoading()">Edit</button>
+                                            </td>
+                                        </tr>
+                                    @endif
                                 </tbody>
                             </table>
                         </div>
