@@ -115,7 +115,8 @@ class HotelController extends Controller
        try{
             $abouts = About::all();
             $bookings = Booking::all();
-            return view('user.booking', compact('abouts', 'bookings'));
+            $room_type = RoomType::all();
+            return view('user.booking', compact('abouts', 'room_type', 'bookings'));
        }catch (\Exception $e){
            Alert::error('Error', 'Something went wrong! Server not running');
            return view('user.booking');
