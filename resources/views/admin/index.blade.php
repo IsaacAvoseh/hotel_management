@@ -1,7 +1,7 @@
 @extends('layouts/main')
 @section('content')
 
-
+@include('flash.flash')
 
 <div class="main_content_iner overly_inner">
     <div class="container-fluid p-0 ">
