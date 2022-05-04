@@ -4,7 +4,6 @@
 
     <div class="main_content_iner overly_inner">
         <div class="container-fluid p-0 ">
-
             <div class="row">
                 <div class="col-12">
                     <div class="page_title_box d-flex align-items-center justify-content-between">
@@ -16,13 +15,21 @@
 
                             </ol>
                         </div>
-                        <a href="#" class="white_btn3">Create Report</a>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                data-toggle="dropdown" aria-expanded="false">
+                                Create Report
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="/admin/booking-report">Booking Report</a>
+                                <a class="dropdown-item" href="/admin/payments-report">Payment Report</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="row ">
-
                 <div class="col-md-10 mt-100px">
                     <div class="row ">
                         <div class="col-xl-3 col-lg-6" style="margin-top: 100px">
