@@ -172,7 +172,6 @@
                         </div>
                         <span>Dashboard</span>
                     </a>
-
                 </li>
                 <li class="">
                     <a href="/admin/room" class="has-arrow/" href="#" aria-expanded="false">
@@ -181,7 +180,6 @@
                         </div>
                         <span>Rooms</span>
                     </a>
-
                 </li>
                 <li class="">
                     <a class="has-arrow/" href="/admin/bookings" aria-expanded="false">
@@ -190,7 +188,6 @@
                         </div>
                         <span>Bookings</span>
                     </a>
-
                 </li>
                 <li class="">
                     <a class="has-arrow/" href="/admin/booking-report" aria-expanded="false">
@@ -199,7 +196,6 @@
                         </div>
                         <span>Booking Reports</span>
                     </a>
-
                 </li>
                 <li class="">
                     <a class="has-arrow/" href="/admin/payments-report" aria-expanded="false">
@@ -208,7 +204,6 @@
                         </div>
                         <span>Payments Report</span>
                     </a>
-
                 </li>
                 <li class="">
                     <a href="/admin/messages" class="has-arrow/" aria-expanded="false">
@@ -217,7 +212,6 @@
                         </div>
                         <span>Messages</span>
                     </a>
-
                 </li>
                 <li class="">
                     <a href="/admin/staff" aria-expanded="false">
@@ -250,12 +244,10 @@
                         </div>
                         <span>Log Out</span>
                     </a>
-
                 </li>
             </ul>
         @endif
     </nav>
-
 
     <section class="main_content dashboard_part large_header_bg">
         <div class="container-fluid no-gutters">
@@ -289,7 +281,6 @@
                                                 <h4>Notifications</h4>
                                             </div>
                                             <div class="Notification_body">
-
                                                 <div class="single_notify d-flex align-items-center">
                                                     <div class="notify_thumb">
                                                         <a href="#"><img src="/img/staf/2.png" alt=""></a>
@@ -301,7 +292,6 @@
                                                         <p>Lorem ipsum dolor sit amet</p>
                                                     </div>
                                                 </div>
-
                                                 <div class="single_notify d-flex align-items-center">
                                                     <div class="notify_thumb">
                                                         <a href="#"><img src="/img/staf/4.png" alt=""></a>
@@ -313,7 +303,6 @@
                                                         <p>Lorem ipsum dolor sit amet</p>
                                                     </div>
                                                 </div>
-
                                                 <div class="single_notify d-flex align-items-center">
                                                     <div class="notify_thumb">
                                                         <a href="#"><img src="/img/staf/3.png" alt=""></a>
@@ -337,7 +326,6 @@
                                                         <p>Lorem ipsum dolor sit amet</p>
                                                     </div>
                                                 </div>
-
                                                 <div class="single_notify d-flex align-items-center">
                                                     <div class="notify_thumb">
                                                         <a href="#"><img src="/img/staf/4.png" alt=""></a>
@@ -349,7 +337,6 @@
                                                         <p>Lorem ipsum dolor sit amet</p>
                                                     </div>
                                                 </div>
-
                                                 <div class="single_notify d-flex align-items-center">
                                                     <div class="notify_thumb">
                                                         <a href="#"><img src="{{ Auth::user()->image }}" alt=""></a>
@@ -368,7 +355,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                     </li>
                                     <li>
                                         <a class="CHATBOX_open nav-link-notify" href="#"> <img src="/img/icon/msg.svg"
@@ -397,17 +383,7 @@
         </div>
 
 
-
-
-
-
-
         @yield('content')
-
-
-
-
-
 
 
         <div class="footer_part">
@@ -423,9 +399,6 @@
             </div>
         </div>
     </section>
-
-
-
 
 
     <div id="back-top" style="display: none;">

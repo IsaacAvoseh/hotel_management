@@ -28,7 +28,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="row ">
                 <div class="col-md-10 mt-100px">
                     <div class="row ">
