@@ -55,8 +55,6 @@
                         @endforeach
                     @endif
                     <!-- Single Room Area -->
-
-
                     <div class="single-room-area d-flex align-items-center mb-50 wow fadeInUp" data-wow-delay="900ms">
                         <!-- Room Thumbnail -->
                         <div class="room-thumbnail"><img alt="" src="/horizon/img/bg-img/hall.jpg" /></div>
@@ -202,7 +200,6 @@
                                             {{ $message }}
                                         @enderror
                                     </div>
-
                                     <div class="col-6"><select class="form-control" id="children"
                                             name="children">
                                             <option value="children">Children</option>
@@ -216,7 +213,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="form-group mb-50">
                                 <div class="slider-range">
                                     <div class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"
@@ -226,7 +222,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="form-group"><button class="btn roberto-btn w-100" type="submit">Book
                                     Now</button></div>
                         </form>
