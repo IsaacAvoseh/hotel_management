@@ -6,6 +6,7 @@ use App\Mail\ReplyMessage;
 use App\Models\About;
 use App\Models\Booking;
 use App\Models\Contact;
+use App\Models\Payment;
 use App\Models\Role;
 use App\Models\Room;
 use App\Models\RoomType;
@@ -36,8 +37,28 @@ class DashBoardController extends Controller
 
     public function Admin()
     {
-
-        return view('admin.index');
+        //get total sales
+        $total_sales = Payment::where('status', '=', 'paid')->orWhere('status', '=', 'success')->sum('amount');
+        $total_online_payment = Payment::where('status', '=', 'success')->sum('amount');
+        $total_cash_payment = Payment::where('status', '=', 'paid')->sum('amount');
+        //percentage of online payment and cash payment
+        $percentage_online_payment = ($total_online_payment / $total_sales) * 100;
+        $percentage_cash_payment = ($total_cash_payment / $total_sales) * 100;
+        // dd($total_sales);
+        //total number of rooms
+        $total_rooms = Room::count();
+        //total rooms available
+        $total_rooms_available = Room::where('status', '=', 'available')->count();
+        //percentage of available rooms
+        $percentage_rooms_available = ($total_rooms_available / $total_rooms) * 100;
+        // dd($percentage_rooms_available);
+        //total rooms booked
+        $total_rooms_booked = Room::where('status', '=', 'booked')->count();
+        //total roomtypes
+        $total_roomtypes = RoomType::count();
+        
+        return view('admin.index', compact('total_sales', 'total_online_payment', 'total_cash_payment', 'percentage_online_payment', 'percentage_cash_payment', 'total_rooms', 'total_rooms_available', 'percentage_rooms_available','total_rooms_booked', 'total_roomtypes'));
+      
     }
 
     public function login(Request $request)
@@ -240,6 +261,14 @@ class DashBoardController extends Controller
 
         if ($request->isMethod('post')) {
             // dd($request->all());
+            $request->validate([
+               'name' => 'required',
+               'price' => 'required',
+               'size' => 'required',
+               'capacity' => 'required',
+               'beds' => 'required',
+               'no_of_rooms' => 'required',
+            ]);
 
             $room_type = new RoomType();
             $room_type->name = $request->name;
@@ -464,7 +493,12 @@ class DashBoardController extends Controller
 
             ]);
             $room = Room::find($booking->room_id);
-            // dd($room);
+            $room->update([
+                'status' => 'booked',
+            ]);
+            $room = Room::where('id', $booking->room_id)->where('status', 'available')->first()->update([
+                'status' => 'booked',
+            ]);
 
             try {
                 $saved = $booking->update([
@@ -472,9 +506,7 @@ class DashBoardController extends Controller
                     'approved_by' => Auth::user()->name,
                 ]);
 
-                $room->update([
-                    'status' => 'booked',
-                ]);
+               
             } catch (\Exception $e) {
                 return redirect()->back()->with('error', 'Something went wrong while updating booking status');
             }
