@@ -39,10 +39,11 @@
 
                         <div class="card-header" id="headingOne">
                             <h5 class="mb-0">
-                                <button class="btn btn-link btn-primary collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Add
+                                <button class="btn btn-link btn-primary collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Add New
                                     Room<span class="digits"></span></button>
                             </h5>
                         </div>
+
                         <div class="collapse" id="collapseOne" aria-labelledby="headingOne" data-parent="#accordion">
                             <div class="card-body">
                                 <div class="modal-body">
@@ -144,7 +145,7 @@
             </div>
 
             <div class="box_body">
-      
+
                 <div class="default-according" id="accordion">
                     <div class="card">
                         @if (isset($rooms) && count($rooms) > 0)
@@ -153,59 +154,169 @@
                             <h5 class="mb-0">
                                 <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo{{$room->id}}" aria-expanded="false" aria-controls="collapseOne">{{ $room->name }}<span class="digits"></span></button>
                             </h5>
+                            <h5 class="mb-0">
+                                <button class="btn btn-link btn-primary collapsed" data-toggle="collapse" data-target="#collapseEdit{{$room->id}}" aria-expanded="false" aria-controls="collapseOne">Edit
+                                    Room<span class="digits"></span></button>
+                            </h5>
                         </div>
 
-                        <div class="collapse" id="collapseTwo{{ $room->id }}" aria-labelledby="headingOne" data-parent="#accordion">
+
+
+
+                        <div class="collapse" id="collapseEdit{{ $room->id }}" aria-labelledby="headingOne" data-parent="#accordion">
                             <div class="card-body">
                                 <div class="modal-body">
-                                    <div class="white_box mb_30">
-                                        <div class="QA_table mb_30">
-                                            <table class="table lms_table_active ">
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col">Room</th>
-                                                        <th scope="col">Room type</th>
-                                                        <th scope="col">Room Features</th>
-                                                        <th scope="col">Price</th>
-                                                        <th scope="col">Status</th>
-                                                        <th scope="col">Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach($roomNumber as $roomN)
-                                                    @if($roomN->room_type_id == $room->id)
-                                                    <tr>
-                                                        <td scope="row">{{ $roomN->name }}</td>
-                                                        <td>{{ $roomN->roomType->name }}</td>
-                                                        <td>{{ $roomN->roomType->service->name == null? "Feature": $roomN->roomType->service->name }}</td>
-                                                        <td>{{ $roomN->roomType->price }}</td>
-                                                        <td style="height: 5px;" class="{{ $roomN->status == 'available'? 'status_btn': 'bg-danger status_btn'}}">{{ ucfirst($roomN->status) }}</td>
-                                                        <td>
-                                                            <a href="#" class="btn btn-primary">View</a>
-                                                            <a href="#" class="btn btn-danger">Edit</a>
-                                                        </td>
-                                                    </tr>
-                                                    @endif
+                                    <form action="{{ route('room') }}" method="POST" enctype="multipart/form-data">
+                                        @csrf
 
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
+                                        <div class="form-group">
+                                            <input type="text" name="name" class="form-control" placeholder="Name" value="{{ $room->name }}">
+                                            <span class="text-danger">
+                                                @error('name')
+                                                {{ $message }}
+                                                @enderror
+                                            </span>
                                         </div>
+                                        <div class="form-group">
+                                            <input type="text" name="price" class="form-control" placeholder="Price" value="{{ $room->price }}" >
+                                            <span class="text-danger" >
+                                                @error('price')
+                                                {{ $message }}
+                                                @enderror
+                                            </span>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" name="size" class="form-control" placeholder="Size" value="{{ $room->size }}">
+                                            <span class="text-danger">
+                                                @error('size')
+                                                {{ $message }}
+                                                @enderror
+                                            </span>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" name="capacity" class="form-control" placeholder="Capacity" value="{{ $room->capacity }}">
+                                            <span class="text-danger">
+                                                @error('capacity')
+                                                {{ $message }}
+                                                @enderror
+                                            </span>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" name="bed" class="form-control" placeholder="Bed" value="{{ $room->bed }}">
+                                            <span class="text-danger">
+                                                @error('bed')
+                                                {{ $message }}
+                                                @enderror
+                                            </span>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="number" name="no_of_rooms" class="form-control" placeholder="Number of Rooms" value="{{ $room->no_of_rooms }}" >
+                                            <span class="text-danger">
+                                                @error('no_of_rooms')
+                                                {{ $message }}
+                                                @enderror
+                                            </span>
+                                        </div>
+                                        <div class="form-group">
+                                            <p class="text-danger" > Please Select One </p>
+                                            <select name="service_id" id="roomfeatures" class="form-control">
+                                                <option value="">Select Room Features</option>
+                                                @if (isset($services) && count($services) > 0)
+                                                @foreach ($services as $service)
+                                                <option value="{{ $service->id }}">{{ $service->name }}
+                                                </option>
+                                                @endforeach
+                                                @endif
+                                            </select>
+                                            <span class="text-danger">
+                                                @error('service_id')
+                                                {{ $message }}
+                                                @enderror
+                                            </span>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="file" name="image" class="form-control">
+
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="file" name="image" class="form-control">
+
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="file" name="image" class="form-control">
+
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="file" name="image" class="form-control">
+
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="file" name="image" class="form-control">
+
+                                        </div>
+
+                                        <button type="submit" onclick="showLoading()" style="background-color: #323246;" class="btn_1 full_width text-center">Update</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="collapse" id="collapseTwo{{ $room->id }}" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body">
+                            <div class="modal-body">
+                                <div class="white_box mb_30">
+                                    <div class="QA_table mb_30">
+                                        <table class="table lms_table_active ">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Room</th>
+                                                    <th scope="col">Room type</th>
+                                                    <th scope="col">Room Features</th>
+                                                    <th scope="col">Price</th>
+                                                    <th scope="col">Status</th>
+                                                    <th scope="col">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach($roomNumber as $roomN)
+                                                @if($roomN->room_type_id == $room->id)
+                                                <tr>
+                                                    <td scope="row">{{ $roomN->name }}</td>
+                                                    <td>{{ $roomN->roomType->name }}</td>
+                                                    <td>{{ $roomN->roomType->service->name == null? "Feature": $roomN->roomType->service->name }}</td>
+                                                    <td>{{ $roomN->roomType->price }}</td>
+                                                    <td style="height: 5px;" class="{{ $roomN->status == 'available'? 'status_btn': 'bg-danger status_btn'}}">{{ ucfirst($roomN->status) }}</td>
+                                                    <td>
+                                                        <a href="#" class="btn btn-primary">View</a>
+                                                        <a href="#" class="btn btn-danger">Edit</a>
+                                                    </td>
+                                                </tr>
+                                                @endif
+
+                                                @endforeach
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        @endforeach
-                        @endif
-
                     </div>
+
+                    @endforeach
+                    @endif
+
+
                 </div>
             </div>
-
-
         </div>
+
+
     </div>
+</div>
 </div>
 </div>
 @endsection
