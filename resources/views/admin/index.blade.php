@@ -2,6 +2,7 @@
 @section('content')
 @include('flash.flash')
 
+<<<<<<< HEAD
 <div class="main_content_iner overly_inner">
     <div class="container-fluid p-0 ">
 
@@ -15,12 +16,38 @@
                             <li class="breadcrumb-item"><a href="javascript:void(0);">Dashboard</a></li>
                             <li class="breadcrumb-item active">Sales</li>
                         </ol>
+=======
+    <div class="main_content_iner overly_inner">
+        <div class="container-fluid p-0 ">
+            <div class="row">
+                <div class="col-12">
+                    <div class="page_title_box d-flex align-items-center justify-content-between">
+                        <div class="page_title_left">
+                            <h3 class="f_s_30 f_w_700 text_white">Dashboard</h3>
+                            <ol class="breadcrumb page_bradcam mb-0">
+                                <li class="breadcrumb-item"><a href="javascript:void(0);">Hotel </a></li>
+                                <li class="breadcrumb-item"><a href="javascript:void(0);">Dashboard</a></li>
+
+                            </ol>
+                        </div>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                data-toggle="dropdown" aria-expanded="false">
+                                Create Report
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="/admin/booking-report">Booking Report</a>
+                                <a class="dropdown-item" href="/admin/payments-report">Payment Report</a>
+                            </div>
+                        </div>
+>>>>>>> 91b34dd7fdcab861a7877bdaa219b921fc6aa03f
                     </div>
                     <a href="#" class="white_btn3">Create Report</a>
                 </div>
             </div>
         </div>
 
+<<<<<<< HEAD
         <div class="row ">
 
             <div class="col-md-10 mt-100px">
@@ -36,6 +63,22 @@
                                     <div class="col-8">
                                         <h4 class="d-flex align-items-center mb-0 text-white ">
                                             {{ $total_rooms !== null ? $total_rooms : 'Loading...' }}
+=======
+            <div class="row ">
+                <div class="col-md-10 mt-100px">
+                    <div class="row ">
+                        <div class="col-xl-3 col-lg-6" style="margin-top: 100px">
+                            <div class="card l-bg-cherry">
+                                <div class="card-statistic-3 p-4">
+                                    <div class="card-icon card-icon-large"><i class="fas fa-shopping-cart"></i></div>
+                                    <div class="mb-4">
+                                        <h5 class="card-title mb-0">Total Rooms</h5>
+                                    </div>
+                                    <div class="row align-items-center mb-2 d-flex">
+                                        <div class="col-8">
+                                            <h2 class="d-flex align-items-center mb-0">
+                                                3,243
+>>>>>>> 91b34dd7fdcab861a7877bdaa219b921fc6aa03f
                                             </h2>
                                     </div>
                                     <div class="col-4 text-right">
