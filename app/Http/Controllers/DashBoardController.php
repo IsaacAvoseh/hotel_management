@@ -488,17 +488,23 @@ class DashBoardController extends Controller
         $booking = Booking::find(base64_decode($id));
         // dd($booking);
         if ($request->isMethod('post')) {
-            $request->validate([
-                'status' => 'required',
+            // $request->validate([
+            //     'status' => 'required',
 
-            ]);
-            $room = Room::find($booking->room_id);
-            $room->update([
-                'status' => 'booked',
-            ]);
-            $room = Room::where('id', $booking->room_id)->where('status', 'available')->first()->update([
-                'status' => 'booked',
-            ]);
+            // ]);
+            // $room = Room::find($booking->room_id);
+            // $room->update([
+            //     'status' => 'booked',
+            // ]);
+            // dd($request->all());
+         try{
+                $room = Room::where('id', $booking->room_id)->update([
+                    'status' => 'booked',
+                ]);
+                // dd($room);
+         }catch(\Exception $e){
+                return redirect()->back()->with('error','Something went wrong, Please try again');
+            }
 
             try {
                 $saved = $booking->update([
