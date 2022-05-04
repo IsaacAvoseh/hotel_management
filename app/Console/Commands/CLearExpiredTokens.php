@@ -12,14 +12,14 @@ class CLearExpiredTokens extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'clear:token';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Clear expired tokens';
 
     /**
      * Create a new command instance.
@@ -39,6 +39,7 @@ class CLearExpiredTokens extends Command
     public function handle()
     {
        //clear expired tokens
-       Artisan::call('auth:clear-resets');
+      Artisan::call('auth:clear-resets');
+     
     }
 }
