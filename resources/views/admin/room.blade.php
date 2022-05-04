@@ -144,6 +144,7 @@
             </div>
 
             <div class="box_body">
+      
                 <div class="default-according" id="accordion">
                     <div class="card">
                         @if (isset($rooms) && count($rooms) > 0)
@@ -178,7 +179,7 @@
                                                         <td>{{ $roomN->roomType->name }}</td>
                                                         <td>{{ $roomN->roomType->service->name == null? "Feature": $roomN->roomType->service->name }}</td>
                                                         <td>{{ $roomN->roomType->price }}</td>
-                                                        <td class="{{ $roomN->status == 'available'? 'status_btn sm': 'bg-danger status_btn'}}">{{ ucfirst($roomN->status) }}</td>
+                                                        <td style="height: 5px;" class="{{ $roomN->status == 'available'? 'status_btn': 'bg-danger status_btn'}}">{{ ucfirst($roomN->status) }}</td>
                                                         <td>
                                                             <a href="#" class="btn btn-primary">View</a>
                                                             <a href="#" class="btn btn-danger">Edit</a>
