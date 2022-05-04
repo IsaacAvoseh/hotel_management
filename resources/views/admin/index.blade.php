@@ -26,7 +26,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <a href="#" class="white_btn3">Create Report</a>    -->
+                    <!-- <a href="#" class="white_btn3">Create Report</a> -->
                 </div>
             </div>
         </div>
@@ -43,8 +43,8 @@
                                     </div>
                                     <div class="row align-items-center mb-2 d-flex">
                                         <div class="col-8">
-                                            <h2 class="d-flex align-items-center mb-0">
-                                                3,243
+                                            <h2 class="d-flex align-items-center mb-0 text-white">
+                                                {{ $total_rooms === null ? 0 : $total_rooms }}
                                             </h2>
                                     </div>
                                     <div class="col-4 text-right">
