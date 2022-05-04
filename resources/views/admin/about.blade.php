@@ -8,12 +8,12 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="dashboard_header_title">
-                                    <h3> Admin Dashboard</h3>
+                                    <h3> About</h3>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="dashboard_breadcam text-right">
-                                    <p><a href="index.html">Dashboard</a> <i class="fas fa-caret-right"></i> New Staff</p>
+                                    <p><a href="/admin/about">Dashboard</a> <i class="fas fa-caret-right"></i> About</p>
                                 </div>
                             </div>
                         </div>
@@ -119,7 +119,8 @@
                                             <td>{{ $abouts->title }}</td>
                                             <td>{{ $abouts->content }}</td>
                                             <td>
-                                                <a href="/admin/editabout" class="btn btn-primary" onclick="showLoading()">Edit</button>
+                                                <a href="/admin/editabout" class="btn btn-primary"
+                                                    onclick="showLoading()">Edit</button>
                                             </td>
                                         </tr>
                                     @endif
