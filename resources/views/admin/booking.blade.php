@@ -13,7 +13,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="dashboard_breadcam text-right">
-                                    <p><a href="index.html">Dashboard</a> <i class="fas fa-caret-right"></i> Bookings</p>
+                                    <p><a href="/admin/bookings">Dashboard</a> <i class="fas fa-caret-right"></i> Bookings</p>
                                 </div>
                             </div>
                         </div>
