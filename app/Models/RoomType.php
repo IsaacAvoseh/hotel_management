@@ -21,10 +21,10 @@ class RoomType extends Model
         'image_2',
         'image_3',
         'image_4',
-        'service_id',   
+        'features_id',   
     ];
 
-    public function service(){
-        return $this->belongsTo(Service::class);
+    public function feature(){
+        return $this->belongsTo(Feature::class);
     }
 }
