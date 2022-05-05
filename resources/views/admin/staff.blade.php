@@ -33,7 +33,7 @@
                                     </h5>
                                 </div>
                                 <div class="collapse" id="collapseTwo" aria-labelledby="headingOne"
-                                    data-parent="#accordion" style="">
+                                    data-parent="#accordion">
                                     <div class="card-body">
 
                                         <div class="modal-body">
@@ -78,7 +78,7 @@
                                     </h5>
                                 </div>
                                 <div class="collapse" id="collapseOne" aria-labelledby="headingOne"
-                                    data-parent="#accordion" style="">
+                                    data-parent="#accordion">
 
                                     <div class="card-body">
 

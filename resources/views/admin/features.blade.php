@@ -55,7 +55,7 @@
                                                     </h5>
                                                 </div>
                                                 <div class="collapse" id="collapseOne" aria-labelledby="headingOne"
-                                                    data-parent="#accordion" style="">
+                                                    data-parent="#accordion">
 
                                                     <div class="card-body">
 
