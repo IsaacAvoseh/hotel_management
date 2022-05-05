@@ -42,7 +42,7 @@
                                         <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseOne">Pay With Cash<span class="digits"></span></button>
                                     </h5>
                                 </div>
-                                <div class="collapse" id="collapseTwo" aria-labelledby="headingOne" data-parent="#accordion" style="">
+                                <div class="collapse" id="collapseTwo" aria-labelledby="headingOne" data-parent="#accordion">
                                     <div class="card-body">
 
                                         <div class="modal-body">

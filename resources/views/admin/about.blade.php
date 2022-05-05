@@ -32,7 +32,7 @@
                                     </h5>
                                 </div>
                                 <div class="collapse" id="collapseOne" aria-labelledby="headingOne"
-                                    data-parent="#accordion" style="">
+                                    data-parent="#accordion">
                                     <div class="card-body">
                                         <div class="modal-body">
                                             <form action="{{ route('about') }}" method="POST"

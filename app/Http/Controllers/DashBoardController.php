@@ -6,11 +6,11 @@ use App\Mail\ReplyMessage;
 use App\Models\About;
 use App\Models\Booking;
 use App\Models\Contact;
+use App\Models\Feature;
 use App\Models\Payment;
 use App\Models\Role;
 use App\Models\Room;
 use App\Models\RoomType;
-use App\Models\Service;
 use App\Models\Staff;
 use App\Models\User;
 use Carbon\Carbon;
@@ -253,10 +253,10 @@ class DashBoardController extends Controller
 
     public function room(Request $request)
     {
-        $services = Service::all();
+        $features = Feature::all();
         $rooms = RoomType::all();
         // dd($rooms);
-        $roomNumber = Room::with('roomType.service')->get();
+        $roomNumber = Room::with('roomType.feature')->get();
         // dd($roomNumber);
 
         if ($request->isMethod('post')) {
@@ -325,14 +325,12 @@ class DashBoardController extends Controller
             $room_type->image_2 = $image_path2;
             $room_type->image_3 = $image_path3;
             $room_type->image_4 = $image_path4;
-            $room_type->service_id = $request->service_id;
+            $room_type->features_id = $request->feature_id;
             $saved = RoomType::create($room_type->toArray());
             if ($saved['id']) {
                 // dd($saved['id']);
                 //save list of room to table rooms depending on the number of $request->no_of_rooms entered, if $request->no_of_rooms is 10 , save 10 rooms to database
                 for ($i = 0; $i < number_format($room_type->no_of_rooms);) {
-
-
                     $room = new Room();
                     $room->name = 'Room' . $i + 1;
                     $room->room_type_id = $saved['id'];
@@ -352,10 +350,10 @@ class DashBoardController extends Controller
             }
         }
 
-        if ($services->count() < 1) {
+        if ($features->count() < 1) {
             Alert::error('Please add a feature first', 'Error');
         }
-        return view('admin.room', compact('services', 'rooms', 'roomNumber'));
+        return view('admin.room', compact('features', 'rooms', 'roomNumber'));
     }
 
     public function roomsingle()
@@ -364,30 +362,30 @@ class DashBoardController extends Controller
     }
 
 
-    public function services(Request $request)
+    public function features(Request $request)
     {
         if ($request->isMethod('post')) {
             $request->validate([
                 'name' => 'required',
 
             ]);
-            $service = new Service();
-            $service->name = $request->name;
-            $service->air_conditioner = $request->air_conditioner ? 1 : 0;
-            $service->unlimited_wifi = $request->unlimited_wifi ? 1 : 0;
-            $service->drinks = $request->drinks ? 1 : 0;
-            $service->restaurant = $request->restaurant ? 1 : 0;
-            $service->cable_tv = $request->cable_tv ? 1 : 0;
-            $service->hour_front_desk = $request->hour_front_desk ? 1 : 0;
+            $feature = new Feature();
+            $feature->name = $request->name;
+            $feature->air_conditioner = $request->air_conditioner ? 1 : 0;
+            $feature->unlimited_wifi = $request->unlimited_wifi ? 1 : 0;
+            $feature->drinks = $request->drinks ? 1 : 0;
+            $feature->restaurant = $request->restaurant ? 1 : 0;
+            $feature->cable_tv = $request->cable_tv ? 1 : 0;
+            $feature->hour_front_desk = $request->hour_front_desk ? 1 : 0;
             // dd($service);
-            $saved = $service->save();
+            $saved = $feature->save();
             if ($saved) {
-                return redirect()->back()->with('success', 'Service added successfully');
+                return redirect()->back()->with('success', 'Features added successfully');
             } else {
-                return redirect()->back()->with('error', 'Service not added');
+                return redirect()->back()->with('error', 'Features not added');
             }
         }
-        return view('admin.services');
+        return view('admin.features');
     }
 
     public function addRoomFeatures(Request $request)
@@ -399,7 +397,7 @@ class DashBoardController extends Controller
 
         $roomFeatures = new RoomType();
         $roomFeatures->name = $request->name;
-        $roomFeatures->service_id = $request->service_id;
+        $roomFeatures->features_id = $request->service_id;
         $saved = $roomFeatures->save();
         if ($saved) {
             return redirect()->back()->with('success', 'Room Type added successfully');
