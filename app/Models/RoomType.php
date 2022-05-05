@@ -25,6 +25,6 @@ class RoomType extends Model
     ];
 
     public function feature(){
-        return $this->belongsTo(Feature::class);
+        return $this->belongsTo(Feature::class, 'features_id');
     }
 }

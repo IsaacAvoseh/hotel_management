@@ -266,7 +266,7 @@ class DashBoardController extends Controller
                'price' => 'required',
                'size' => 'required',
                'capacity' => 'required',
-               'beds' => 'required',
+               'bed' => 'required',
                'no_of_rooms' => 'required',
             ]);
 
