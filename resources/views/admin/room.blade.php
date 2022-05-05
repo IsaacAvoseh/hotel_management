@@ -19,7 +19,7 @@
                     </div>
                 </div>
             </div>
-            @if ($services->count() < 1) <div style="display: flex; flex-direction: column; align-items: center;">
+            @if ($features->count() < 1) <div style="display: flex; flex-direction: column; align-items: center;">
                 <p class="text-danger"> No Room Feature Available, You cannot add a room without attaching a
                     feature, Please add a feature first </p>
                 <div>
@@ -87,17 +87,17 @@
                                         </span>
                                     </div>
                                     <div class="form-group">
-                                        <select name="service_id" id="roomfeatures" class="form-control">
+                                        <select name="feature_id" id="roomfeatures" class="form-control">
                                             <option value="">Select Room Features</option>
-                                            @if (isset($services) && count($services) > 0)
-                                            @foreach ($services as $service)
-                                            <option value="{{ $service->id }}">{{ $service->name }}
+                                            @if (isset($features) && count($features) > 0)
+                                            @foreach ($features as $feature)
+                                            <option value="{{ $feature->id }}">{{ $feature->name }}
                                             </option>
                                             @endforeach
                                             @endif
                                         </select>
                                         <span class="text-danger">
-                                            @error('service_id')
+                                            @error('feature_id')
                                             {{ $message }}
                                             @enderror
                                         </span>
@@ -182,17 +182,17 @@
                                                                 </span>
                                                             </div>
                                                             <div class="form-group">
-                                                                <select name="service_id" id="roomfeatures" class="form-control">
+                                                                <select name="feature_id" id="roomfeatures" class="form-control">
                                                                     <option value="">Select Room Features</option>
-                                                                    @if (isset($services) && count($services) > 0)
-                                                                    @foreach ($services as $service)
-                                                                    <option value="{{ $service->id }}">{{ $service->name }}
+                                                                    @if (isset($features) && count($features) > 0)
+                                                                    @foreach ($features as $feature)
+                                                                    <option value="{{ $feature->id }}">{{ $feature->name }}
                                                                     </option>
                                                                     @endforeach
                                                                     @endif
                                                                 </select>
                                                                 <span class="text-danger">
-                                                                    @error('service_id')
+                                                                    @error('feature_id')
                                                                     {{ $message }}
                                                                     @enderror
                                                                 </span>
@@ -302,17 +302,17 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <p class="text-danger"> Please Select One </p>
-                                                                <select name="service_id" id="roomfeatures" class="form-control">
+                                                                <select name="feature_id" id="roomfeatures" class="form-control">
                                                                     <option value="">Select Room Features</option>
-                                                                    @if (isset($services) && count($services) > 0)
-                                                                    @foreach ($services as $service)
-                                                                    <option value="{{ $service->id }}">{{ $service->name }}
+                                                                    @if (isset($features) && count($features) > 0)
+                                                                    @foreach ($features as $feature)
+                                                                    <option value="{{ $feature->id }}">{{ $feature->name }}
                                                                     </option>
                                                                     @endforeach
                                                                     @endif
                                                                 </select>
                                                                 <span class="text-danger">
-                                                                    @error('service_id')
+                                                                    @error('feature_id')
                                                                     {{ $message }}
                                                                     @enderror
                                                                 </span>
@@ -370,7 +370,7 @@
                                                                     <tr>
                                                                         <td scope="row">{{ $roomN->name }}</td>
                                                                         <td>{{ $roomN->roomType->name }}</td>
-                                                                        <td>{{ $roomN->roomType->service->name == null? "Feature": $roomN->roomType->service->name }}</td>
+                                                                        <td>{{ $roomN->roomType->feature->name == null? "Feature": $roomN->roomType->feature->name }}</td>
                                                                         <td>{{ $roomN->roomType->price }}</td>
                                                                         <td style="height: 5px;" class="{{ $roomN->status == 'available'? 'status_btn': 'bg-danger status_btn'}}">{{ ucfirst($roomN->status) }}</td>
                                                                         <td>
@@ -402,8 +402,8 @@
                     </div>
                 </div>
         </div>
-    
-       
+
+
 
     </div>
 </div>

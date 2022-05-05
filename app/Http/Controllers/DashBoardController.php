@@ -253,7 +253,7 @@ class DashBoardController extends Controller
 
     public function room(Request $request)
     {
-        $services = Feature::all();
+        $features = Feature::all();
         $rooms = RoomType::all();
         // dd($rooms);
         $roomNumber = Room::with('roomType.feature')->get();
@@ -325,7 +325,7 @@ class DashBoardController extends Controller
             $room_type->image_2 = $image_path2;
             $room_type->image_3 = $image_path3;
             $room_type->image_4 = $image_path4;
-            $room_type->features_id = $request->service_id;
+            $room_type->features_id = $request->feature_id;
             $saved = RoomType::create($room_type->toArray());
             if ($saved['id']) {
                 // dd($saved['id']);
@@ -350,10 +350,10 @@ class DashBoardController extends Controller
             }
         }
 
-        if ($services->count() < 1) {
+        if ($features->count() < 1) {
             Alert::error('Please add a feature first', 'Error');
         }
-        return view('admin.room', compact('services', 'rooms', 'roomNumber'));
+        return view('admin.room', compact('features', 'rooms', 'roomNumber'));
     }
 
     public function roomsingle()
