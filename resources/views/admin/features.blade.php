@@ -37,7 +37,7 @@
                                                 <div style="background-color: #323246;"
                                                     class="modal-header justify-content-center">
 
-                                                    <h5 class="modal-title text_white">Services</h5>
+                                                    <h5 class="modal-title text_white">Features</h5>
                                                 </div>
 
                                             </div>
@@ -60,12 +60,12 @@
                                                     <div class="card-body">
 
                                                         <div class="modal-body">
-                                                            <form action="{{ route('services') }}" method="POST"
+                                                            <form action="{{ route('features') }}" method="POST"
                                                                 enctype="multipart/form-data">
                                                                 @csrf
                                                                 <div class="form-group">
                                                                     <input type="text" name="name" class="form-control"
-                                                                        placeholder="Service 1">
+                                                                        placeholder="Feature 1">
                                                                     <span class="text-danger">
                                                                         @error('first_name')
                                                                             {{ $message }}

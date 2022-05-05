@@ -362,30 +362,30 @@ class DashBoardController extends Controller
     }
 
 
-    public function services(Request $request)
+    public function features(Request $request)
     {
         if ($request->isMethod('post')) {
             $request->validate([
                 'name' => 'required',
 
             ]);
-            $service = new Feature();
-            $service->name = $request->name;
-            $service->air_conditioner = $request->air_conditioner ? 1 : 0;
-            $service->unlimited_wifi = $request->unlimited_wifi ? 1 : 0;
-            $service->drinks = $request->drinks ? 1 : 0;
-            $service->restaurant = $request->restaurant ? 1 : 0;
-            $service->cable_tv = $request->cable_tv ? 1 : 0;
-            $service->hour_front_desk = $request->hour_front_desk ? 1 : 0;
+            $feature = new Feature();
+            $feature->name = $request->name;
+            $feature->air_conditioner = $request->air_conditioner ? 1 : 0;
+            $feature->unlimited_wifi = $request->unlimited_wifi ? 1 : 0;
+            $feature->drinks = $request->drinks ? 1 : 0;
+            $feature->restaurant = $request->restaurant ? 1 : 0;
+            $feature->cable_tv = $request->cable_tv ? 1 : 0;
+            $feature->hour_front_desk = $request->hour_front_desk ? 1 : 0;
             // dd($service);
-            $saved = $service->save();
+            $saved = $feature->save();
             if ($saved) {
-                return redirect()->back()->with('success', 'Service added successfully');
+                return redirect()->back()->with('success', 'Features added successfully');
             } else {
-                return redirect()->back()->with('error', 'Service not added');
+                return redirect()->back()->with('error', 'Features not added');
             }
         }
-        return view('admin.services');
+        return view('admin.features');
     }
 
     public function addRoomFeatures(Request $request)
