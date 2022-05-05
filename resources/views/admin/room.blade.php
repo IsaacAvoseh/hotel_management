@@ -367,6 +367,7 @@
                                                                 <tbody>
                                                                     @foreach($roomNumber as $roomN)
                                                                     @if($roomN->room_type_id == $room->id)
+                                                            
                                                                     <tr>
                                                                         <td scope="row">{{ $roomN->name }}</td>
                                                                         <td>{{ $roomN->roomType->name }}</td>
