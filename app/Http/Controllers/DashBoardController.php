@@ -331,8 +331,6 @@ class DashBoardController extends Controller
                 // dd($saved['id']);
                 //save list of room to table rooms depending on the number of $request->no_of_rooms entered, if $request->no_of_rooms is 10 , save 10 rooms to database
                 for ($i = 0; $i < number_format($room_type->no_of_rooms);) {
-
-
                     $room = new Room();
                     $room->name = 'Room' . $i + 1;
                     $room->room_type_id = $saved['id'];
