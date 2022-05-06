@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\BookingsController;
+use App\Http\Controllers\ContactMessagesController;
 use App\Http\Controllers\DashBoardController;
+use App\Http\Controllers\FeaturesController;
 use App\Http\Controllers\ForgotPassWordController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\PaymentController;
@@ -29,15 +31,15 @@ Route::match(['get', 'post'], '/admin/change-password', [DashBoardController::cl
 Route::match(['get', 'post'], '/admin/staff', [DashBoardController::class, 'staff'])->name('staff');
 Route::post('/admin/staff/role', [DashBoardController::class, 'addRole'])->name('role');
 Route::match(['get', 'post'], '/admin/room', [RoomController::class, 'room'])->name('room');
-Route::post('/admin/staff/roomfeatures', [DashBoardController::class, 'addRoomFeatures'])->name('roomfeatures');
+Route::post('/admin/staff/roomfeatures', [FeaturesController::class, 'addRoomFeatures'])->name('roomfeatures');
 Route::match(['get', 'post'], '/admin/roomsingle', [DashBoardController::class, 'roomsingle'])->name('roomsingle');
-Route::match(['get', 'post'], '/admin/roomfeatures', [DashBoardController::class, 'features'])->name('features');
-Route::match(['get', 'post'], '/admin/messages', [DashBoardController::class, 'messages'])->name('messages');
+Route::match(['get', 'post'], '/admin/roomfeatures', [FeaturesController::class, 'features'])->name('features');
+Route::match(['get', 'post'], '/admin/messages', [ContactMessagesController::class, 'messages'])->name('messages');
 Route::match(['get', 'post'], '/admin/booking-details/{id}', [DashBoardController::class, 'bookingDetails'])->name('booking-details');
 Route::post('/admin/booking-details/update/{id}', [DashBoardController::class, 'updateBooking'])->name('update-booking');
 Route::match(['get', 'post'],'/admin/booking-report', [DashBoardController::class, 'bookingReport'])->name('booking-report');
-Route::match(['get', 'post'], '/admin/messages/{id}', [DashBoardController::class, 'replyMessage'])->name('reply');
-Route::match(['get', 'post'], '/admin/messages/delete/{id}', [DashBoardController::class, 'deleteMessage'])->name('delete_message');
+Route::match(['get', 'post'], '/admin/messages/{id}', [ContactMessagesController::class, 'replyMessage'])->name('reply');
+Route::match(['get', 'post'], '/admin/messages/delete/{id}', [ContactMessagesController::class, 'deleteMessage'])->name('delete_message');
 Route::match(['get', 'post'], '/ad', [DashBoardController::class, 'mail'])->name('mail');
 Route::match(['get', 'post'], '/admin/bookings', [DashBoardController::class, 'bookings'])->name('bookings');
 Route::match(['get', 'post'], '/admin/about', [DashBoardController::class, 'About'])->name('about');
