@@ -7,6 +7,7 @@ use App\Http\Controllers\FeaturesController;
 use App\Http\Controllers\ForgotPassWordController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\RoomController;
 use Illuminate\Support\Facades\Route;
 
 /*

@@ -62,7 +62,7 @@ class HotelController extends Controller
     {
         // dd($request->all());
         $room_type_id = RoomType::find(base64_decode($request->id));
-        echo  json_encode(Room::where('room_type_id', $room_type_id->id)->get());
+        echo  json_encode(Room::where('room_type_id', $room_type_id->id)->where('status', 'available')->get());
         // // dd($rooms);
         // return response()->json([
         //     'room' => $rooms
