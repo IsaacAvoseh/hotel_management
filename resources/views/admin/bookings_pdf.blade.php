@@ -39,7 +39,7 @@
                                     @if (isset($bookings) && count($bookings) > 0)
                                     @foreach ($bookings as $booking)
                                     <tr>
-                                        <td scope="row">{{ $booking->id }}</td>
+                                        <td scope="row"> {{ $loop->iteration }}</td>
                                         <td scope="row">{{ $booking->name }}</td>
                                         <td>{{ $booking->email }}</td>
                                         <td>{{ $booking->phone }}</td>

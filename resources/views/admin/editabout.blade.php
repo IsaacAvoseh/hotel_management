@@ -20,7 +20,8 @@
                     </div>
                 </div>
                 <div class="col-lg-12">
-                    @include('flash.flash')
+                     @include('flash.flash')
+                    @include('sweetalert::alert')
                     <div class="card-body">
                         <div class="modal-body">
                             <form action="{{ route('editabout') }}" method="POST" enctype="multipart/form-data">

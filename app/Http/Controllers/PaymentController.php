@@ -64,6 +64,9 @@ class PaymentController extends Controller
 
     public function paymentsPdf(Request $request)
     {
+        if (Auth::user()->type !== 'admin') {
+            return redirect()->back()->with('error', 'You are not Authorized to carry out this action , be careful I will report you to admin if you it again');
+        }
         $payments = Payment::all();
         view()->share('admin.payment.payments_pdf', $payments);
         $pdf = PDF::loadView('admin.payment.payments_pdf', compact('payments'));

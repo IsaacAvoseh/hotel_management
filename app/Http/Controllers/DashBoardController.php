@@ -165,6 +165,10 @@ class DashBoardController extends Controller
     public function addRole(Request $request)
     {
 
+        if (Auth::user()->type !== 'admin') {
+            return redirect()->back()->with('error', 'You are not Authorized to carry out this action , be careful I will report you to admin if you it again');
+        }
+
         $request->validate([
             'name' => 'required',
             'description' => 'required',
@@ -193,6 +197,9 @@ class DashBoardController extends Controller
         // dd($staffs[0]->roles);
 
         if ($request->isMethod('post')) {
+            if(Auth::user()->type !== 'admin'){
+                return redirect()->back()->with('error', 'You are not Authorized to carry out this action , be careful I will report you to admin if you it again');
+            }
             //add new staff and use phone number as password
             $request->validate([
                 'first_name' => 'required',
@@ -297,6 +304,8 @@ class DashBoardController extends Controller
             //     'status' => 'booked',
             // ]);
             // dd($request->all());
+
+             
          try{
                 $room = Room::where('id', $booking->room_id)->update([
                     'status' => 'booked',
@@ -341,6 +350,10 @@ class DashBoardController extends Controller
         $abouts = About::find(1);
         // dd($abouts);
         if ($request->isMethod('post')) {
+            if (Auth::user()->type !== 'admin') {
+                return redirect()->back()->with('error', 'You are not Authorized to carry out this action , be careful I will report you to admin if you it again');
+            }
+
             $request->validate([
                 'phone' => 'required',
                 'email' => 'required',
@@ -369,6 +382,10 @@ class DashBoardController extends Controller
     {
         $abouts = About::find(1);
         if ($request->isMethod('post')) {
+            if (Auth::user()->type !== 'admin') {
+                return redirect()->back()->with('error', 'You are not Authorized to carry out this action , be careful I will report you to admin if you it again');
+            }
+            
             $request->validate([
                 'phone' => 'required',
                 'email' => 'required',

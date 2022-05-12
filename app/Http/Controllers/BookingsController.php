@@ -63,6 +63,9 @@ class BookingsController extends Controller
 
     public function bookingsPdf(Request $request)
     {
+        if (Auth::user()->type !== 'admin') {
+            return redirect()->back()->with('error', 'You are not Authorized to carry out this action , be careful I will report you to admin if you it again');
+        }
         $bookings = Booking::all();
         view()->share('admin.bookings_pdf', $bookings);
         $pdf = PDF::loadView('admin.bookings_pdf', compact('bookings'));

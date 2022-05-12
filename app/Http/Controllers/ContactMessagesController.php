@@ -7,6 +7,7 @@ use App\Models\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class ContactMessagesController extends Controller
 {
@@ -58,6 +59,9 @@ class ContactMessagesController extends Controller
 
     public function deleteMessage(Request $request)
     {
+        if (Auth::user()->type !== 'admin') {
+            return redirect()->back()->with('error', 'You are not Authorized to carry out this action , be careful I will report you to admin if you it again');
+        }
         $message = Contact::find(base64_decode($request->id));
         $message->delete();
         return redirect()->back()->with('success', 'Message deleted successfully');

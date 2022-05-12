@@ -6,6 +6,7 @@ use App\Models\Feature;
 use App\Models\Room;
 use App\Models\RoomType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class RoomController extends Controller
@@ -20,6 +21,10 @@ class RoomController extends Controller
         // dd($roomNumber);
 
         if ($request->isMethod('post')) {
+            if (Auth::user()->type !== 'admin') {
+                return redirect()->back()->with('error', 'You are not Authorized to carry out this action , be careful I will report you to admin if you it again');
+            }
+
             // dd($request->all());
             $request->validate([
                 'name' => 'required',

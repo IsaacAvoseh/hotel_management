@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Feature;
 use App\Models\RoomType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FeaturesController extends Controller
 {
@@ -13,6 +14,9 @@ class FeaturesController extends Controller
     public function features(Request $request)
     {
         if ($request->isMethod('post')) {
+            if (Auth::user()->type !== 'admin') {
+                return redirect()->back()->with('error', 'You are not Authorized to carry out this action , be careful I will report you to admin if you it again');
+            }
             $request->validate([
                 'name' => 'required',
 
@@ -38,6 +42,10 @@ class FeaturesController extends Controller
 
     public function addRoomFeatures(Request $request)
     {
+
+        if (Auth::user()->type !== 'admin') {
+            return redirect()->back()->with('error', 'You are not Authorized to carry out this action , be careful I will report you to admin if you it again');
+        }
         $request->validate([
             'name' => 'required',
             'service_id' => 'required',
