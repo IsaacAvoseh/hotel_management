@@ -230,6 +230,22 @@
                     </a>
                 </li>
                 <li class="">
+                    <a href="#" aria-expanded="false">
+                        <div class="icon_menu">
+                            <img src="/img/menu-icon/6.svg" alt="">
+                        </div>
+                        <span>Restaurant</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#" aria-expanded="false">
+                        <div class="icon_menu">
+                            <img src="/img/menu-icon/6.svg" alt="">
+                        </div>
+                        <span>Laundry</span>
+                    </a>
+                </li>
+                <li class="">
                     <a href="/admin/about" aria-expanded="false">
                         <div class="icon_menu">
                             <img src="/img/menu-icon/7.svg" alt="">
