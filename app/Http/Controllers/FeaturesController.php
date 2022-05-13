@@ -46,6 +46,7 @@ class FeaturesController extends Controller
         if (Auth::user()->type !== 'admin') {
             return redirect()->back()->with('error', 'You are not Authorized to carry out this action , be careful I will report you to admin if you it again');
         }
+        
         $request->validate([
             'name' => 'required',
             'service_id' => 'required',
