@@ -26,6 +26,7 @@
             </div>
             <div class="col-lg-12">
                 @include('flash.flash')
+                @include('sweetalert::alert')
 
                 <div class="white_box mb_30">
                     <div class="row justify-content-center">
@@ -109,7 +110,7 @@
                                                                 </div>
 
                                                             </div>
-                                                            
+
                                                             <div class="form-group">
 
                                                                 <div class="form-check">
@@ -160,4 +161,4 @@
                             </div>
 
 
-@endsection
+                            @endsection

@@ -4,6 +4,8 @@
     <div class="container-fluid p-0">
         <div class="row justify-content-center">
             <div class="col-12">
+                @include('flash.flash')
+                @include('sweetalert::alert')
                 <div class="dashboard_header mb_50">
                     <div class="row">
                         <div class="col-lg-6">
@@ -49,7 +51,7 @@
                                     <td>{{ $booking->check_out }}</td>
                                     <td>{{ $booking->status }}</td>
                                     <td>{{ $booking->approved_by }}</td>
-                                        <td>{{ \Carbon\Carbon::parse($booking->created_at)->diffForHumans() }}</td> 
+                                    <td>{{ \Carbon\Carbon::parse($booking->created_at)->diffForHumans() }}</td>
                                 </tr>
                                 @endforeach
                                 @endif

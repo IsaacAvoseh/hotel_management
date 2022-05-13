@@ -165,6 +165,10 @@ class DashBoardController extends Controller
     public function addRole(Request $request)
     {
 
+        if (Auth::user()->type !== 'admin') {
+            return redirect()->back()->with('error', 'You are not Authorized to carry out this action , be careful I will report you to admin if you it again');
+        }
+
         $request->validate([
             'name' => 'required',
             'description' => 'required',
@@ -193,6 +197,9 @@ class DashBoardController extends Controller
         // dd($staffs[0]->roles);
 
         if ($request->isMethod('post')) {
+            if(Auth::user()->type !== 'admin'){
+                return redirect()->back()->with('error', 'You are not Authorized to carry out this action , be careful I will report you to admin if you it again');
+            }
             //add new staff and use phone number as password
             $request->validate([
                 'first_name' => 'required',
@@ -251,214 +258,16 @@ class DashBoardController extends Controller
         return view('admin.staff', compact('roles', 'staffs'));
     }
 
-    public function room(Request $request)
-    {
-        $features = Feature::all();
-        $rooms = RoomType::all();
-        // dd($rooms);
-        $roomNumber = Room::with('roomType.feature')->get();
-        // dd($roomNumber);
-
-        if ($request->isMethod('post')) {
-            // dd($request->all());
-            $request->validate([
-               'name' => 'required',
-               'price' => 'required',
-               'size' => 'required',
-               'capacity' => 'required',
-               'bed' => 'required',
-               'no_of_rooms' => 'required',
-            ]);
-
-            $room_type = new RoomType();
-            $room_type->name = $request->name;
-            $room_type->price = $request->price;
-            $room_type->size = $request->size;
-            $room_type->capacity = $request->capacity;
-            $room_type->bed = $request->bed;
-            $room_type->no_of_rooms = $request->no_of_rooms;
-
-
-            if ($request->hasFile('image')) {
-                $image = $request->file('image');
-                $image_name = $image->getClientOriginalName();
-                $image->move(public_path('/admin/rooms'), $image_name);
-                $image_path = '/admin/rooms/' . $image_name;
-            } else {
-                $image_path = '/admin/room.jpg';
-            }
-            if ($request->hasFile('image_1')) {
-                $image1 = $request->file('image_1');
-                $image_name1 = $image1->getClientOriginalName();
-                $image1->move(public_path('/admin/rooms'), $image_name1);
-                $image_path1 = '/admin/rooms/' . $image_name1;
-            } else {
-                $image_path1 = '/admin/room.jpg';
-            }
-            if ($request->hasFile('image_2')) {
-                $image2 = $request->file('image_2');
-                $image_name2 = $image2->getClientOriginalName();
-                $image2->move(public_path('/admin/rooms'), $image_name2);
-                $image_path2 = '/admin/rooms/' . $image_name2;
-            } else {
-                $image_path2 = '/admin/room.jpg';
-            }
-            if ($request->hasFile('image_3')) {
-                $image3 = $request->file('image_3');
-                $image_name3 = $image3->getClientOriginalName();
-                $image3->move(public_path('/admin/rooms'), $image_name3);
-                $image_path3 = '/admin/rooms/' . $image_name3;
-            } else {
-                $image_path3 = '/admin/room.jpg';
-            }
-            if ($request->hasFile('image_4')) {
-                $image4 = $request->file('image_4');
-                $image_name4 = $image4->getClientOriginalName();
-                $image4->move(public_path('/admin/rooms'), $image_name4);
-                $image_path4 = '/admin/rooms/' . $image_name4;
-            } else {
-                $image_path4 = '/admin/room.jpg';
-            }
-
-            $room_type->image = $image_path;
-            $room_type->image_1 = $image_path1;
-            $room_type->image_2 = $image_path2;
-            $room_type->image_3 = $image_path3;
-            $room_type->image_4 = $image_path4;
-            $room_type->features_id = $request->feature_id;
-            $saved = RoomType::create($room_type->toArray());
-            if ($saved['id']) {
-                // dd($saved['id']);
-                //save list of room to table rooms depending on the number of $request->no_of_rooms entered, if $request->no_of_rooms is 10 , save 10 rooms to database
-                for ($i = 0; $i < number_format($room_type->no_of_rooms);) {
-                    $room = new Room();
-                    $room->name = 'Room' . $i + 1;
-                    $room->room_type_id = $saved['id'];
-                    // $room->status = 'available';
-                    $room->room_no = strtoupper('R' . rand(100, 999));
-                    $saved1 = $room->save();
-                    $i++;
-                }
-                if ($saved1) {
-
-                    return redirect()->back()->with('success', 'Room added successfully');
-                } else {
-                    return back()->with('error', 'Something went wrong while adding Room');
-                }
-            } else {
-                return redirect()->back()->with('error', 'Something went wrong, Please try again');
-            }
-        }
-
-        if ($features->count() < 1) {
-            Alert::error('Please add a feature first', 'Error');
-        }
-        return view('admin.room', compact('features', 'rooms', 'roomNumber'));
-    }
-
+  
     public function roomsingle()
     {
         return view('admin.roomsingle');
     }
 
 
-    public function features(Request $request)
-    {
-        if ($request->isMethod('post')) {
-            $request->validate([
-                'name' => 'required',
+    
 
-            ]);
-            $feature = new Feature();
-            $feature->name = $request->name;
-            $feature->air_conditioner = $request->air_conditioner ? 1 : 0;
-            $feature->unlimited_wifi = $request->unlimited_wifi ? 1 : 0;
-            $feature->drinks = $request->drinks ? 1 : 0;
-            $feature->restaurant = $request->restaurant ? 1 : 0;
-            $feature->cable_tv = $request->cable_tv ? 1 : 0;
-            $feature->hour_front_desk = $request->hour_front_desk ? 1 : 0;
-            // dd($service);
-            $saved = $feature->save();
-            if ($saved) {
-                return redirect()->back()->with('success', 'Features added successfully');
-            } else {
-                return redirect()->back()->with('error', 'Features not added');
-            }
-        }
-        return view('admin.features');
-    }
-
-    public function addRoomFeatures(Request $request)
-    {
-        $request->validate([
-            'name' => 'required',
-            'service_id' => 'required',
-        ]);
-
-        $roomFeatures = new RoomType();
-        $roomFeatures->name = $request->name;
-        $roomFeatures->features_id = $request->service_id;
-        $saved = $roomFeatures->save();
-        if ($saved) {
-            return redirect()->back()->with('success', 'Room Type added successfully');
-        } else {
-            return redirect()->back()->with('error', 'Room Type not added');
-        }
-    }
-
-    public function messages(Request $request)
-    {
-        $messages = Contact::all();
-        // if($request->isMethod('post')){
-        //     dd($request->all());
-        // }
-        return view('admin.messages', compact('messages'));
-    }
-
-
-    public function replyMessage(Request $request, $id)
-    {
-
-        $message = Contact::findOrfail(base64_decode($id));
-
-        // dd(date('d-m-Y', strtotime(Carbon::now())));
-        if ($request->isMethod('post')) {
-            // dd($message);
-            $request->validate([
-                'reply_body' => 'required',
-            ]);
-            $saved = $message->update([
-                'reply_title' => $request->reply_title,
-                'status' => 1,
-                'reply_body' => $request->reply_body,
-                'reply_time' => date('d-m-Y', strtotime(Carbon::now())),
-
-            ]);
-            // $saved = $message->save();
-
-            if ($saved) {
-
-                try {
-                    Mail::to($message->email)->send(new ReplyMessage($message));
-                } catch (\Exception $e) {
-                    return redirect()->back()->with('not-sent', 'Something went wrong while sending email, Message not sent');
-                }
-
-                return redirect()->back()->with('success', 'Message replied successfully');
-            } else {
-                return redirect()->back()->with('error', 'Message not replied');
-            }
-        }
-        return view('admin.reply_message', compact('message'));
-    }
-
-    public function deleteMessage(Request $request)
-    {
-        $message = Contact::find(base64_decode($request->id));
-        $message->delete();
-        return redirect()->back()->with('success', 'Message deleted successfully');
-    }
-
+   
 
 
     public function mail()
@@ -495,6 +304,8 @@ class DashBoardController extends Controller
             //     'status' => 'booked',
             // ]);
             // dd($request->all());
+
+             
          try{
                 $room = Room::where('id', $booking->room_id)->update([
                     'status' => 'booked',
@@ -539,6 +350,10 @@ class DashBoardController extends Controller
         $abouts = About::find(1);
         // dd($abouts);
         if ($request->isMethod('post')) {
+            if (Auth::user()->type !== 'admin') {
+                return redirect()->back()->with('error', 'You are not Authorized to carry out this action , be careful I will report you to admin if you it again');
+            }
+
             $request->validate([
                 'phone' => 'required',
                 'email' => 'required',
@@ -567,6 +382,10 @@ class DashBoardController extends Controller
     {
         $abouts = About::find(1);
         if ($request->isMethod('post')) {
+            if (Auth::user()->type !== 'admin') {
+                return redirect()->back()->with('error', 'You are not Authorized to carry out this action , be careful I will report you to admin if you it again');
+            }
+            
             $request->validate([
                 'phone' => 'required',
                 'email' => 'required',

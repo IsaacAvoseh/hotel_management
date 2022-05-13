@@ -39,7 +39,7 @@
                                     @if (isset($bookings) && count($bookings) > 0)
                                     @foreach ($bookings as $booking)
                                     <tr>
-                                        <td scope="row">{{ $booking->id }}</td>
+                                        <td scope="row"> {{ $loop->iteration }}</td>
                                         <td scope="row">{{ $booking->name }}</td>
                                         <td>{{ $booking->email }}</td>
                                         <td>{{ $booking->phone }}</td>
@@ -63,6 +63,5 @@
 
 </body>
 
-<!-- Mirrored from demo.dashboardpack.com/sales-html/index_3.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 24 Mar 2022 14:36:05 GMT -->
 
 </html>
