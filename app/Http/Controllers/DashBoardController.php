@@ -232,7 +232,7 @@ class DashBoardController extends Controller
                 $staff->password = Hash::make($request->phone);
                 $staff->save();
             } catch (\Exception $e) {
-                return redirect()->back()->with('error', 'Staff not added, try again');
+                return redirect()->back()->with('error', 'Staff not added, please try again');
             }
             try {
                 //save staff to users table
