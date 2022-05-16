@@ -249,7 +249,7 @@ class DashBoardController extends Controller
                 $saved = $user->save();
 
                 if ($saved) {
-                    return redirect()->back()->with('success', 'Staff added successfully and staff account created successfully');
+                     return redirect()->back()->with('success', 'Staff added successfully and staff account created successfully');
                 }
             } catch (\Exception $e) {
                 return redirect()->back()->with('error', ' Staff Added , but something went wrong, while creating staff account, please try again');
