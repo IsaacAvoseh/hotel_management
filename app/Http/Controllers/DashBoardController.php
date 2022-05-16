@@ -200,7 +200,7 @@ class DashBoardController extends Controller
             if(Auth::user()->type !== 'admin'){
                 return redirect()->back()->with('error', 'You are not Authorized to carry out this action , be careful I will report you to admin if you it again');
             }
-            //add new staff and use phone number as password
+            //add new staff and use phone number as password, will use phone number to login to the system
             $request->validate([
                 'first_name' => 'required',
                 'first_name' => 'required',
