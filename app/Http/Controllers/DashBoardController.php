@@ -131,7 +131,7 @@ class DashBoardController extends Controller
                 // dd($ request->all());
                 $request->validate([
                     'name' => 'required',
-                    'email' => 'required|email',
+                    'email' => 'required|email|unique:users',
                     'password' => 'required',
                     'password_confirmation' => 'required|same:password',
                 ]);
