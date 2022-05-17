@@ -91,7 +91,7 @@
             <div class="col-12">
                 <!-- Form -->
                 <div class="roberto-contact-form">
-                    <form action="" method="post">
+                    <form method="post">
                         @include('flash.flash')
                         @csrf
                         <div class="row">

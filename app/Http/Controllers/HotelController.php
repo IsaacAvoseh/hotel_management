@@ -73,14 +73,8 @@ class HotelController extends Controller
 
     public function Contact(Request $request)
     {
-         try{
-                $abouts = About::all();
-                $contacts = Contact::all();
-                return view('user.contact', compact('abouts', 'contacts'));
-            }catch (\Exception $e){
-                Alert::error('Error', 'Something went wrong! Server not running');
-                return view('user.contact');
-            }
+        // dd($request->all());
+        
     
         if ($request->isMethod('post')) {
             // dd($request->all());
@@ -106,6 +100,15 @@ class HotelController extends Controller
                 Alert::error('Error', 'Something went wrong! Server not running');
                 return redirect()->back()->with('error', 'Something Went wrong, please try again');
             }
+        }
+
+        try {
+            $abouts = About::all();
+            $contacts = Contact::all();
+            return view('user.contact', compact('abouts', 'contacts'));
+        } catch (\Exception $e) {
+            Alert::error('Error', 'Something went wrong! Server not running');
+            return view('user.contact');
         }
         // return view('user.contact', compact('abouts', 'aboutus'));
     }
