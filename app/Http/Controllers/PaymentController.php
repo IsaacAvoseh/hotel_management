@@ -24,6 +24,7 @@ class PaymentController extends Controller
         $bookingData = base64_decode($request->booking);
         // $bookingData = base64_decode($request->booking)==null ? Booking::find(base64_decode($request->booking->id)) : base64_decode($request->booking);
         $bookingData = json_decode($bookingData);
+        // dd($bookingData);
         // $bookingData = Booking::find(base64_decode($request->bookingId));
         // dd(json_decode($bookingData));
         $payment = new Payment();

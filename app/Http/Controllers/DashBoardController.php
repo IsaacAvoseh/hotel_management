@@ -284,7 +284,8 @@ class DashBoardController extends Controller
 
     public function bookingDetails(Request $request, $id)
     {
-        $booking = Booking::find(base64_decode($id))->with('room', 'roomType')->first();
+        // dd(base64_decode($id));
+        $booking = Booking::where('id',base64_decode($id))->with('room', 'roomType')->first();
         // dd($booking);
 
         return view('admin.booking_details', compact('booking'));

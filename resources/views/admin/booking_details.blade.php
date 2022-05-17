@@ -53,7 +53,8 @@
                             <div class="quantity mt-3" style="display: flex;">
 
 
-                                <form action="/admin/approve-booking/{{ base64_encode($booking->id) }}" method="POST">
+                                <form action="/admin/approve-booking/{{ base64_encode($booking->id) }}" 
+                                method="POST">
                                     @csrf
                                     <input type="hidden" name="id" value="{{ base64_encode( $booking->id ) }}">
                                     <button type="submit" class="btn btn-success px-4 d-inline-block ">
