@@ -42,15 +42,15 @@ class DashBoardController extends Controller
         $total_online_payment = Payment::where('status', '=', 'success')->sum('amount');
         $total_cash_payment = Payment::where('status', '=', 'paid')->sum('amount');
         //percentage of online payment and cash payment
-        $percentage_online_payment = ($total_online_payment / $total_sales) * 100;
-        $percentage_cash_payment = ($total_cash_payment / $total_sales) * 100;
+        $percentage_online_payment = $total_online_payment !== 0?  ($total_online_payment / $total_sales) * 100 : 0;
+        $percentage_cash_payment = $total_cash_payment !== 0 ? ($total_cash_payment / $total_sales) * 100 : 0;
         // dd($total_sales);
         //total number of rooms
         $total_rooms = Room::count();
         //total rooms available
         $total_rooms_available = Room::where('status', '=', 'available')->count();
         //percentage of available rooms
-        $percentage_rooms_available = ($total_rooms_available / $total_rooms) * 100;
+        $percentage_rooms_available = $total_rooms_available !== 0? ($total_rooms_available / $total_rooms) * 100 : 0;
         // dd($percentage_rooms_available);
         //total rooms booked
         $total_rooms_booked = Room::where('status', '=', 'booked')->count();
