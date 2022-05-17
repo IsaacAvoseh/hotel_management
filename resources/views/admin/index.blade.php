@@ -43,9 +43,9 @@
                                     </div>
                                     <div class="row align-items-center mb-2 d-flex">
                                         <div class="col-8">
-                                            <h2 class="d-flex align-items-center mb-0 text-white">
+                                            <h4 class="d-flex align-items-center mb-0 text-white">
                                                 {{ $total_rooms === null ? 0 : $total_rooms }}
-                                            </h2>
+                                            </h4>
                                     </div>
                                     <div class="col-4 text-right">
                                         <span>12.5% <i class="fa fa-arrow-up"></i></span>
@@ -69,7 +69,7 @@
                                     <div class="col-8">
                                         <h4 class="d-flex align-items-center mb-0 text-white">
                                             {{ $total_rooms_available !== null ? $total_rooms_available : 'Loading...' }}
-                                            </h2>
+                                            </h4>
                                     </div>
                                     <div class="col-4 text-right">
                                         <span>{{ round($percentage_rooms_available , 1)}}% <i class="fa fa-arrow-up"></i></span>
@@ -117,7 +117,7 @@
                                     <div class="col-8">
                                         <h5 class="d-flex align-items-center mb-0 text-white">
                                            N {{ number_format($total_sales , 2) }}
-                                        </h2>
+                                        </h5>
                                     </div>
                                     <div class="col-4 text-right">
                                         <span>100% <i class="fa fa-arrow-up"></i></span>
