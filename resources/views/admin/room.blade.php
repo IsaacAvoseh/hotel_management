@@ -19,7 +19,8 @@
                     </div>
                 </div>
             </div>
-            @if ($features->count() < 1) <div style="display: flex; flex-direction: column; align-items: center;">
+            @if ($features->count() < 1) 
+            <div style="display: flex; flex-direction: column; align-items: center;">
                 <p class="text-danger"> No Room Feature Available, You cannot add a room without attaching a
                     feature, Please add a feature first </p>
                 <div>
@@ -31,86 +32,10 @@
                                 Room<span class="digits"></span></button>
                         </h5>
                     </div>
-
-                    <div class="collapse" id="collapseOne" aria-labelledby="headingOne" data-parent="#accordion">
-                        <div class="card-body">
-                            <div class="modal-body">
-                                <form action="{{ route('room') }}" method="POST" enctype="multipart/form-data">
-                                    @csrf
-
-                                    <div class="form-group">
-                                        <input type="text" name="name" class="form-control" placeholder="Name">
-                                        <span class="text-danger">
-                                            @error('name')
-                                            {{ $message }}
-                                            @enderror
-                                        </span>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" name="price" class="form-control" placeholder="Price">
-                                        <span class="text-danger">
-                                            @error('price')
-                                            {{ $message }}
-                                            @enderror
-                                        </span>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" name="size" class="form-control" placeholder="Size">
-                                        <span class="text-danger">
-                                            @error('size')
-                                            {{ $message }}
-                                            @enderror
-                                        </span>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" name="capacity" class="form-control" placeholder="Capacity">
-                                        <span class="text-danger">
-                                            @error('capacity')
-                                            {{ $message }}
-                                            @enderror
-                                        </span>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" name="bed" class="form-control" placeholder="Bed">
-                                        <span class="text-danger">
-                                            @error('bed')
-                                            {{ $message }}
-                                            @enderror
-                                        </span>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="number" name="no_of_rooms" class="form-control" placeholder="Number of Rooms">
-                                        <span class="text-danger">
-                                            @error('no_of_rooms')
-                                            {{ $message }}
-                                            @enderror
-                                        </span>
-                                    </div>
-                                    <div class="form-group">
-                                        <select name="feature_id" id="roomfeatures" class="form-control">
-                                            <option value="">Select Room Features</option>
-                                            @if (isset($features) && count($features) > 0)
-                                            @foreach ($features as $feature)
-                                            <option value="{{ $feature->id }}">{{ $feature->name }}
-                                            </option>
-                                            @endforeach
-                                            @endif
-                                        </select>
-                                        <span class="text-danger">
-                                            @error('feature_id')
-                                            {{ $message }}
-                                            @enderror
-                                        </span>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="file" name="image" class="form-control">
-
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="file" name="image" class="form-control">
-                                    </div>
-                            </div>
-                            @endif
+                </div>
+            </div>
+            
+              @endif
 
                             <div class="col-lg-12">
                                 @include('flash.flash')
