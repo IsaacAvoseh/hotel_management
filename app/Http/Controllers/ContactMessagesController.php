@@ -11,6 +11,15 @@ use Illuminate\Support\Facades\Auth;
 
 class ContactMessagesController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth')->except([
+            'login', 'register'
+        ]);
+    }
+
+    
     public function messages(Request $request)
     {
         $messages = Contact::all();

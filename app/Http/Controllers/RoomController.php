@@ -12,6 +12,13 @@ use RealRashid\SweetAlert\Facades\Alert;
 class RoomController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth')->except([
+            'login', 'register'
+        ]);
+    }
+    
     public function room(Request $request)
     {
         $features = Feature::all();

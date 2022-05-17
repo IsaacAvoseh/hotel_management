@@ -10,6 +10,13 @@ use Illuminate\Support\Facades\Auth;
 class FeaturesController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth')->except([
+            'login', 'register'
+        ]);
+    }
+
 
     public function features(Request $request)
     {

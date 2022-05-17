@@ -26,18 +26,18 @@
                 <div>
                     <a class="btn btn-primary sm" href="/admin/roomfeatures">Add Room Feature</a>
 
-                    <div class="card-header" id="headingOne">
+                    <!-- <div class="card-header" id="headingOne">
                         <h5 class="mb-0">
                             <button class="btn btn-link btn-primary collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Add New
                                 Room<span class="digits"></span></button>
                         </h5>
-                    </div>
+                    </div> -->
                 </div>
             </div>
-            
+
               @endif
 
-                            <div class="col-lg-12">
+                            <div class="col-lg-10">
                                 @include('flash.flash')
                                 @include('sweetalert::alert')
                                 <div class="box_body">
